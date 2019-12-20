@@ -1,0 +1,13 @@
+<div id=wrapper #wrapper>
+    <table id=litterae>
+        <tr class=littera *ngFor="let lit of profile.litterae" >
+            <th [title]="lit.tokens+' / '+lit.rawTokens+' / '+lit.types" (click)=highlightStrid(lit) [class]="lit.asAlternative>0 ? 'highlight':''" title="compare usage"> {{lit.str}}</th>
+          <!--  <td>{{lit.tokens}}</td> -->
+            <td ><span *ngFor="let f of lit.basicFreqs" [style.background-color]=getShade(f)>_</span></td>
+            
+        </tr>
+
+    </table>
+
+
+</div>

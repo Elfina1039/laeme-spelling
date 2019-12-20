@@ -1,0 +1,84 @@
+[
+    
+    {
+    "id": "4",
+    "version" : "T",
+    "manuscript": "Cambridge, Trinity College B.14.52 (335), entry 1",
+    "date":"late 12th century",
+    "description": "Three hands contribute to the manuscript. Poema Morale is written by hand A. The language of the text in LAEME was placed in West Essex, though Samuels believed it to be a London variety influenced by immigration (Samuels in Hill 1977: 107). Linguistically, the text is very close to the language of a part of the Trinity Homilies in the same manuscript and written by the same scribe. The text languages (internally consistent linguistic systems) of the two remaining hands differ from A. Analyses of the text languages performed by Ker and later by Laing and McIntosh (Ker 1932; Laing & McIntosh 1995b in Laing 2004) suggest that there were two different exemplars, one for the PM and the other for Trinity Homilies. Both were of South East Midland provenance, but the language of the latter is a more northern variety and also less homogenous. The conclusion based on these findings is that A was a literatim copyist, i.e. reproduced the forms found in his exemplar literally.",
+    "laemeLink":"Cambridge, Trinity College B.14.52 (335), entry 1",
+    "links":[
+        {"title": "EM", "link":"https://www.le.ac.uk/english/em1060to1220/mss/EM.CTC.B.14.52.htm"},
+         {"title": "Images", "link":"https://mss-cat.trin.cam.ac.uk/search.php?shelfmark=B.14.52"}
+    ]
+},
+    
+        {
+    "id": "5",
+    "version" : "L",
+    "manuscript": "London, Lambeth Palace Library 487, entry 3 ",
+    "date":"ca. 1200",
+    "description": "Version L in LAEME is localised in North West Worcestershire. Besides the Poema Morale, the scribe copied part of the Lambeth Homilies. Miss Sisam (1951) claimed that the languages of the two texts differ, and ascribed the differences between them to the fact that they were copied from different exemplars. One part of the Homilies (group A) was copied from exemplar X while the other part as well as the PM (group B) were copied from Y, which was slightly later than X. Both X and Y were 12th century manuscripts (Sisam, 1951: 109). Laing (2013) pointed out that this might be helpful in distinguishing between the forms influenced by the exemplars and those belonging to the dialect of the scribe – the latter should be shared by both groups.",
+    "laemeLink" :"London, Lambeth Palace Library 487, entry 3",
+    "links":[
+    ]
+},
+    
+         {
+    "id": "6",
+    "version" : "e",
+    "manuscript": "London, British Library, Egerton 613, entry 6",
+    "date":"ca. 1250",
+    "description": "Egerton 613 contains two version of the Poema Morale which were presumably copied from a shared exemplar (e.g. Hill 1977: 100). The two texts are localised in SW Worcestershire in LAEME. Scholars have noted conspicuously archaic grammar and ortography of the copies, especially of e (Hill 1977: 109).  e is by far the most consistent text in its use of accentuation. The scribes of e and E also copied other texts in the manuscript.",
+    "laemeLink" :"London, British Library, Egerton 613, entry 6",
+    "links":[
+    ]
+},
+    
+         {
+    "id": "7",
+    "version" : "E",
+    "manuscript": "London, British Library, Egerton 613, entry 5",
+    "date":"ca. 1250",
+    "description": "Egerton 613 contains two version of the Poema Morale which were presumably copied from a shared exemplar (e.g. Hill 1977: 100). The two texts are localised in SW Worcestershire in LAEME. Scholars have noted conspicuously archaic grammar and ortography of the copies, however, older forms in E are often modernized. The scribes of e and E also copied other texts in the manuscript.",
+    "laemeLink" :"London, British Library, Egerton 613, entry 5",
+    "links":[
+    ]
+},
+    
+         {
+    "id": "8",
+    "version" : "D",
+    "manuscript": "Oxford, Bodleian Library, MS Digby 4",
+    "date":"early 13th century",
+    "description": "Version D differs from the rest of the copies in its graphical form, being written in short lines arranged in four line stanzas. L is written as prose and the five remaining versions are written in long rhyming couplets. The manuscript Digby 4 comprises texts by eight different scribes working between the early 12th and early 13th centuries. All the items except the PM are in Latin. The connections between the PM and some other texts in the MS include homiletic content and the fact that some were copied from 12th century sources. Ker (1936 in Hill, 1972: 275) claimed that the manuscript originally comprised also a version of the Proverbs of Alfred, of which a fragment was preserved (London, British Library, Cotton Galba A xix, not included in LAEME). His view was challenged by Hall (1920 in Hill, 1972: 276). According to a more recent account presented by Betty Hill (1972), the Proverbs were not originally a part of the MS. They were added and later detached again.",
+    "laemeLink" :"Oxford, Bodleian Library, Digby 4",
+    "links":[
+    ]
+},
+    
+        {
+    "id": "9",
+    "version" : "J",
+    "manuscript": "Oxford, Jesus College 29, part II",
+    "date":"ca. 1275",
+    "description": "The manuscript is a collection of multiple English texts, mostly in verse. The language of J was localise in the Linguistic Atlas of Late Middle English in Soth-East Herefordshire (Laing, 1992: 571). As for textual relationships with other copies, stemmatologists proposed similatities between J and Ee. Moore () described J as a composite text which might have shared an exemplar with M as well as EeL (Hill, 1977: 100).",
+    "laemeLink" :"Oxford, Jesus College 29, part II",
+    "links":[
+    ]
+},
+    
+           {
+    "id": "10",
+    "version" : "M",
+    "manuscript": "Cambridge, Fitzwilliam Museum, McClean 123",
+    "date":"late 13th century",
+    "description": " M is the latest surviving copy of the PM. The view summarized in Hill (1977) is that its language is a mixture of the Essex variety and a Western element. Samuels placed the text in Essex (Hill, 1977: 110). The localisation in LAEME based on the fit-technique is in central Gloucestershire, which is quite distant from Essex. Additional information on the text admits that there might be a South East Midland dialect layer, which is supported by evidence from the Linguistic Atlas of Late Middle English (LALME). Thus, both of the presented views agree on the fact that there is a Western as well as an Eastern dialect layer in the text but not on the question of which layer is the dominant one. The theory that the language is mixed was opposed by Laing (1992: 573). An interesting possibility mentioned in her preliminary study but not discussed in greater detail is that one of the exemplars of the text was written down from memory (Paues, 1907 in Laing, 1992: 571). This would be a possible explanation of its unusual number of omissions and additions. Although the association with Nunthean Priory in Warwickshire might be taken for extralinguistic evidence of origin, the language strongly contradicts such a notion (Laing, 1992: 571). Hill (1977) mentions Hall’s (1920 in Hill, 1977: 100) opinion that D is the text closest to M and there is also a connection between M and T. An interesting feature of the MS is a list of OE letters with examples of usage included at the beginning. The explanation of this proposed by Laing (1992) is that the MS was copied by a French scribe who was probably unfamiliar with OE letters (Laing, 1992: 576).",
+    "laemeLink" :"Cambridge, Fitzwilliam Museum, McClean 123",
+    "links":[
+    ]
+}
+
+
+
+]

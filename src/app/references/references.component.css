@@ -1,0 +1,26 @@
+*{box-sizing: border-box}
+
+#wrapper{
+    width:100%;
+    background: linear-gradient(black, #2e200d);
+    color: white;
+    display:flex;
+    flex-flow: column nowrap;
+    align-items:center;
+    padding:2%;
+}
+
+header{
+    border-bottom: 2px solid #df8f17;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+content{
+        display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}

@@ -1,0 +1,23 @@
+#content{
+    display:flex;
+    flex-flow: row nowrap;
+    
+}
+
+table{
+    margin:0.5em;
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+td{
+    border: 1px solid black;
+}
+
+td:hover{
+    background-color:yellow;
+    cursor: pointer;
+}
+
+
+

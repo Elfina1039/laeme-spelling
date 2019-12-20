@@ -1,0 +1,15 @@
+<div id=wrapper #wrapper>
+    
+    <h2>{{msMeta.manuscript}}</h2>
+    <div>
+        <p class=date>date: {{msMeta.date}}</p>
+        
+        <p>{{msMeta.description}}</p>
+        
+        <a [routerLink]="['/references']"target="_blank">References</a>
+    </div>
+    
+    <button (click)=redirectToLaeme(msMeta.laemeLink) title="see entry in LAEME">LAEME catalogue</button>
+    
+    
+</div>

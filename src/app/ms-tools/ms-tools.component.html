@@ -1,0 +1,37 @@
+<div id=wrapper>
+    
+    <header>
+        <form>
+        <input type=color name=searchColor [(ngModel)]=search.color title="pick highlight color">    
+       <!-- <input type=checkbox name=rgxSearch [(ngModel)]=search.rgx value=false>RegExp    -->
+            
+            
+            <app-token-search *ngFor="let f of search.fields" [fields]=f></app-token-search>
+            
+            
+            <button (click)=removeField() title="remove search criterion" class=icon *ngIf="search.fields.length>1">-</button> 
+            <button (click)=addField() title="add search criterion" class=icon>+</button>
+            <button (click)=searchMss(search) title="search and highlight in texts">Search</button>    
+            <button (click)=clearMss() title="remove all highlights">Clear all</button>  
+            
+        </form>
+    </header>    
+    
+ <content>
+    
+    <div *ngFor="let ms of mss" [style.height]=msSize.height+msSize.unit [style.max-width]=msSize.width+msSize.unit class=msWrapper>
+
+    <app-ms [ms]=ms [msSize]="msSize"  
+            (requestAlign)=alignMss($event)
+            (requestComparison)=compareProfiles($event)
+            (requestSearch)=searchMss($event) 
+            (requestAlternatives)=markAlternatives($event)
+            #msComponent ></app-ms>
+    
+</div>
+    
+    
+    </content>   
+
+    
+</div>

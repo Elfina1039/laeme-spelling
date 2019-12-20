@@ -1,0 +1,79 @@
+#wrapper {
+    box-shadow: 0 0 2em black inset;
+        overflow:scroll;
+height:100%;
+padding: 1em;
+    display: flex;
+    flex-flow: column wrap;
+scroll-behavior: smooth}
+
+header{
+    flex-flow: column nowrap;
+    color: white;
+    padding: 0.5em;
+    background: #4f391b;
+    height: 5%;
+    transition: height 1s ease-out;
+    border-right: 1px solid white;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-radius: 0.4em 0.4em 0 0em;
+    display: flex;
+  justify-content: center;
+}
+
+.msTitle{
+    flex-flow: row nowrap;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+}
+
+
+
+.msLine{
+    font-size: 13pt;
+    margin: 0.2em;
+    border-radius : 0.2em;
+    display:flex;
+        
+            flex-flow: row wrap;
+    width: 100%;
+}
+
+.msToken{
+    padding:0.05em;
+     border-radius : 0.2em;
+}
+
+button:hover{
+    box-shadow:0 0 0.2em white;
+}
+
+
+button.round{
+    background: transparent;
+   /* border-radius: 50%;*/
+    font-weight: bold;
+    font-size: 9pt;
+    text-align: center;
+    border: none;
+    border-left: 2px solid darkblue;
+    color: darkblue;
+}
+
+button.round:hover{
+    background: rgba(255,255,255,0.5);
+}
+
+.icon{
+    background:transparent;
+    border:2px solid #df8f17;
+    color:#df8f17;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14pt;
+    border-radius:0.2em;
+}
+

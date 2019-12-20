@@ -1,0 +1,22 @@
+#wrapper{
+    display:flex;
+    flex-flow: column nowrap;
+    padding:0.5em;
+}
+
+.pattern, .split{
+    display:flex;
+    flex-flow: row nowrap;
+}
+
+.pattern{
+    border-bottom:1px dashed silver;
+}
+
+.slot{
+    width:2em;
+    text-align:center;
+    border-right: 1px dashed silver;
+    border-left: 1px dashed silver;
+}
+

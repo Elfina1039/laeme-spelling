@@ -1,0 +1,18 @@
+    - explain that this is work in progress
+    - add copyright letter
+
+    - add credits - Progres7
+    - exapain that allternative littera should be highlighted when a search is performed
+
+- normalize litt frequencies!
+
+    - References link on MS - make more visible and open in new tab by default
+- fix: end of lines get hidden when profile is open
+- highlight only words where the lit actually occurs? + add to guide
+
+
+- REGISTRATION?
+
+- navigate to next hit using the button on top
+
+

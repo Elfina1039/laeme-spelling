@@ -1,0 +1,14 @@
+<div id=wrapper #wrapper>
+    <div id=topRow>
+    <div id=members>
+        <span class=setMember *ngFor="let m of set.members" [style.border-width]="calcBorder(m.tokens)">{{m.str}}</span>
+    </div>
+    <div id=freqs>    
+        {{set.types}} / {{set.tokens}}
+    </div>
+        
+</div>
+    <button (click)="loadItems()">Load items</button>
+    <app-item-list [items]=items></app-item-list>
+    
+</div>

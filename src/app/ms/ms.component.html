@@ -1,0 +1,34 @@
+<header #header>
+<div class=msTitle>
+<button (click)="compareProfiles()" title="display spelling profile" class=icon>P</button>
+<h3>Version {{ms.meta.version}}  </h3>  
+    <button (click)="msInfo.toggle()" title="information about the MS" class=icon>i</button>
+    </div>
+
+</header>
+  <app-ms-info [msMeta]=ms.meta  #msInfo></app-ms-info>
+
+
+
+
+<div id=wrapper [style.ma-width]=msSize.width+msSize.unit [style.max-height]=msSize.height+msSize.unit #wrapper>
+    <app-profile-side [profile]=profile (requestHighlight)=fireSearch($event) #profileCmp></app-profile-side>
+  
+       
+    
+    
+<div [style.width]=lineWidth>
+    <div>
+        <button *ngFor="let r of searchResults" class="icon" style="color:black" [style.background-color]=r[0]>{{r[1]}}</button>
+    </div> 
+<div *ngFor="let line of ms.lines; let li = index" [style.background]=line.color [id]="ms.meta.id+'/'+ms.lines.indexOf(line)" class=msLine>
+    <button (click)=alignMss(line) class=round title="align MSs">{{li}}</button>
+    <span *ngFor="let token of line.tokens" [title]="token.lexel+' / '+token.grammel" [style.background]=token.color class=msToken>{{token.form}}&nbsp;</span>
+    
+    </div>
+    </div>
+    
+    
+   
+  
+</div>

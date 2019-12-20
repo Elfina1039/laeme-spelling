@@ -1,0 +1,11 @@
+<div id=wrapper>
+    <div id=header></div>
+    <div id=content>
+    <table id=list>
+        <tr *ngFor="let i of items"><td (click)="loadSplits(i.strid)">{{i.lexel}}/{{i.wordClass}} ({{i.pos}})</td></tr>
+    </table>    
+
+    
+    <app-splits #splits></app-splits>
+    </div>
+</div>

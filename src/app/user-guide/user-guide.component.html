@@ -1,0 +1,118 @@
+<div id=wrapper #wrapper>
+    <header>
+        <h1>Poema Morale</h1>
+        <h2>Linguistic Atlas of Early Middle English</h2>
+    </header>
+
+    <content>
+
+        <h2>User guide</h2>
+        
+        <div class=chapter>
+            <h3>Pick version</h3>
+            <p>
+                You can select versions to be displayed before navigating to the page with the manuscripts using the chechboxes on the title page:
+            </p>
+             <img class="guide" src="assets/images/guide_pick_mss.png" />
+
+        </div>
+
+        <div class=chapter>
+            <h3>Search</h3>
+            <p>
+                You can search for words in the texts and highlight them. Search criteira include lexel (lemma), grammel (grammatical tag) and form (actual form of the word) or a combination of the three (see <a href="http://www.lel.ed.ac.uk/ihd/laeme2/DOCS/GrammelCommentary.pdf">LAEME documentation</a> for deails about grammatical tagging). You can use regular expressions in your search. The lexel / grammel for each word in the text get displayed when you hover over it.
+            </p>
+
+            <ol>
+                <li> <b>pick highlight color</b> </li>
+                <li> <b>pick a field (lexel/grammel/tag)</b> - you can add more fields (search criteria by clicling the "Add field" button (6))</li>
+                <li> <b>enter search string</b></li>
+                <li> <b>click search</b> - the words matching your criteria will be highlighted (5)</li>
+
+            </ol>
+            <img class="guide" src="assets/images/guide_search.png" />
+
+            <p>
+                The programme will highlight all occurrences in all texts. The number of hits for each text will apper at the top of the manuscript in a coloured box (7). To delete all highlights, click "Clear all" (8).
+            </p>
+
+        </div>
+
+        <div class=chapter>
+            <h3>Align texts</h3>
+            <p>
+                Click line number in any text (dark blue number on the right) to search for corresponding lines in the other versions. The programme will highlight the line with the greatest overlap of lexels/grammels in each text. The opacity of the highlight depends on the size of the overlap. The greater overlap, the fuller colour. If the programme highlights the "wrong" line, it might mean that the coressponding line was omitted or significantly changed.
+            </p>
+
+
+            <img class="guide" src="assets/images/guide_align.png" />
+
+
+        </div>
+
+        <div class=chapter>
+            <h3>Display MS description</h3>
+            <p>
+                Click the "i" button at the top of a version to display a brief description of the manuscript. You fill find a link to the catalogie entry in LAEME at the bottom of the box.
+            </p>
+
+
+            <img class="guide" src="assets/images/guide_ms_info.png" />
+
+
+        </div>
+
+        <div class=chapter>
+            <h3>Compare spelling</h3>
+            <p>
+                This feature allows you to display the overview of litterae for the given text. You can then
+                visualise differences in the frequency of the litterae and highlight relevant items in the texts. If you hover over a littera on the list, its incidence in the text will be displayed as two numbers. The first number gives the total occurrences in the given text and the second number representes the number of distinct items (lexel/grammel combinations) in which the littera appears. The list is ordered by frequency, the most rare litterae appearing at the top.
+
+            </p>
+            <ol>
+                <li>Display the inventory of litterae by clicking on the button "P" (Profile). To compare, open at least two inventories:
+                    <img class="guide" src="assets/images/guide_dsp_profile.png" />
+                </li>
+                <p>
+                    Only texts with displayed profiles are compared. Frequency data for the individual litterae get displayed if you hover over the littera as a sequence of three numbers: "normalized frequenc (instances/1000 words) / raw frequency / number of different types (lexel-grammel combinations)" in which the littera appears. 
+                    </p>
+                    <p>
+                    The coloured rectangles reflect differences in frequency of the litterae and texts are compared separately, e.g. the first rectangle in version T (above) reflects comparison with L and the second one with D.
+                </p>
+                <p>Three colors are used:
+
+                    <ul>
+                        <li>Green = the littera is used relatively more often in the given text </li>
+                        <li>Red = the littera is used relatively less often</li>
+                        <li>White = frequencies are comparable</li>
+                    </ul>
+                <br>
+
+                <li><b>Click a littera to highlight all items in which it ever appears in a given text.</b> This means that lexel/grammel combinations in which the selected littera appears <i>elsewhere</i> in the text will also be highlighted. Corresponding literae in all open inventories of litterae will be highlighed as well.
+                    <img class="guide" src="assets/images/guide_compare_profile.png" />
+                    
+                    </li>
+
+            </ol>
+            
+            <p>
+             This feature works in the same way as manual searches so you can choose different colour to highlight different items.
+            </p>
+
+
+        </div>
+
+ <a [routerLink]="['']">Back to Home page</a>
+    </content>
+
+
+
+
+    <footer>
+        <a href="http://www.amc.lel.ed.ac.uk/" target="_blank">
+            <img src="assets/images/amc_banner.jpg">
+        </a>
+
+    </footer>
+
+</div>
