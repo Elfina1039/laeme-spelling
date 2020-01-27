@@ -1,3 +1,8 @@
-<p>
-  map works!
-</p>
+<div id=map style="width:700px; height:700px" #map></div>
+
+<div id=legend>
+    <span *ngFor="let ck of colorKey | keyvalue" [style.color]=ck.value>
+    {{ck.key}}
+    </span>
+
+</div>

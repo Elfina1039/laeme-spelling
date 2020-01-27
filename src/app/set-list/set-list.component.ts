@@ -9,18 +9,45 @@ import { SetService } from '../services/set.service';
 })
 export class SetListComponent implements OnInit {
     sets : Set[] = [];
+    filtered : Set[] = [];
   constructor(private setSvc : SetService) { }
 
   ngOnInit() {
-      let ref = this;
-      this.setSvc.fetchSets().subscribe((data:any)=>{
-          console.log(data);
-          data.sets.forEach((s)=>{
-                           ref.sets.push(new Set(s));
-                           });
-      })
+     this.fetchText(8);
       
       
   }
+  
+fetchAll(){
+     let ref = this;
+      this.setSvc.fetchUniversal("getSetsOverview",[]).subscribe((data:any)=>{
+          console.log(data);
+          data.forEach((s)=>{
+                           ref.sets.push(new Set(s));
+                           });
+          ref.filtered = ref.sets;
+      })
+
+}    
+    
+fetchText(id){
+     let ref = this;
+      this.setSvc.fetchUniversal("getSetsByText",[id]).subscribe((data:any)=>{
+          console.log(data);
+          data.forEach((s)=>{
+            
+                           ref.sets.push(new Set(s));
+                           
+                           });
+           ref.filtered = ref.sets;
+      })
+
+}
+    
+filterSets(littera){
+    console.log("checking for "+littera);
+    this.filtered = this.sets.filter((s)=>s.checkForLittera(littera));
+}
+    
 
 }

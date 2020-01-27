@@ -21,6 +21,9 @@ import { SetListComponent } from './set-list/set-list.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { FormListComponent } from './form-list/form-list.component';
 import { SplitsComponent } from './splits/splits.component';
+import { TextProfileComponent } from './text-profile/text-profile.component';
+import { MapWrapperComponent } from './map-wrapper/map-wrapper.component';
+
 
 @NgModule({
   declarations: [
@@ -39,13 +42,16 @@ import { SplitsComponent } from './splits/splits.component';
     SetListComponent,
     ItemListComponent,
     FormListComponent,
-    SplitsComponent
+    SplitsComponent,
+    TextProfileComponent,
+    MapWrapperComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
       HttpClientModule,
       FormsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

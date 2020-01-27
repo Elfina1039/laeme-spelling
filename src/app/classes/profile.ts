@@ -1,3 +1,9 @@
+export interface LitStats{
+    str : string;
+    tokens : number;
+    types? : number;
+}
+
 export class Littera{
     str : string;
     tokens : number;
@@ -38,6 +44,7 @@ export class Item extends Slot{
 
 export class Set{
     members : Littera[];
+    membersStrings : string[];
     type : string;
     types : number;
     tokens : number;
@@ -54,6 +61,18 @@ export class Set{
         
         
        this.members = members; 
+    this.membersStrings = this.members.map((m)=>m.str);
+    }
+    
+    checkForLittera(l){
+         console.log(this.membersStrings);
+        console.log(this.membersStrings.indexOf(l));
+        if(this.membersStrings.indexOf(l)==-1){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
     
     

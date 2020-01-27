@@ -1,9 +1,10 @@
 .setMember, #freqs {
-    border-left-color: black;
-    border-left-style:solid;
+    border-bottom-color: black;
+    border-bottom-style:solid;
    /* border-radius: 0.2em;*/
     padding: 0.5em;
 }
+
 #wrapper {
     border: 2px solid black;
     display: flex;
@@ -19,8 +20,6 @@
 }
 
 #members {
- 
     display: flex;
     flex-flow: row nowrap;
-
 }

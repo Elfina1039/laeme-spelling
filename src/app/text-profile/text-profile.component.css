@@ -1,0 +1,17 @@
+header{width:100%;
+        height:5%;
+        border-bottom:2px solid black}
+
+content{
+    display:flex;
+    flex-flow: row wrap;
+}
+
+#side{
+    width:5%;
+    padding-top:1em;
+}
+
+#sets{
+   width:90%; 
+}

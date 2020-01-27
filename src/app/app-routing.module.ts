@@ -4,17 +4,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import { SetListComponent } from './set-list/set-list.component';
+import { MapWrapperComponent } from './map-wrapper/map-wrapper.component';
 
 import { MsToolsComponent } from './ms-tools/ms-tools.component';
 import { TitlePageComponent } from './title-page/title-page.component';
 import { UserGuideComponent } from './user-guide/user-guide.component';
 import { ReferencesComponent } from './references/references.component';
+import { TextProfileComponent } from './text-profile/text-profile.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const routes: Routes = [{path:'mss/:texts', component: MsToolsComponent},
+                        {path:'profile/:id', component: TextProfileComponent},
                          {path:'guide', component: UserGuideComponent},
                          {path:'references', component: ReferencesComponent},
                         {path:'test-set', component: SetListComponent},
+                        {path:'test-map/:fnc/:args', component: MapWrapperComponent},
+                        {path:'test-map', component: MapWrapperComponent},
                        {path:'', component: TitlePageComponent}];
 
 @NgModule({

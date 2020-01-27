@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Littera, Item, Slot } from '../classes/profile';
+import { SetService } from '../services/set.service';
 
 @Component({
   selector: 'app-item-list',
@@ -7,9 +8,10 @@ import { Littera, Item, Slot } from '../classes/profile';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-    @Input("items") items : Item[];
+     items : Item[] = [];
     @ViewChild("splits") splits : any;
-  constructor() { }
+    
+  constructor(private setSvc : SetService) { }
 
   ngOnInit() {
 
@@ -17,9 +19,21 @@ export class ItemListComponent implements OnInit {
   }
     
     
-loadSplits(strid){
-          this.splits.pattern = ["C","V","C"];
-      this.splits.splits = [["f","y","r"],["f","e","r"],["f","u","r"]];
+loadSplits(morphid){
+      this.splits.loadSplitsByMorphid(morphid);
 }
+    
+    
+loadItemsByLits(lits){
+     let ref = this;
+    let litList=lits.join(",");
+      this.setSvc.fetchUniversal("getSlotsByLits",[litList]).subscribe((data:any)=>{
+          console.log(data);
+          data.forEach((i)=>{
+                           ref.items.push(<Item>i);
+                           });
+      })
+    
+} 
 
 }

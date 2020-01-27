@@ -1,0 +1,11 @@
+
+<header>Text profile id: {{textId}}</header>
+<content>
+<div id=side>
+<app-profile-side [profile]=profile (requestHighlight)=filterSets($event) #profileCmp></app-profile-side>
+</div>
+    
+<div id=sets>
+<app-set-list #setListCmp></app-set-list>
+    </div>    
+</content>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Profile } from '../classes/profile';
 import { ListSearch } from '../classes/general';
+import { ManuscriptService } from '../services/manuscript.service';
 
 @Component({
   selector: 'app-profile-side',
@@ -9,13 +10,23 @@ import { ListSearch } from '../classes/general';
 })
 export class ProfileSideComponent implements OnInit {
    @Input("profile") profile : Profile;
+    //profile : Profile;
   @Output("requestHighlight") requestHighlight = new EventEmitter<[ListSearch, string[]]>();
      @ViewChild("wrapper") wrapper : any;
-  constructor() { }
+  constructor(private msService : ManuscriptService) { }
 
   ngOnInit() {
   }
 
+fetchProfile(id){
+    console.log("fetching profile");
+     let ref = this;
+      this.msService.fetchProfile(id).subscribe((data:any)=>{ref.profile = new Profile(data.lits, data.slots); console.log(ref.profile);});
+      
+    
+}  
+     
+    
     
 toggle(){
     // console.log(this.wrapper);
@@ -47,7 +58,7 @@ highlightStrid(littera){
     
     console.log(slotList);
     
-    let search = new ListSearch({fields:[["strid",""]], color:"yellow", list:stridList});
+    let search = new ListSearch({littera:littera.str,fields:[["strid",""]], color:"yellow", list:stridList});
     
     
     this.requestHighlight.emit([search, slotList]);

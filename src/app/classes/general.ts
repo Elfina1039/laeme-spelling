@@ -30,11 +30,13 @@ export class Search{
 
 export class ListSearch extends Search{
     list : number[];
+    littera : string;
     
     constructor(data){
         super(data);
         console.log(data.list);
         this.list = data.list;
+        this.littera = data.littera;
     }
     
     perform(t){
