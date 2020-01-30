@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Littera, Item, Slot } from '../classes/profile';
 import { SetService } from '../services/set.service';
 
@@ -10,6 +10,7 @@ import { SetService } from '../services/set.service';
 export class ItemListComponent implements OnInit {
      items : Item[] = [];
     @ViewChild("splits") splits : any;
+    @Output() mapItem : EventEmitter<any> = new EventEmitter();
     
   constructor(private setSvc : SetService) { }
 
@@ -24,10 +25,10 @@ loadSplits(morphid){
 }
     
     
-loadItemsByLits(lits){
+loadItems(fnc,args){
+    this.items = [];
      let ref = this;
-    let litList=lits.join(",");
-      this.setSvc.fetchUniversal("getSlotsByLits",[litList]).subscribe((data:any)=>{
+      this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
           console.log(data);
           data.forEach((i)=>{
                            ref.items.push(<Item>i);
@@ -35,5 +36,13 @@ loadItemsByLits(lits){
       })
     
 } 
+    
+requestMap(item){
+    console.log("requesting map for " + item.strid);
+    this.mapItem.emit({fnc:"mapSlot",args:[item.strid, item.pos]});
+}
+    
+    
+  
 
 }

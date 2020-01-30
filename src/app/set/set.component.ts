@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Set, Littera, Item, Slot } from '../classes/profile';
 import { SetService } from '../services/set.service';
 
@@ -11,6 +11,8 @@ import { SetService } from '../services/set.service';
 export class SetComponent implements OnInit {
     @Input("set") set : Set;
     @ViewChild("itemList") itemList : any;
+    
+    @Output() mapSet : EventEmitter<any> = new EventEmitter();
     items : Item[] = [];
     
     
@@ -26,7 +28,14 @@ calcBorder(tokens){
 }
     
 loadItems(){
-    this.itemList.loadItemsByLits(this.set.membersStrings);
+    let lits : string = this.set.membersStrings.join(",");
+    this.itemList.loadItems("getSlotsByLits",[lits]);
+}
+    
+requestMap(){
+    let lits : string = this.set.membersStrings.join(",");
+    console.log("requesting" + lits);
+    this.mapSet.emit({fnc:"mapSetExact", args:[lits]});
 }
     
     

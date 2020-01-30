@@ -7,6 +7,10 @@
         {{set.types}} / {{set.tokens}}
     </div>
         
+        <div id=links>
+            <button (click)="requestMap()">Map</button>
+        </div>
+        
 </div>
     <button (click)="loadItems()">Load items</button>
     <app-item-list #itemList></app-item-list>

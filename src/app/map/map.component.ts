@@ -112,7 +112,7 @@ addLaemeData(mapData){
         
        // console.log(feature);
         
-        this.msKey[feature.ol_uid]=f.id;
+        this.msKey[<any>feature.ol_uid]=f;
     
      let pie=this.graphicSvc.drawPie(f.litterae,f.tokens, this.colorKey);
         

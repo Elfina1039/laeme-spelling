@@ -13,7 +13,6 @@ export class SetListComponent implements OnInit {
   constructor(private setSvc : SetService) { }
 
   ngOnInit() {
-     this.fetchText(8);
       
       
   }
@@ -30,9 +29,9 @@ fetchAll(){
 
 }    
     
-fetchText(id){
+loadSets(fnc, args){
      let ref = this;
-      this.setSvc.fetchUniversal("getSetsByText",[id]).subscribe((data:any)=>{
+      this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
           console.log(data);
           data.forEach((s)=>{
             

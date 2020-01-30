@@ -198,13 +198,14 @@ this.dataSample=[{"id" : 129, "litterae" : [{"str" : "f", "tokens" : 2}], "token
         
         lits.forEach((l,li)=>{
             let end = start + (2*Math.PI*(l.tokens/total));
-            
+            ctx.strokeStyle="black";
             ctx.beginPath();
             ctx.fillStyle=colorKey[l.str];
             ctx.arc(10,10,10,start,end);
             ctx.lineTo(10,10);
             ctx.closePath();
             ctx.fill();
+            ctx.stroke();
             
             start = end;
         

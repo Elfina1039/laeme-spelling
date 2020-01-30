@@ -1,1 +1,12 @@
+<div id=wrapper>
 <app-map (msClicked)=displayMs($event) #map></app-map>
+
+<!--<app-set-list (mapSet)=changeMap($event) #setList></app-set-list>-->
+    <div id=sets>
+ <app-set *ngFor="let s of sets" [set]=s (mapSet)=changeMap($event) #set></app-set>
+    </div>
+    <div id=selected #selected>
+        <h3>Selected text:{{selectedText.id}} </h3>
+<app-item-list (mapItem)=changeMap($event) #itemList></app-item-list>
+    </div>
+</div>

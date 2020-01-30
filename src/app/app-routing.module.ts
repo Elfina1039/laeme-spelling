@@ -18,8 +18,7 @@ const routes: Routes = [{path:'mss/:texts', component: MsToolsComponent},
                          {path:'guide', component: UserGuideComponent},
                          {path:'references', component: ReferencesComponent},
                         {path:'test-set', component: SetListComponent},
-                        {path:'test-map/:fnc/:args', component: MapWrapperComponent},
-                        {path:'test-map', component: MapWrapperComponent},
+                        {path:'map/:fnc/:args', component: MapWrapperComponent},
                        {path:'', component: TitlePageComponent}];
 
 @NgModule({

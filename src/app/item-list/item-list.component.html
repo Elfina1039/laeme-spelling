@@ -2,7 +2,12 @@
     <div id=header></div>
     <div id=content>
     <table id=list>
-        <tr *ngFor="let i of items"><td (click)="loadSplits(i.strid)">{{i.lexel}}/{{i.wordClass}} ({{i.pos}})</td></tr>
+        <tr *ngFor="let i of items"><td (click)="loadSplits(i.strid)">{{i.lexel}}/{{i.wordClass}} ({{i.pos}})</td>
+            <td><span class=lit *ngFor="let l of i.litterae">{{l.str}}/{{l.tokens}}</span></td>
+            <th>
+                <button (click)="requestMap(i)">Map</button>
+            </th>
+        </tr>
     </table>    
 
     

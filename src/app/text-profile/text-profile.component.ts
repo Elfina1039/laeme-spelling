@@ -36,7 +36,7 @@ profile : Profile;
     
 loadProfile(id){
    // this.preloaded.push(id);
- this.setListCmp.fetchText(id);
+ this.setListCmp.loadSets("getSetsByText",[id]);
 this.profileCmp.fetchProfile(id);
 this.profileCmp.toggle();
     
