@@ -1,11 +1,16 @@
-<div id=wrapper>
-    <div id=header></div>
+<div id=wrapper #wrapper>
+    <div id=header>
+        Filters: <span *ngFor="let f of filters">{{f.type}} : {{f.values.join(",")}}</span>
+    </div>
     <div id=content>
+        <button (click)="submitSelection()">Submit</button>
     <table id=list>
-        <tr *ngFor="let i of items"><td (click)="loadSplits(i.strid)">{{i.lexel}}/{{i.wordClass}} ({{i.pos}})</td>
+        <tr *ngFor="let i of items">
+            <th *ngIf="enableSelect"><input type=checkbox [(ngModel)]="i.selected"></th>
+            <td (click)="loadSplits(i.strid, i.pos)">{{i.lexel}}/{{i.wordClass}} ({{i.pos}})</td>
             <td><span class=lit *ngFor="let l of i.litterae">{{l.str}}/{{l.tokens}}</span></td>
             <th>
-                <button (click)="requestMap(i)">Map</button>
+                <button (click)="submitItem(i)">Submit</button>
             </th>
         </tr>
     </table>    

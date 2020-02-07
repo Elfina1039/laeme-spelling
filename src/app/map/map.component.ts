@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter,  Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter,  Input} from '@angular/core';
 import Map from 'ol/Map';
 import {Tile, Vector} from 'ol/layer';
 import OSM from 'ol/source/OSM';
@@ -15,6 +15,7 @@ import Select from 'ol/interaction/Select';
 
 import { GraphicService } from '../services/graphic.service';
 import { LitStats } from '../classes/profile';
+import { MapSearch } from '../classes/general';
 
 @Component({
   selector: 'app-map',
@@ -26,15 +27,21 @@ export class MapComponent implements OnInit {
     lang : number = 0;
     map : any;
     colorKey : any = {};
+    freqRange : [number,number] = [0,0];
     msKey : any = {};
+    mapData :any = [];
+    activeLayer : string = "";
+    @Input("previousSearches") previousSearches : MapSearch[];
    // @Input()litStats : LitStats[];
     @ViewChild("map") mapContainer : any;
+    @ViewChild("wrapper") wrapper : any;
     @Output() msClicked : EventEmitter<number> = new EventEmitter();
     
     
   constructor(private graphicSvc : GraphicService) { }
 
   ngOnInit() {
+    
     this.initializeMap(); 
 
      
@@ -82,10 +89,25 @@ export class MapComponent implements OnInit {
 
 addLaemeData(mapData){
     console.log("ADDING");
-     let ref = this;     
+    this.mapData = mapData;
+    //console.log(this.map);
+    let tokenFreqs = mapData.map((m)=>m.tokens);
+    let max = Math.max(...tokenFreqs);
+    let min = Math.min(...tokenFreqs);
+    this.freqRange=[min,max];
+    
+    console.log(max);
+   let newLayer = this.drawMap();
+  return newLayer;
+   // console.log(this.map.getLayers());
+}
+    drawMap(){
+       
+          let ref = this;  
+        this.graphicSvc.addFilter(ref.wrapper.nativeElement);
     let features : Feature[] = [];
     
-    mapData.forEach((md)=>{
+    this.mapData.forEach((md)=>{
         features.push(this.createFeature(md));
     });
     
@@ -96,36 +118,52 @@ addLaemeData(mapData){
         
          let vectorLayer = new Vector({
             source : vectorSrc
-        });    
+        }); 
+        
+        let layers = this.map.getLayers();
+    
+        let oldLayer=layers.array_.filter((l)=>l["ol_uid"]==this.activeLayer);
+        
+        if(oldLayer){
+           this.map.removeLayer(oldLayer[0]);
+           };
         
         this.map.addLayer(vectorLayer);
-  
-   // console.log(this.map.getLayers());
-}
+        this.activeLayer=vectorLayer["ol_uid"];
     
+   this.graphicSvc.removeFilter(ref.wrapper.nativeElement);
+        return vectorLayer;
+    }
 
     createFeature(f){
-        
+        let ref = this;
         let feature = new Feature({
             geometry: new Point(fromLonLat([this.graphicSvc.grid[f.id].long, this.graphicSvc.grid[f.id].lat]))
         });
         
        // console.log(feature);
         
-        this.msKey[<any>feature.ol_uid]=f;
+        this.msKey[<any>feature["ol_uid"]]=f;
     
-     let pie=this.graphicSvc.drawPie(f.litterae,f.tokens, this.colorKey);
+     let pieSize= this.graphicSvc.calcPieSize(ref.freqRange[0],ref.freqRange[1],f.tokens);
+     let pie=this.graphicSvc.drawPie(f.litterae,f.tokens,pieSize/2, this.colorKey);
+        //console.log(pie);
         
         feature.setStyle(new Style({
             image: new Icon({
                 img : pie,
                 crossOrigin : "anonymous",
-                imgSize : [20,20]
+                imgSize : [pieSize,pieSize]
             })
         }));
    
    return feature; 
 } 
+    
+ colorChange(v){
+     this.colorKey[v.key]=v.value;
+     console.log(this.colorKey);
+ }
     
     
 displayMs(id){

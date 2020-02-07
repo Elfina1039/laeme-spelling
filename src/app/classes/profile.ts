@@ -38,6 +38,7 @@ export class Slot{
 export class Item extends Slot{
     lexel : string;
     wordClass : string;
+    selected : boolean = false;
     
 }
 

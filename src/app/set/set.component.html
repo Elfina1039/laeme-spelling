@@ -12,7 +12,12 @@
         </div>
         
 </div>
-    <button (click)="loadItems()">Load items</button>
-    <app-item-list #itemList></app-item-list>
+    <button *ngIf="!itemList.open" (click)="showItems()">Show items</button>
+    <button *ngIf="itemList.open" (click)="hideItems()">Hide items</button>
+    <app-item-list enableSelect=true
+                   (requestItem)=submitItem($event)
+                   (requestSelection)=submitSelection($event)
+                   #itemList>
+    </app-item-list>
     
 </div>

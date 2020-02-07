@@ -1,3 +1,13 @@
+export interface SearchFnc{
+    label : string;
+    fnc : string;
+}
+
+export interface MapSearch extends SearchFnc{
+    args : string[];
+    layer : any;
+}
+
 
 export class Search{
     fields : [string, string][];

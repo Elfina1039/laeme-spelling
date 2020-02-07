@@ -1,0 +1,6 @@
+<div id=wrapper #wrapper>
+    <button *ngFor="let l of links" (click)="submitLink(l.fnc)">{{l.label}}</button>
+    
+    <app-search-box (requestSearch)=submitQuickLink($event) [functions]="quickLinks"></app-search-box>
+    
+</div>

@@ -1,5 +1,13 @@
 <div id = wrapper>
-
-<router-outlet></router-outlet>
+    
+    
+    <menu>  
+        <button (click)="menu.toggle()">Menu</button>
+        
+        <app-menu #menu></app-menu> 
+    
+    </menu>
+    
+<router-outlet> </router-outlet>
     
 </div>

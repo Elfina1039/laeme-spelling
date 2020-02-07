@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class GraphicService {
     grid;
     dataSample;
-    colors : string[]=["red","blue","yellow","green","orange","white","black","silver","navy","purple","pink"]; 
+    colors : string[]=["#fc1703","#2003fc","#ede60c","#22f007","#ff9305","#ffffff","#000000","#aef50a","#0be6c8","#ed0edb","#145415"]; 
     
     
   constructor() {
@@ -189,7 +189,7 @@ this.dataSample=[{"id" : 129, "litterae" : [{"str" : "f", "tokens" : 2}], "token
 
     
     
- drawPie(lits:any, total, colorKey){
+ drawPie(lits:any, total, r, colorKey){
      let canvas : HTMLCanvasElement = document.createElement('canvas');
       let ctx = canvas.getContext('2d'); 
        
@@ -201,8 +201,8 @@ this.dataSample=[{"id" : 129, "litterae" : [{"str" : "f", "tokens" : 2}], "token
             ctx.strokeStyle="black";
             ctx.beginPath();
             ctx.fillStyle=colorKey[l.str];
-            ctx.arc(10,10,10,start,end);
-            ctx.lineTo(10,10);
+            ctx.arc(r,r,r,start,end);
+            ctx.lineTo(r,r);
             ctx.closePath();
             ctx.fill();
             ctx.stroke();
@@ -211,6 +211,36 @@ this.dataSample=[{"id" : 129, "litterae" : [{"str" : "f", "tokens" : 2}], "token
         
         })
        return canvas; 
-    }    
+    } 
+    
+    
+    calcPieSize(min,max,tokens){
+        let rng = max-min;
+        let size = 15 + ((tokens/rng)*15);
+        return size;
+    }
+    
+   addFilter(toFilter){
+    //this.renderer.setStyle(toFilter, "filter", "blur(5px)");
+       console.log("addingTO");
+       console.log(toFilter);
+       toFilter.style.filter="blur(5px)";
+    }
+    
+    removeFilter(toFilter){
+   // this.renderer.setStyle(toFilter, "filter", "none"); 
+        console.log("REMOVING");
+       console.log(toFilter);
+        toFilter.style.filter="none";
+        
+    }
+    
+    darken(toFilter){
+    //this.renderer.setStyle(toFilter, "filter", "blur(5px)");
+       toFilter.style.filter="contrast(5%)";
+    }
+    
+ 
+    
     
 }

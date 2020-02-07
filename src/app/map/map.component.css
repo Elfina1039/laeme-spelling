@@ -1,8 +1,19 @@
+#wrapper{
+    transition:filter 1s ease-out;
+    width:100%;
+    height:100%;
+}
 
+#map{
+    width:700px;
+    height:700px;
+}
 
-#legend{background-color: black}
+#legend{background-color: black;
+width:700px;}
 
 #legend span{
     font-weight:bold;
     font-size: 20px;
+    
 }

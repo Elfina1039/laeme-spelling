@@ -11,9 +11,12 @@ import { SetService } from '../services/set.service';
 export class SetComponent implements OnInit {
     @Input("set") set : Set;
     @ViewChild("itemList") itemList : any;
+    items : Item[] = [];
     
     @Output() mapSet : EventEmitter<any> = new EventEmitter();
-    items : Item[] = [];
+  
+    @Output() requestItem : EventEmitter<any> = new EventEmitter();
+    @Output() requestSelection : EventEmitter<any> = new EventEmitter();
     
     
   constructor(private setSvc: SetService) { }
@@ -27,15 +30,33 @@ calcBorder(tokens){
     return <string>border+"px";
 }
     
-loadItems(){
-    let lits : string = this.set.membersStrings.join(",");
+showItems(){
+    if(this.itemList.items.length==0){
+        let lits : string = this.set.membersStrings.join(",");
     this.itemList.loadItems("getSlotsByLits",[lits]);
+    }
+    else{
+        this.itemList.show();
+    }
+    
 }
+
+hideItems(){
+        this.itemList.hide();
+    }
     
 requestMap(){
     let lits : string = this.set.membersStrings.join(",");
     console.log("requesting" + lits);
     this.mapSet.emit({fnc:"mapSetExact", args:[lits]});
+}
+
+submitItem(e){
+    this.requestItem.emit(e);
+}
+    
+submitSelection(e){
+    this.requestSelection.emit(e);
 }
     
     

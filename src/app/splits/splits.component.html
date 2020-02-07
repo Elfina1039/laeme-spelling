@@ -5,7 +5,7 @@
     </div>  
     
      <div class=split *ngFor="let split of splits">
-        <span class=slot *ngFor="let s of split">{{s}}</span>
+        <span [style.background-color]=highlightPos(s.key) class=slot *ngFor="let s of split | keyvalue">{{s.value}}</span>
     </div> 
 
 

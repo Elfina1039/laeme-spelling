@@ -1,5 +1,26 @@
 #wrapper{
+    height:100%;
+    width:100%;
+    display:flex;
+    flex-flow:column nowrap;
+    background-color:#c17a10;
+    transition:filter 0.5s;
+}
+
+header{
+    padding-left:7em;
+    height:10%;
+    width:100%;
+}
+
+content{
     display:flex;
     flex-flow:row nowrap;
-    background-color:#c17a10;
+    height:90%;
+    width:100%;
+}
+
+#setList{
+    height:100%;
+    overflow:scroll;
 }

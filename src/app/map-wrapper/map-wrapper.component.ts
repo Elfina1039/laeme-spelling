@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild,ViewChildren, Input } from '@angular/core';
+import { Component, OnInit, ViewChild,ViewChildren, Input} from '@angular/core';
 import { SetService } from '../services/set.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LitStats, Set } from '../classes/profile';
-
+import {  SearchFnc, MapSearch } from '../classes/general';
+import { GraphicService } from '../services/graphic.service';
 @Component({
   selector: 'app-map-wrapper',
   templateUrl: './map-wrapper.component.html',
@@ -11,15 +12,23 @@ import { LitStats, Set } from '../classes/profile';
 export class MapWrapperComponent implements OnInit {
 @ViewChild("map") map : any;
 @ViewChild("itemList") itemList : any;
+@ViewChild("setList") setList : any;
+@ViewChild("wrapper") wrapper : any;
 //@ViewChild("setList") setList : any;
 
     laemeData : any = [];
+    previousSearches : MapSearch[] = [];
     litStats : LitStats[];
     selectedText : any = {id:0};
     sets : Set[] = [];
     params : any = {};
     
-  constructor(protected route: ActivatedRoute, protected router : Router , private setSvc : SetService) { }
+    searchFncs : SearchFnc[] = [
+        {label:"Map set+", fnc : "mapSet"},
+        {label:"Map set", fnc : "mapSetExact"}
+    ]
+    
+  constructor(protected route: ActivatedRoute, protected router : Router , private setSvc : SetService,  private graphicSvc: GraphicService) { }
 
   ngOnInit() {
       
@@ -39,7 +48,18 @@ export class MapWrapperComponent implements OnInit {
       
       
   }
+
+mapItem(e){
+    this.changeMap({fnc:"mapSlot", args: [e.strid,e.pos]});
+}
     
+mapSelection(e){
+    this.changeMap({fnc:"mapSlots", args:[e.join(",") ]});
+}
+    
+mapSearch(e){
+    this.changeMap({fnc:e.fnc, args:[e.search.main]});
+}
     
 changeMap(e){
     console.log("changing map");
@@ -50,6 +70,10 @@ changeMap(e){
     
 loadMap(fnc,args){
     let ref = this;
+    this.graphicSvc.addFilter(ref.wrapper.nativeElement);
+    this.graphicSvc.addFilter(ref.setList.nativeElement);
+   
+    
       this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
           console.log(data);
           ref.laemeData=data;
@@ -58,7 +82,9 @@ loadMap(fnc,args){
           ref.litStats=data;
        
         ref.map.makeColorKey(ref.litStats);
-       ref.map.addLaemeData(ref.laemeData);
+       let newLayer = ref.map.addLaemeData(ref.laemeData);
+            
+        ref.previousSearches.push({label:fnc, fnc:fnc, args:args, layer:newLayer});
       })
       })
     this.loadSets("getSetsByLits",args);
@@ -69,12 +95,14 @@ loadMap(fnc,args){
     loadSets(fnc, args){
      let ref = this;
       this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
-          console.log(data);
+          ref.sets=[];
           data.forEach((s)=>{
             
                            ref.sets.push(new Set(s));
                            
                            });
+        ref.graphicSvc.removeFilter(ref.setList.nativeElement);
+        ref.graphicSvc.removeFilter(ref.wrapper.nativeElement);
         
       })
 
@@ -89,6 +117,9 @@ displayMs(e){
     let args = this.params.args[0];
     let fnc = this.params.fnc+"ForText";
     this.itemList.loadItems(fnc, [e.id,args]);
-}    
+    this.itemList.filters.push({type:"ms", values:[e.id]});
+} 
+    
+    
     
 }

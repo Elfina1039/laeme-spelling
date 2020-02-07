@@ -23,6 +23,9 @@ import { FormListComponent } from './form-list/form-list.component';
 import { SplitsComponent } from './splits/splits.component';
 import { TextProfileComponent } from './text-profile/text-profile.component';
 import { MapWrapperComponent } from './map-wrapper/map-wrapper.component';
+import { SearchBoxComponent } from './search-box/search-box.component';
+import { KwicComponent } from './kwic/kwic.component';
+import { MenuComponent } from './menu/menu.component';
 
 
 @NgModule({
@@ -44,7 +47,10 @@ import { MapWrapperComponent } from './map-wrapper/map-wrapper.component';
     FormListComponent,
     SplitsComponent,
     TextProfileComponent,
-    MapWrapperComponent
+    MapWrapperComponent,
+    SearchBoxComponent,
+    KwicComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,14 @@
-<div id=map style="width:700px; height:700px" #map></div>
-
-<div id=legend>
+<div id=wrapper  #wrapper>
+    
+    <div id=legend>
     <span *ngFor="let ck of colorKey | keyvalue" [style.color]=ck.value>
-    {{ck.key}}
+   <input type=color (change)="colorChange(ck)" [(ngModel)]="ck.value"/> {{ck.key}}
     </span>
+    <button (click)=drawMap()>Redraw</button>
+</div>
+    
+
+<div id=map  #map></div>
+
 
 </div>
