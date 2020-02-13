@@ -185,14 +185,22 @@ this.dataSample=[{"id" : 129, "litterae" : [{"str" : "f", "tokens" : 2}], "token
   
   }
     
-   
+   makeColorKey(litStats){
+         let ref = this;
+        let colorKey=[];
+          litStats.forEach((ls,lsi)=>{
+        colorKey[ls.str]=ref.colors[lsi]});  
+    
+      return colorKey;
+    } 
 
     
     
  drawPie(lits:any, total, r, colorKey){
      let canvas : HTMLCanvasElement = document.createElement('canvas');
       let ctx = canvas.getContext('2d'); 
-       
+      canvas.width = r*2; 
+      canvas.height = r*2; 
       
         let start = 0;
         

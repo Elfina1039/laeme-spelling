@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, Renderer2 } from '@angular/core';
 import { Littera, Item, Slot } from '../classes/profile';
 import { SetService } from '../services/set.service';
+import { QueryData, Filter } from '../classes/general';
 
 @Component({
   selector: 'app-item-list',
@@ -10,7 +11,7 @@ import { SetService } from '../services/set.service';
 export class ItemListComponent implements OnInit {
      items : Item[] = [];
     open : boolean = false;
-    filters : any = [];
+    queryData : QueryData;
     @Input("enableSelect") enableSelect: boolean = true;
     
     @ViewChild("wrapper") wrapper : any;
@@ -31,7 +32,10 @@ export class ItemListComponent implements OnInit {
     
 loadSplits(morphid, pos){
     this.splits.pos=pos;
-      this.splits.loadSplits("getSplitsByMorphid",[morphid]);
+    let fnc = this.queryData.fnc;
+    let args : string[] = this.queryData.args.map((a)=>a);
+        args.push(morphid);
+      this.splits.loadSplits(fnc,args);
 }
     
     
@@ -41,20 +45,21 @@ loadItems(fnc,args){
      let ref = this;
      this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
           console.log(data);
-          data.forEach((i)=>{
+          data.rows.forEach((i)=>{
                            ref.items.push(<Item>i);
                            });
+         ref.queryData = data.queryData;
       })
     
 } 
     
 submitItem(item){
-    console.log("requesting map for " + item.strid);
-    this.requestItem.emit({strid:item.strid, pos:item.pos});
+    console.log("requesting map for " + item.morphid);
+    this.requestItem.emit({morphid:item.morphid, pos:item.pos});
 }
     
 submitSelection(){
-    let selection = this.items.filter((i)=>i.selected).map((s)=>s.strid+"-"+s.pos);
+    let selection = this.items.filter((i)=>i.selected).map((s)=>s.morphid+"-"+s.pos);
     console.log(selection);
      this.requestSelection.emit(selection);
 }

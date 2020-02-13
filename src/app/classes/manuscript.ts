@@ -28,18 +28,20 @@ export class Manuscript {
     //tokens : Token[];
     lines : MsLine[];
     
-    constructor(ms){
-        console.log(ms);
-        this.meta = ms.meta;
+    constructor(tokens, id){
+        
+        this.meta = {id:id, version:"??", date:"date", manuscript:"manuscript", description:"description", laemeLink:"link", links:[]};
         
         let lineCount = 0;
         let lines = []
         lines[0] = <MsLine>{tokens:[]};
         
-        ms.tokens.forEach((t)=>{if(t.lexel=="BR"){lineCount++; lines[lineCount] = <MsLine>{tokens:[]};}
+        tokens.forEach((t)=>{if(t.nl.join(";").search("\n")!=-1){lines[lineCount].tokens.push(t);lineCount++; lines[lineCount] = <MsLine>{tokens:[]};}
                                else{
-                                   lines[lineCount].tokens.push(t)}});
+                                   lines[lineCount].tokens.push(t);}});
         this.lines = lines;
+        
+        console.log(this);
     }
     
     

@@ -13,7 +13,7 @@ import { ReferencesComponent } from './references/references.component';
 import { TextProfileComponent } from './text-profile/text-profile.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-const routes: Routes = [{path:'mss/:texts', component: MsToolsComponent},
+const routes: Routes = [{path:'mss/:id', component: MsToolsComponent},
                         {path:'profile/:id', component: TextProfileComponent},
                          {path:'guide', component: UserGuideComponent},
                          {path:'references', component: ReferencesComponent},

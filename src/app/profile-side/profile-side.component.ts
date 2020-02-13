@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Profile } from '../classes/profile';
 import { ListSearch } from '../classes/general';
-import { ManuscriptService } from '../services/manuscript.service';
+import { SetService } from '../services/set.service';
 
 @Component({
   selector: 'app-profile-side',
@@ -9,21 +9,19 @@ import { ManuscriptService } from '../services/manuscript.service';
   styleUrls: ['./profile-side.component.css']
 })
 export class ProfileSideComponent implements OnInit {
-   @Input("profile") profile : Profile;
+   profile : Profile;
     //profile : Profile;
   @Output("requestHighlight") requestHighlight = new EventEmitter<[ListSearch, string[]]>();
      @ViewChild("wrapper") wrapper : any;
-  constructor(private msService : ManuscriptService) { }
+  constructor(private setSvc : SetService) { }
 
   ngOnInit() {
   }
 
 fetchProfile(id){
-    console.log("fetching profile");
-     let ref = this;
-      this.msService.fetchProfile(id).subscribe((data:any)=>{ref.profile = new Profile(data.lits, data.slots); console.log(ref.profile);});
-      
     
+     let ref = this;
+      this.setSvc.fetchUniversal("getInventory",[id]).subscribe((inventory:any)=>{ this.setSvc.fetchUniversal("getSlotsByText",[id]).subscribe((slots:any)=>{ref.profile = new Profile(inventory.rows, slots.rows); console.log(this.profile);});});
 }  
      
     
@@ -58,7 +56,7 @@ highlightStrid(littera){
     
     console.log(slotList);
     
-    let search = new ListSearch({littera:littera.str,fields:[["strid",""]], color:"yellow", list:stridList});
+    let search = new ListSearch({littera:littera.str,fields:[["morphids",""]], color:"yellow", list:stridList});
     
     
     this.requestHighlight.emit([search, slotList]);

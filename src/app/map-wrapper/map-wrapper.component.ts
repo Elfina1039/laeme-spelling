@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild,ViewChildren, Input} from '@angular/core';
 import { SetService } from '../services/set.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LitStats, Set } from '../classes/profile';
-import {  SearchFnc, MapSearch } from '../classes/general';
+import {  SearchFnc, MapSearch, QueryData, Filter } from '../classes/general';
 import { GraphicService } from '../services/graphic.service';
 @Component({
   selector: 'app-map-wrapper',
@@ -22,6 +22,8 @@ export class MapWrapperComponent implements OnInit {
     selectedText : any = {id:0};
     sets : Set[] = [];
     params : any = {};
+     queryData : QueryData;
+    searchLabel : string;
     
     searchFncs : SearchFnc[] = [
         {label:"Map set+", fnc : "mapSet"},
@@ -41,6 +43,10 @@ export class MapWrapperComponent implements OnInit {
     ref.loadMap(fnc,args);
            
            ref.params={fnc:fnc, args:args};
+           if(!ref.searchLabel){
+                ref.searchLabel = fnc;
+           }
+          
            
            
 
@@ -50,7 +56,7 @@ export class MapWrapperComponent implements OnInit {
   }
 
 mapItem(e){
-    this.changeMap({fnc:"mapSlot", args: [e.strid,e.pos]});
+    this.changeMap({fnc:"mapSlot", args: [e.morphid,e.pos]});
 }
     
 mapSelection(e){
@@ -76,31 +82,38 @@ loadMap(fnc,args){
     
       this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
           console.log(data);
-          ref.laemeData=data;
+          ref.laemeData=data.rows;
         this.setSvc.fetchUniversal(fnc+"Stats",args).subscribe((data:any)=>{
           console.log(data);
-          ref.litStats=data;
+          ref.litStats=data.rows;
        
         ref.map.makeColorKey(ref.litStats);
        let newLayer = ref.map.addLaemeData(ref.laemeData);
             
-        ref.previousSearches.push({label:fnc, fnc:fnc, args:args, layer:newLayer});
+        ref.previousSearches.unshift({label:ref.searchLabel, fnc:fnc, args:args, layer:newLayer});
+            
+        ref.loadSets("getSetsByLits",args);
       })
       })
-    this.loadSets("getSetsByLits",args);
+    
     
 }
+    
+    switchLayer(ps){
+        this.map.placeLayer(ps.layer);
+    }
     
 
     loadSets(fnc, args){
      let ref = this;
       this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
           ref.sets=[];
-          data.forEach((s)=>{
+          data.rows.forEach((s)=>{
             
                            ref.sets.push(new Set(s));
                            
                            });
+        ref.queryData = data.queryData;
         ref.graphicSvc.removeFilter(ref.setList.nativeElement);
         ref.graphicSvc.removeFilter(ref.wrapper.nativeElement);
         

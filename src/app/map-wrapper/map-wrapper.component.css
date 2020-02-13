@@ -1,16 +1,55 @@
+*{
+    box-sizing: border-box;
+}
+
 #wrapper{
     height:100%;
     width:100%;
     display:flex;
     flex-flow:column nowrap;
-    background-color:#c17a10;
     transition:filter 0.5s;
 }
 
 header{
-    padding-left:7em;
-    height:10%;
     width:100%;
+    background:#2e200d;
+    height:7%;
+    display: flex;
+    flex-flow: row nowrap;
+    color:#df8f17;
+    font-size:16pt;
+    padding-left:8em;
+    border-bottom: 2px solid #df8f17;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header{
+    flex-flow: column nowrap;
+    color: white;
+    padding: 0.5em;
+    background: #4f391b;
+    height: 5%;
+    transition: height 1s ease-out;
+    border-right: 1px solid white;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-radius: 0.4em 0.4em 0 0em;
+    display: flex;
+  justify-content: center;
+}
+
+#previousSearch{
+    width:20%;
+}
+
+input[type=text], select{
+    background : white;
+     box-shadow: 0 0 0.5em #c17a10 inset;
+    padding:0.2em;
+    border: 1px inset #c17a10;
+    color:black;
 }
 
 content{
@@ -23,4 +62,12 @@ content{
 #setList{
     height:100%;
     overflow:scroll;
+    max-width:25%;
+}
+
+#selected{
+    max-width:25%;
+    height:100%;
+    overflow:scroll;
+    
 }

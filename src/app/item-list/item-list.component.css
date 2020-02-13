@@ -6,22 +6,29 @@
 
 #content{
     display:flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     
 }
 
 table{
     margin:0.5em;
-    border: 2px solid black;
+    border: 2px solid white;
     border-collapse: collapse;
 }
 
-td{
-    border: 1px solid black;
+
+th.link{
+    background:#c17a10;
 }
 
-td:hover{
-    background-color:yellow;
+td,th{
+    border: 1px solid white;
+    color: white;
+    background: #4f391b;
+}
+
+th:hover{
+    box-shadow: 0 0 0.5em white inset;
     cursor: pointer;
 }
 

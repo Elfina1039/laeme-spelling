@@ -30,7 +30,7 @@ export class Littera{
 }
 
 export class Slot{
-    strid : number;
+    morphid : number;
     pos : number;
     litterae : Littera[];
 }
@@ -49,15 +49,19 @@ export class Set{
     type : string;
     types : number;
     tokens : number;
+    loaderFnc : string;
+    args : string[];
     
     constructor(s){
+        this.loaderFnc = s.loaderFnc;
+        this.args = s.args;
         this.type = s.type;
         this.types = s.types;
         this.tokens = s.tokens;
         let members : Littera[] = [];
         
          s.members.forEach((li)=>{
-          members.push(new Littera({str : li.str, tokens: li.tokens, types : 1, normTokens: li.tokens}));  
+          members.push(new Littera({str : li.str, tokens: li.tokens, types : li.types, normTokens: li.tokens}));  
         });
         
         
@@ -85,7 +89,7 @@ export class Profile {
     slotRef : any;
                       
     constructor(list, slotsData){
-     //   console.log(list);
+       console.log(slotsData);
         
     let litterae : Littera[] = [];
     let slots : Slot[] = [];
@@ -93,17 +97,16 @@ export class Profile {
     let ref = this;
         
         list.forEach((li)=>{
-          litterae.push(new Littera({str : li.lit, tokens: li.total, types : li.poss, normTokens: li.normFreq}));  
+          litterae.push(new Littera(li));  
         });
            this.litterae = litterae;
         
          slotsData.forEach((s)=>{
-            let def = s.slot.split("-");
-             let members = s.lst.map((l)=>l[0]);
+             let members = s.litterae.map((l)=>l.str);
            
-            let nSlot=<Slot>{strid : eval(def[0]), pos: eval(def[1]), litterae : ref.linkLitterae(members)};
+            let nSlot=<Slot>{morphid : eval(s.morphid), pos: s.pos, litterae : s.litterae};
           slots.push(nSlot); 
-             slotRef[s.slot] = nSlot;
+             slotRef[s.morphid+"-"+s.pos] = nSlot;
         
         });
         
@@ -153,7 +156,7 @@ getSlotList(littera){
     
     this.slots.forEach((s)=>{
         if(s.litterae.map((l)=>l.str).indexOf(littera.str)!=-1){
-            result.push(s.strid+"-"+s.pos);
+            result.push(s.morphid+"-"+s.pos);
         }
         
     });
@@ -178,6 +181,7 @@ getAlternatives(slotList : string[]){
         if(slotRef[sl]){
           slotRef[sl].litterae.forEach((l)=>{
         l.asAlternative++;
+              console.log("a")
         });  
         }
         

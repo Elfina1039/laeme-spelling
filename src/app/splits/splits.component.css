@@ -16,7 +16,8 @@
 .slot{
     width:2em;
     text-align:center;
-    border-right: 1px dashed silver;
-    border-left: 1px dashed silver;
+    border-right: 1px dashed white;
+    border-left: 1px dashed white;
+    background: #df8f17;
 }
 

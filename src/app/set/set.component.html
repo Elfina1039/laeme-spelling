@@ -1,14 +1,15 @@
 <div id=wrapper #wrapper>
     <div id=topRow>
+        <div #chart> </div>
     <div id=members>
-        <span class=setMember *ngFor="let m of set.members" [style.border-width]="calcBorder(m.tokens)">{{m.str}}</span>
+        <span class=setMember *ngFor="let m of set.members" [style.border-width]="calcBorder(m.tokens)" [style.border-color]="colorKey[m.str]">{{m.str}}</span>
     </div>
     <div id=freqs>    
         {{set.types}} / {{set.tokens}}
     </div>
         
         <div id=links>
-            <button (click)="requestMap()">Map</button>
+            <button (click)="requestMap()" class=icon>>></button>
         </div>
         
 </div>

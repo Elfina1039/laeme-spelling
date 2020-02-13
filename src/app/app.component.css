@@ -1,3 +1,7 @@
+*{
+    
+box-sizing: border-box;
+}
 html{
     width:100%;
     height:100%;
@@ -11,27 +15,35 @@ html{
     position:absolute;
     display:flex;
     flex-flow:row nowrap;
+    background: linear-gradient(black, #2e200d);
 }
 
 input{
     border-radius: 0.2em;
 }
 
-menu{
+app-menu{
     position:absolute;
     top:0;
     left:0;
-    width:7em;
+    height:100%;
+    width:0;
+    z-index:1000;
+   /* width:7em;
     
     margin:0;
     background-color: yellow;
     padding:0;
     display:flex;
-    flex-flow:column nowrap;
+    flex-flow:column nowrap;*/
 }
 
 router-outliet{
-    width:100%;
-    height:100%;
+  /*  width:100%;
+    height:100%;*/
+}
+
+.link{
+    border:3px solid red;
 }
 

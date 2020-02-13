@@ -24,7 +24,7 @@ export class MenuComponent implements OnInit {
     
    
     
-    height : number = 0;
+    width : number = 0;
      
 
   constructor(private router : Router,
@@ -35,9 +35,9 @@ export class MenuComponent implements OnInit {
 
 toggle(){
     let toRender = this.wrapper.nativeElement;
-    let h = -this.height + 20;
-    this.height = h;
-    this.renderer.setStyle(toRender, "height",h+"em");
+    let w = -this.width + 7;
+    this.width = w;
+    this.renderer.setStyle(toRender, "width",w+"em");
 }    
     
 submitLink(lnk){

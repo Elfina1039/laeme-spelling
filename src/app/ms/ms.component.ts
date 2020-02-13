@@ -3,6 +3,7 @@ import { Manuscript, MsSize, MsLine } from '../classes/manuscript';
 import { Search, ListSearch } from '../classes/general';
 import { Profile } from '../classes/profile';
 import { ManuscriptService } from '../services/manuscript.service';
+import { SetService } from '../services/set.service';
 
 @Component({
   selector: 'app-ms',
@@ -11,7 +12,7 @@ import { ManuscriptService } from '../services/manuscript.service';
 })
 export class MsComponent implements OnInit {
     @Input("ms") ms : Manuscript;
-     @Input("msSize") msSize : MsSize;
+    @Input("msSize") msSize : MsSize;
     @Output() requestAlign = new EventEmitter<MsLine>();
     @Output() requestComparison = new EventEmitter<string>();
     @Output() requestSearch = new EventEmitter<Search>();
@@ -23,11 +24,12 @@ export class MsComponent implements OnInit {
     
     showInfo : boolean = false;
     showProfile : boolean = false;
-    profile : Profile;
+    profile : Profile ;
     searchResults : [string, number][]=[];
     lineWidth : number;
 
-  constructor(private msService : ManuscriptService) { }
+  constructor(private msService : ManuscriptService,
+              private setSvc : SetService) { }
 
   ngOnInit() {
       console.log("MS loaded");
@@ -42,7 +44,7 @@ export class MsComponent implements OnInit {
 loadProfile(){
     
      let ref = this;
-      this.msService.fetchProfile(ref.ms.meta.id).subscribe((data:any)=>{ref.profile = new Profile(data.lits, data.slots); console.log(this.profile);});
+      this.setSvc.fetchUniversal("getInventory",[ref.ms.meta.id]).subscribe((inventory:any)=>{ this.setSvc.fetchUniversal("getSlotsByText",[ref.ms.meta.id]).subscribe((slots:any)=>{ref.profile = new Profile(inventory, slots); console.log(this.profile);});});
       
     
 }  

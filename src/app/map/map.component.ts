@@ -48,12 +48,7 @@ export class MapComponent implements OnInit {
   }
     
     makeColorKey(litStats){
-         let ref = this;
-        ref.colorKey=[];
-          litStats.forEach((ls,lsi)=>{
-        console.log(ls.str+"="+ref.graphicSvc.colors[lsi]);
-        ref.colorKey[ls.str]=ref.graphicSvc.colors[lsi]});  
-      console.log(this.colorKey);
+        this.colorKey = this.graphicSvc.makeColorKey(litStats);
       
     }
     
@@ -120,9 +115,18 @@ addLaemeData(mapData){
             source : vectorSrc
         }); 
         
-        let layers = this.map.getLayers();
+        this.placeLayer(vectorLayer);
     
-        let oldLayer=layers.array_.filter((l)=>l["ol_uid"]==this.activeLayer);
+       
+    
+   this.graphicSvc.removeFilter(ref.wrapper.nativeElement);
+        return vectorLayer;
+    }
+    
+    
+    placeLayer(vectorLayer){
+        let layers = this.map.getLayers();
+         let oldLayer=layers.array_.filter((l)=>l["ol_uid"]==this.activeLayer);
         
         if(oldLayer){
            this.map.removeLayer(oldLayer[0]);
@@ -130,9 +134,6 @@ addLaemeData(mapData){
         
         this.map.addLayer(vectorLayer);
         this.activeLayer=vectorLayer["ol_uid"];
-    
-   this.graphicSvc.removeFilter(ref.wrapper.nativeElement);
-        return vectorLayer;
     }
 
     createFeature(f){

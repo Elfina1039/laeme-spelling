@@ -6,6 +6,9 @@ import { HttpClient , HttpHeaders } from '@angular/common/http';
 })
 export class SetService {
 
+    fncKey : any = {getSetsByLits : "getSlotsByLits", 
+                   getSetsByText : "getSlotsByText",
+                   getSetsByTextAndLits : "getSlotsByTextAndLits"};
    
   constructor(private http: HttpClient) { 
       console.log("data service construction");

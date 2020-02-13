@@ -1,11 +1,17 @@
 <div id=wrapper #wrapper>
     <header>
+        <h3>Maps</h3>
+        <input type=text placeholder="search label" [(ngModel)]="searchLabel">
+        <select  id ="previousSearch" title="previous searches" 
+                (change)="switchLayer(previousSearches[$event.target.value])" >
+            <option *ngFor="let ps of previousSearches | keyvalue" [value]="ps.key">{{ps.value.label}}: {{ps.value.args}}</option>
+        </select>
+        
+    
         <app-search-box (requestSearch)="mapSearch($event)"
                         [functions]=searchFncs>
         </app-search-box>
-        <button *ngFor="let ps of previousSearches">
-        {{ps.label}}
-        </button>
+        
     </header>
     
     <content>
@@ -13,14 +19,21 @@
 
 <!--<app-set-list (mapSet)=changeMap($event) #setList></app-set-list>-->
     <div id=setList #setList>
- <app-set *ngFor="let s of sets" [set]=s (mapSet)=changeMap($event) 
+        <div class=header><h3>Sets</h3></div>
+ <app-set *ngFor="let s of sets" 
+          [set]=s 
+          [queryData]=queryData
+          [colorKey] = "map.colorKey"
+          (mapSet)=changeMap($event) 
  (requestItem)= mapItem($event)
  (requestSelection)=mapSelection($event)
           #set></app-set>
     </div>
     <div id=selected #selected>
-        <h3>Selected text:{{selectedText.id}} </h3>
-<app-item-list (mapItem)=changeMap($event) #itemList></app-item-list>
+        <div class=header> <h3>Selected text:{{selectedText.id}} </h3></div>
+<app-item-list (requestItem)=mapItem($event)
+               (requestSelection)=mapSelection($event)
+               #itemList></app-item-list>
     </div>
     </content>
 </div>

@@ -21,6 +21,7 @@ header{
     flex-flow: row nowrap;
     align-items: center;
     color:white;
+    padding-left:7em;
 }
 
 app-token-search{

@@ -1,8 +1,45 @@
 #wrapper{
-    width:100%;
-    height:0em;
+    height:100%;
+    width:0em;
     overflow:hidden;
-    transition: height 1s ease-out;
+    transition: width 1s ease-out;
     display:flex;
     flex-flow:column nowrap;
+    background: #2e200d;
+    border-right: 3px outset white;
+    font-size: 16pt;
+   box-shadow: 0 0 0.5em white inset;
+    color:white;
+}
+
+
+
+#button{
+    font-size: 16pt;
+    border: 1px solid black;
+    width:7em;
+    padding: 0.5em;
+    color: black;
+    background: #df8f17;
+    margin: 0em;
+    transition: background 0.5s ease-out;
+    cursor:pointer;
+    border: 3px outset white;
+    font-weight:bold;
+    
+}
+
+#button:hover, .link:hover{
+
+    box-shadow: 0 0 0.5em white inset;
+  
+}
+
+.link{
+    font-size: 14pt;
+    color: white;
+    background: transparent;
+    border:none;
+    border-bottom: 1px solid white;
+    padding: 0.2em;
 }

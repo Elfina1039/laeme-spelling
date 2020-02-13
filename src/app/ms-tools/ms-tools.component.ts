@@ -31,10 +31,11 @@ export class MsToolsComponent implements OnInit {
       let ref = this;
       
        this.route.paramMap.subscribe(function(p){
-        let texts : string[]=p.get('texts').split(",");
+        let texts : string[]=p.get('id').split(",");
         ref.preloaded = texts;
     ref.msSize.width = 100/ref.preloaded.length;
       ref.msSize.height = 100;
+           console.log("LOADING MS");
       texts.forEach((pl)=>ref.loadMs(pl));
     
 
@@ -49,7 +50,8 @@ export class MsToolsComponent implements OnInit {
 loadMs(id){
    // this.preloaded.push(id);
      let ref = this;
-      this.msService.fetchMs(id).subscribe((data:Manuscript)=>ref.mss.push(new Manuscript(data)));
+      this.msService.fetchMs(id).subscribe((data:any)=>
+                                           ref.mss.push(new Manuscript(data.rows,id)));
       console.log(this.mss);
     
 }  

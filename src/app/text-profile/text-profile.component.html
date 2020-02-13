@@ -1,11 +1,22 @@
 
-<header>Text profile id: {{textId}}</header>
+<div id=wrapper>
+
+    <header><h3>Text profile</h3><h3> id: {{textId}}</h3></header>
 <content>
 <div id=side>
-<app-profile-side [profile]=profile (requestHighlight)=filterSets($event) #profileCmp></app-profile-side>
+    <div class=header><h3>Litterae</h3></div>
+<app-profile-side (requestHighlight)=filterSets($event) #profileCmp></app-profile-side>
 </div>
     
 <div id=sets>
+    <div class=header><h3>Sets</h3></div>
 <app-set-list #setListCmp></app-set-list>
-    </div>    
+    </div>  
+ 
+<div id=ms> 
+    <app-ms-tools></app-ms-tools>
+    </div>
+    
 </content>
+    
+</div>

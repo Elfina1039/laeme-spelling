@@ -22,7 +22,7 @@ loadSplits(fnc, args){
      let ref = this;
       this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
           console.log(data);
-          data.forEach((i)=>{
+          data.rows.forEach((i)=>{
                            ref.splits.push(i.split);
                            });
       })
@@ -33,11 +33,11 @@ highlightPos(i:number){
 
     if(i==this.pos-1){
    
-        return "yellow";
+        return "white";
         
     }
     else{
-        return "transparent";
+        return "#df8f17";
     }
 }
     
