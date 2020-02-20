@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChildren } from '@angular/core';
 import { ManuscriptService } from '../services/manuscript.service';
+import { MemoryService } from '../services/memory.service';
 import { Manuscript, MsSize } from '../classes/manuscript';
 import { Search } from '../classes/general';
 import { Profile } from '../classes/profile';
@@ -21,7 +22,9 @@ export class MsToolsComponent implements OnInit {
     msSize : MsSize = {width:0, height:90, unit: "%"};
     search : Search = new Search({fields : [["lexel",""]], color:"#80ff00"});
 
-  constructor(private msService : ManuscriptService, protected route: ActivatedRoute) { 
+  constructor(private msService : ManuscriptService, 
+               private memorySvc : MemoryService,
+               protected route: ActivatedRoute) { 
      
       this.msSize.unit = "%";
       console.log(this.msSize);
@@ -67,14 +70,15 @@ loadMs(id){
     searchMss(search){
       //  let search = this.search;
         search.color = this.search.color;
+        this.memorySvc.msSearches.push(search);
+        console.log(this.msComponents);
         this.msComponents._results.forEach((ms)=>ms.highlightToken(search));
         
     }
     
       markAlternatives(slotList : string[]){
           console.log(slotList);
-   
-        this.msComponents._results.forEach((ms)=>ms.profile.getAlternatives(slotList));
+    this.msComponents._results.forEach((ms)=>ms.profile.getAlternatives(slotList));
         
     }
     

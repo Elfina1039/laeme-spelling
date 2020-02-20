@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MsMeta } from '../classes/manuscript';
+import { SetService } from '../services/set.service';
 
 @Component({
   selector: 'app-ms-info',
@@ -7,13 +8,25 @@ import { MsMeta } from '../classes/manuscript';
   styleUrls: ['./ms-info.component.css']
 })
 export class MsInfoComponent implements OnInit {
- @Input("msMeta") msMeta : MsMeta;
+  mss : MsMeta[] = [];
     @ViewChild("wrapper") wrapper : any;
-  constructor() { }
+  constructor(private setSvc : SetService) { }
 
   ngOnInit() {
   }
 
+    
+loadMeta(ids){
+    let ref=this;
+      this.setSvc.fetchUniversal("getMsMeta",ids).subscribe((data:any)=>{
+          console.log(data);
+          data.rows.forEach((i)=>{
+                           ref.mss.push(<MsMeta>i);
+                           });
+         //ref.queryData = data.queryData;
+      })
+}    
+    
     
 toggle(){
     // console.log(this.wrapper);
@@ -26,6 +39,7 @@ toggle(){
     }
          
 }     
+
     
     
 close(){
@@ -38,9 +52,7 @@ open(){
    
 }
     
-redirectToLaeme(link){
-    console.log(this.msMeta);
-    window.open("http://archive.ling.ed.ac.uk/ihd/laeme2_scripts/search_cross_ref.php?fieldVal="+link);
+redirectToLaeme(link){  window.open("http://archive.lel.ed.ac.uk/ihd/laeme2_scripts/find_msdescriptor.php?idno="+link);
 }
     
 }

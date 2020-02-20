@@ -1,0 +1,13 @@
+<div #wrapper>
+  
+    <div *ngFor="let os of optionSets" class=optionSet>
+        <h4>{{os.label}}</h4>
+    <ul class=optionList>
+        <li *ngFor="let o of os.options">
+            <input  type=checkbox
+                   [(ngModel)]=o[1]
+                   (change)="updateFilter(os)"/> {{o[0]}}</li>
+    </ul>
+</div>
+
+</div>

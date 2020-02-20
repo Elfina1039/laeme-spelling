@@ -9,7 +9,8 @@
         
     
         <app-search-box (requestSearch)="mapSearch($event)"
-                        [functions]=searchFncs>
+                        [functions]=searchFncs
+                        [filters]=filters>
         </app-search-box>
         
     </header>
@@ -31,6 +32,8 @@
     </div>
     <div id=selected #selected>
         <div class=header> <h3>Selected text:{{selectedText.id}} </h3></div>
+        <app-ms-info #msInfo></app-ms-info>        
+        
 <app-item-list (requestItem)=mapItem($event)
                (requestSelection)=mapSelection($event)
                #itemList></app-item-list>

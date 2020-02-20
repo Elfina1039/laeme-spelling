@@ -1,15 +1,17 @@
 <div id=wrapper #wrapper>
-    
-    <h2>{{msMeta.manuscript}}</h2>
+  <div *ngFor="let m of mss">  
+    <h2>{{m.manuscript}}</h2>
     <div>
-        <p class=date>date: {{msMeta.date}}</p>
+        <p class=date>date: {{m.date}}</p>
+        <p class=date>localisation: {{m.localisation}}</p>
+        <p class=date>script: {{m.script}}</p>
         
-        <p>{{msMeta.description}}</p>
+        <p>{{m.description}}</p>
         
-        <a [routerLink]="['/references']"target="_blank">References</a>
+        <a [routerLink]="['/profile',m.id]"target="_blank">Display profile</a>
     </div>
     
-    <button (click)=redirectToLaeme(msMeta.laemeLink) title="see entry in LAEME">LAEME catalogue</button>
+    <button (click)=redirectToLaeme(m.id) title="see entry in LAEME">LAEME catalogue</button>
     
-    
+    </div>
 </div>

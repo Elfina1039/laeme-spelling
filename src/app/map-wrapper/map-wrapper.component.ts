@@ -14,6 +14,7 @@ export class MapWrapperComponent implements OnInit {
 @ViewChild("itemList") itemList : any;
 @ViewChild("setList") setList : any;
 @ViewChild("wrapper") wrapper : any;
+@ViewChild("msInfo") msInfo : any;
 //@ViewChild("setList") setList : any;
 
     laemeData : any = [];
@@ -28,6 +29,10 @@ export class MapWrapperComponent implements OnInit {
     searchFncs : SearchFnc[] = [
         {label:"Map set+", fnc : "mapSet"},
         {label:"Map set", fnc : "mapSetExact"}
+    ]
+    
+    filters : string[] = [
+        
     ]
     
   constructor(protected route: ActivatedRoute, protected router : Router , private setSvc : SetService,  private graphicSvc: GraphicService) { }
@@ -64,7 +69,9 @@ mapSelection(e){
 }
     
 mapSearch(e){
-    this.changeMap({fnc:e.fnc, args:[e.search.main]});
+   
+    console.log(e.filters);
+    this.changeMap({fnc:e.fnc, args:[e.search.main].concat(e.filters)});
 }
     
 changeMap(e){
@@ -126,11 +133,13 @@ loadMap(fnc,args){
 displayMs(e){
     console.log("displaying ");
     this.selectedText.id=e.id;
+    this.msInfo.loadMeta([e.id]);
+    this.msInfo.toggle();
    // let lits = e.litterae.map((ls)=>ls.str).join(",");
     let args = this.params.args[0];
     let fnc = this.params.fnc+"ForText";
     this.itemList.loadItems(fnc, [e.id,args]);
-    this.itemList.filters.push({type:"ms", values:[e.id]});
+   // this.itemList.queryData.filters.push({type:"ms", values:[e.id]});
 } 
     
     

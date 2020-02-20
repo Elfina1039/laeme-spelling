@@ -6,8 +6,41 @@ export interface QueryData{
 
 export interface Filter{
     level: string;
+    label? : string;
     field: string;
-    value: any;
+    operator: string;
+    values: any;
+    optionSets? : string[]; 
+
+}
+
+export class FilterClass{
+    level: string;
+    label : string;
+    field: string;
+    operator: string;
+    values: any;
+    optionSets : string[]; 
+    
+    constructor(source){
+        this.level = source.level;
+        this.label = source.label;
+        this.field = source.field;
+        this.values = source.values;
+        this.operator = source.operator;
+        this.optionSets = source.optionSets;
+        console.log(this);
+    }
+    
+    clone(){
+       return new FilterClass(this);
+    }
+}
+
+export interface OptionSet{
+    id : string;
+    label : string;
+    options : [string, boolean][];
 }
 
 export interface SearchFnc{
@@ -18,6 +51,7 @@ export interface SearchFnc{
 export interface MapSearch extends SearchFnc{
     args : string[];
     layer : any;
+    filters? : Filter[];
 }
 
 
@@ -48,6 +82,30 @@ export class Search{
     }
     
 }
+
+export class SingleListSearch extends Search{ 
+    constructor(data){
+        super(data);
+       
+    }
+    
+   perform(t){
+        let match : boolean = true;
+        
+        this.fields.forEach((f)=>{
+              if(t[f[0]].indexOf(f[1])==-1){
+             match=false;
+             }
+            
+        });
+       
+        return match;
+        
+    }
+    
+    
+}
+
 
 
 export class ListSearch extends Search{

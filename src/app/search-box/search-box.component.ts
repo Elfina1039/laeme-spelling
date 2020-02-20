@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {  SearchFnc } from '../classes/general';
+import {  SearchFnc, Filter } from '../classes/general';
+import { FilterDataService } from '../services/filter-data.service';
 
 @Component({
   selector: 'app-search-box',
@@ -9,15 +10,19 @@ import {  SearchFnc } from '../classes/general';
 export class SearchBoxComponent implements OnInit {
     search : any = {main:""};
     @Input("functions") functions : SearchFnc[];
+    @Input("filters") filters : string[];
     @Output() requestSearch : EventEmitter<any> = new EventEmitter();
     
-  constructor() { }
+  
+  constructor(protected filterData : FilterDataService) { }
 
   ngOnInit() {
+     
   }
     
     submitSearch(search, fnc){
-        this.requestSearch.emit({search:search, fnc:fnc});
+       
+        this.requestSearch.emit({search:search, fnc:fnc, filters:[]});
     }
 
 }

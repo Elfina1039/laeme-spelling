@@ -3,12 +3,14 @@ import { Token } from './token';
 
 export interface MsMeta {
     id : number;
-    version : string;
+    version? : string;
     date : string;
+    script : string;
+    localisation : string;
     manuscript : string;
-    description : string;
-    laemeLink : string;
-    links : any[];
+    description? : string;
+    laemeLink? : string;
+    links? : any[];
 }
 
 export interface MsSize {
@@ -24,21 +26,30 @@ export interface MsLine {
 }
 
 export class Manuscript {
-    meta : MsMeta;
+    //meta : MsMeta;
     //tokens : Token[];
     lines : MsLine[];
+    id : number;
     
     constructor(tokens, id){
-        
-        this.meta = {id:id, version:"??", date:"date", manuscript:"manuscript", description:"description", laemeLink:"link", links:[]};
+        this.id=id;
+      //  this.meta = {id:id, version:"??", date:"date", manuscript:"manuscript", description:"description", laemeLink:"link", links:[]};
         
         let lineCount = 0;
         let lines = []
         lines[0] = <MsLine>{tokens:[]};
         
-        tokens.forEach((t)=>{if(t.nl.join(";").search("\n")!=-1){lines[lineCount].tokens.push(t);lineCount++; lines[lineCount] = <MsLine>{tokens:[]};}
-                               else{
-                                   lines[lineCount].tokens.push(t);}});
+        tokens.forEach((t)=>{if(t.nl.join(";").search("\{\\\}")!=-1){lines[lineCount].tokens.push(t);lineCount++; lines[lineCount] = <MsLine>{tokens:[]};}
+                               else 
+
+                               {
+                                   lines[lineCount].tokens.push(t);
+                               if(t.nl.join(";")[0]=="\\" || t.nl.join(";")[0]==";"){
+                                  lines[lineCount].tokens.push({lexel:"", grammel:"PN", form:t.nl.join(";").match("[A-Z]+"), morphids:[]});; 
+                               }
+                               
+                               }});
+        
         this.lines = lines;
         
         console.log(this);

@@ -26,6 +26,9 @@ import { MapWrapperComponent } from './map-wrapper/map-wrapper.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { KwicComponent } from './kwic/kwic.component';
 import { MenuComponent } from './menu/menu.component';
+import { LitInventoryComponent } from './lit-inventory/lit-inventory.component';
+import { FilterComponent } from './filter/filter.component';
+import { SearchBoxAdvancedComponent } from './search-box-advanced/search-box-advanced.component';
 
 
 @NgModule({
@@ -50,7 +53,10 @@ import { MenuComponent } from './menu/menu.component';
     MapWrapperComponent,
     SearchBoxComponent,
     KwicComponent,
-    MenuComponent
+    MenuComponent,
+    LitInventoryComponent,
+    FilterComponent,
+    SearchBoxAdvancedComponent
   ],
   imports: [
     BrowserModule,

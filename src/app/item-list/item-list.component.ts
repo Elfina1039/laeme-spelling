@@ -35,6 +35,8 @@ loadSplits(morphid, pos){
     let fnc = this.queryData.fnc;
     let args : string[] = this.queryData.args.map((a)=>a);
         args.push(morphid);
+    let filters = this.queryData.filters;
+       // args.push(JSON.stringify(filters));
       this.splits.loadSplits(fnc,args);
 }
     

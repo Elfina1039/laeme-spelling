@@ -1,4 +1,10 @@
 <div id=wrapper #wrapper>
-    <label><input type="text" [(ngModel)]=search.main></label>
+   
+    
+    <div class=searchPos>
+     <label><input type="text" [(ngModel)]=search.main></label>
+       
+  </div>
+    
     <button *ngFor="let f of functions" (click)="submitSearch(search, f.fnc)">{{f.label}}</button>
 </div>

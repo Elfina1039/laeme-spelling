@@ -1,0 +1,33 @@
+<div id=wrapper #wrapper>
+    
+      <div class=searchPos>
+     <label><input type="text" [(ngModel)]=search.text placeholder="text id"></label>
+        <label [style.display]="displayFilters ? 'none':'block'" 
+               *ngFor="let f of textFilters"><app-filter [filter]=f></app-filter></label>
+  </div>
+    
+     <div class=searchPos>
+     <label><input type="text" [(ngModel)]=search.pre placeholder="preceding littera"></label>
+        <label [style.display]="displayFilters ? 'none':'block'"
+               *ngFor="let f of preFilters"><app-filter [filter]=f></app-filter></label>
+  </div>
+    
+    <div class=searchPos>
+     <label><input type="text" [(ngModel)]=search.main placeholder="main littera"></label>
+        <label [style.display]="displayFilters ? 'none':'block'"
+               *ngFor="let f of mainFilters"><app-filter [filter]=f></app-filter></label>
+  </div>
+    
+    <div class=searchPos>
+     <label><input type="text" [(ngModel)]=search.post placeholder="following littera"></label>
+        <label [style.display]="displayFilters ? 'none':'block'"
+               *ngFor="let f of postFilters"><app-filter [filter]=f></app-filter></label>
+  </div>
+    
+    <div class=searchPos>
+        <button (click)="displayFilters=!displayFilters">Show filters</button>
+      <button *ngFor="let f of functions" (click)="submitSearch(search, f.fnc)">{{f.label}}</button>
+  </div>
+    
+   
+</div>

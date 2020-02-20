@@ -1,0 +1,46 @@
+#wrapper{
+   background: transparent;
+    color: white;
+    padding: 0.5em;
+    display: none;
+    overflow: hidden;
+   /* margin-left: -1.5em;
+    margin-top: -1.5em;*/
+}
+
+
+#litterae{ /*=table*/
+    width:100%;
+    border:none;
+    border-collapse:collapse;
+     background: linear-gradient(#4f391b,#2e200d);
+}
+
+tr.littera th, tr.littera td{
+    border: 1px solid white;
+    font-size:14pt;
+}
+
+tr.littera td{
+    text-align : center;
+}
+
+tr.littera{
+    cursor:pointer;
+}
+
+tr.littera th:hover, tr.littera td:hover{
+        box-shadow: 0 0 0.5em white inset;
+    cursor: pointer;
+}
+
+th.highlight{
+    color:blue;
+    background:white;
+}
+
+th{
+    background:#c17a10;
+    border: 1px solid white;
+    color:white;
+}

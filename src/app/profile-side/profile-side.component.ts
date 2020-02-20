@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { Profile } from '../classes/profile';
+import { Profile, Littera, Slot } from '../classes/profile';
 import { ListSearch } from '../classes/general';
 import { SetService } from '../services/set.service';
 
@@ -13,16 +13,45 @@ export class ProfileSideComponent implements OnInit {
     //profile : Profile;
   @Output("requestHighlight") requestHighlight = new EventEmitter<[ListSearch, string[]]>();
      @ViewChild("wrapper") wrapper : any;
+    loaderFnc : string = "getInventory";
+    textId : number;
   constructor(private setSvc : SetService) { }
 
   ngOnInit() {
   }
 
 fetchProfile(id){
-    
+    this.textId = id;
      let ref = this;
-      this.setSvc.fetchUniversal("getInventory",[id]).subscribe((inventory:any)=>{ this.setSvc.fetchUniversal("getSlotsByText",[id]).subscribe((slots:any)=>{ref.profile = new Profile(inventory.rows, slots.rows); console.log(this.profile);});});
+      this.setSvc.fetchUniversal(ref.loaderFnc,[id]).subscribe((litsData:any)=>{ this.setSvc.fetchUniversal("getSlotsByText",[id]).subscribe((slotsData:any)=>{
+          let litterae : Littera[] = ref.processLits(litsData.rows);
+           let slots : any = ref.processSlots(slotsData.rows);
+          
+          ref.profile = new Profile(litterae, slots.list, slots.ref); console.log(this.profile);});});
 }  
+    
+
+processLits(litsData){
+    let litterae : Littera[] = [];
+    litsData.forEach((li)=>{
+          litterae.push(new Littera(li));  
+        });
+   return litterae; 
+    
+}
+    
+processSlots(slotsData){
+    let slots : Slot[] = [];
+     let slotRef : any = {};
+     slotsData.forEach((s)=>{
+             let members = s.litterae.map((l)=>l.str);
+            let nSlot=<Slot>{morphid : eval(s.morphid), pos: s.pos, litterae : s.litterae};
+            slots.push(nSlot); 
+             slotRef[s.morphid+"-"+s.pos] = nSlot;
+        
+        });
+    return {list: slots, ref: slotRef};
+}
      
     
     

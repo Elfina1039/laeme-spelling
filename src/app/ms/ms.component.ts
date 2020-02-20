@@ -34,20 +34,17 @@ export class MsComponent implements OnInit {
   ngOnInit() {
       console.log("MS loaded");
       console.log(this.ms);
-      this.loadProfile();
+      //this.loadProfile();
+      let id = this.ms.id;
+      this.msInfo.loadMeta([id]);
+      this.profileCmp.fetchProfile(id);
       this.lineWidth = this.msSize.width;
       
       
       
   }
 
-loadProfile(){
-    
-     let ref = this;
-      this.setSvc.fetchUniversal("getInventory",[ref.ms.meta.id]).subscribe((inventory:any)=>{ this.setSvc.fetchUniversal("getSlotsByText",[ref.ms.meta.id]).subscribe((slots:any)=>{ref.profile = new Profile(inventory, slots); console.log(this.profile);});});
-      
-    
-}  
+ 
     
     
 highlightToken(search:Search){
@@ -77,7 +74,7 @@ clear(){
 }  
     
 highlightLine(scoreTreshold: number){
-    let msId = this.ms.meta.id;
+    let msId = this.ms.id;
     let offset : number = 0;
     this.ms.lines.forEach((l, li)=>{if(l.matchScore>=scoreTreshold){
                                     let alpha = l.matchScore / l.tokens.length;

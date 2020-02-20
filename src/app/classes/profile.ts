@@ -4,6 +4,7 @@ export interface LitStats{
     types? : number;
 }
 
+
 export class Littera{
     str : string;
     tokens : number;
@@ -21,12 +22,31 @@ export class Littera{
 
     }
     
-    compareFreq(refLit){
-        let result : number = parseFloat((this.tokens/refLit.tokens).toFixed(2));
+    compareFreq(refTokens){
+        let result : number = parseFloat((this.tokens/refTokens).toFixed(2));
         return result;
     }
     
+    dspFreq(){
+        let result : number = Math.round(this.tokens*1000);
+       return result;
+    }
+ 
+}
+
+
+export class LitteraExtended extends Littera{
+    mssRatio : number;
+    rareSlots : number;
     
+    constructor(source){
+        super(source);
+        this.mssRatio = source.mssRatio;
+        this.rareSlots = source.rareSlots;
+      
+        let globalCmp = this.compareFreq(source.litAvg);
+        this.basicFreqs.push(globalCmp);
+    }
 }
 
 export class Slot{
@@ -83,35 +103,19 @@ export class Set{
     
 }
 
+
+
 export class Profile {
     litterae : Littera[];
     slots : Slot[];
     slotRef : any;
                       
-    constructor(list, slotsData){
-       console.log(slotsData);
-        
-    let litterae : Littera[] = [];
-    let slots : Slot[] = [];
-    let slotRef : any = {};
+    constructor(litterae, slots, slotRef){
+      
+   
     let ref = this;
-        
-        list.forEach((li)=>{
-          litterae.push(new Littera(li));  
-        });
-           this.litterae = litterae;
-        
-         slotsData.forEach((s)=>{
-             let members = s.litterae.map((l)=>l.str);
-           
-            let nSlot=<Slot>{morphid : eval(s.morphid), pos: s.pos, litterae : s.litterae};
-          slots.push(nSlot); 
-             slotRef[s.morphid+"-"+s.pos] = nSlot;
-        
-        });
-        
- 
-     this.slots = slots;
+    this.litterae = litterae;
+  this.slots = slots;
     this.slotRef = slotRef;
       //  console.log(this.slotRef);
             }
@@ -123,7 +127,7 @@ compare(reference : Littera[]){
         let refLit = litDict.get(l.str);
         if(refLit){
            
-            let ratio = l.compareFreq(refLit);
+            let ratio = l.compareFreq(refLit.tokens);
             l.basicFreqs.push(ratio);
            
         }else{

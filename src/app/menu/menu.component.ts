@@ -1,6 +1,7 @@
-import { Component, OnInit, Renderer2, ViewChild} from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, Input} from '@angular/core';
 import {  Router } from '@angular/router';
 import {  SearchFnc } from '../classes/general';
+import { MemoryService } from '../services/memory.service';
 
 @Component({
   selector: 'app-menu',
@@ -21,14 +22,14 @@ export class MenuComponent implements OnInit {
         {label : "Get Map", fnc : "/map/mapSet"},
     ];
     
-    
    
     
     width : number = 0;
      
 
   constructor(private router : Router,
-              private renderer : Renderer2) { }
+              private renderer : Renderer2,
+              private memorySvc : MemoryService) { }
 
   ngOnInit() {
   }

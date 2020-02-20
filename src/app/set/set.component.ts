@@ -52,6 +52,8 @@ showItems(){
     let lits : string = this.set.membersStrings.join(",");
     let args : string[] = this.queryData.args.map((a)=>a);
         args.push(lits);
+    let filters = this.queryData.filters;
+        args.push(JSON.stringify(filters));
     this.itemList.loadItems(ref.queryData.fnc,args);
     }
     else{

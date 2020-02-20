@@ -1,0 +1,26 @@
+<div id=wrapper #wrapper>
+    <table id=litterae>
+        
+        <tr>
+            <th>Lit.</th>
+            <th>T/T</th>
+            <th>C</th>
+            <th>Rare slots</th>
+        </tr>
+        
+        <tr class=littera *ngFor="let lit of profile.litterae" >
+            <th [title]="lit.tokens+' / '+lit.rawTokens+' / '+lit.types" (click)=highlightStrid(lit) [class]="lit.asAlternative>0 ? 'highlight':''" title="compare usage"> {{lit.str}}</th>
+          <td>{{lit.rawTokens}}/{{lit.types}}</td> 
+            <td ><span *ngFor="let f of lit.basicFreqs" [style.background-color]=getShade(f)>_</span></td>
+            
+            <td (click)="loadSlots(lit.str)">{{lit.rareSlots}}</td>
+            
+        </tr>
+
+    </table>
+    
+    
+    <app-item-list #itemList></app-item-list>
+
+
+</div>

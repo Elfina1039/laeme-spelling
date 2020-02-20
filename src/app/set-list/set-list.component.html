@@ -1,1 +1,12 @@
-<app-set *ngFor="let s of filtered" [set]=s [queryData]="queryData" #set></app-set>
+
+<header>
+<app-search-box-advanced [functions]="searchFncs"
+                (requestSearch)="setSearch($event)"></app-search-box-advanced>
+</header>
+
+<content>
+
+<app-set *ngFor="let s of filtered" [set]=s [queryData]="queryData"
+         (requestItem)="submitItem($event)"
+        (requestSelection)="submitSelection($event)"#set></app-set>
+</content>

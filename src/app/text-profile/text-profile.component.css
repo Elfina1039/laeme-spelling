@@ -1,4 +1,4 @@
-#wrapper{width:1000px;
+#wrapper{width:100%;
 height:100%;
 display:flex;
 flex-flow:column nowrap;}
@@ -32,19 +32,19 @@ content{
 
 #side{
     height: 100%;
-    width:10%;
+    width:15%;
     overflow:scroll;
     
 }
 
 #sets{
-   width:40%;
+   width:30%;
     height:100%;
     overflow:scroll;
 }
 
 #ms{
-   width:40%;
+   width:55%;
     height:100%;
     overflow:scroll;
 }

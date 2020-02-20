@@ -7,4 +7,7 @@
     
     <app-search-box (requestSearch)=submitQuickLink($event) [functions]="quickLinks"></app-search-box>
     
+    
+    <span>MS searches: {{ memorySvc.msSearches.length}}</span>
+    
 </div>

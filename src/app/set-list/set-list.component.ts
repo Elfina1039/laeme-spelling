@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Set, Littera, Item } from '../classes/profile';
-import { QueryData, Filter } from '../classes/general';
+import { QueryData, Filter, SearchFnc } from '../classes/general';
 import { SetService } from '../services/set.service';
 
 @Component({
@@ -12,6 +12,12 @@ export class SetListComponent implements OnInit {
     sets : Set[] = [];
     filtered : Set[] = [];
     queryData : QueryData;
+    searchFncs : SearchFnc[] = [{label:"Advanced search", fnc:"getFilteredSets"}];
+    
+    @Output() requestItem : EventEmitter<any> = new EventEmitter();
+    
+    @Output() requestSelection : EventEmitter<any> = new EventEmitter();
+    
   constructor(private setSvc : SetService) { }
 
   ngOnInit() {
@@ -34,6 +40,8 @@ fetchAll(){
     
 loadSets(fnc, args){
      let ref = this;
+        this.filtered = [];
+    this.sets = [];
       this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
           console.log(data);
           data.rows.forEach((s)=>{
@@ -51,5 +59,18 @@ filterSets(littera){
     this.filtered = this.sets.filter((s)=>s.checkForLittera(littera));
 }
     
+submitItem(e){
+    this.requestItem.emit(e);
+}
+
+submitSelection(e){
+    this.requestSelection.emit(e);
+}
+    
+setSearch(e){
+    console.log(e.filters);
+    let args : string[] = [e.search.main, e.filters];
+    this.loadSets(e.fnc, args);
+}
 
 }
