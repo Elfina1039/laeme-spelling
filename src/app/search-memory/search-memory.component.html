@@ -1,0 +1,23 @@
+<header>Browse Manuscripts</header>
+
+<content>
+<table>
+<tr> 
+    <th>Label</th>
+    <th >Function</th>
+    <th> Arguments</th>
+    <th>Filters</th>
+
+</tr>
+    
+<tr *ngFor="let ms of memorySvc.mapSearches"> 
+    <th>{{ms.label}}</th>
+    <td>{{ms.fnc}}</td>
+    <td>{{ms.args}}</td>
+    <td>{{ms.filters}}</td>
+    <th><a [routerLink]="['/map',ms.fnc, ms.args+';'+ms.filters]" target="_blank">Map</a></th>
+</tr>
+    
+    
+</table>
+</content>

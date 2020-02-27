@@ -29,6 +29,14 @@ import { MenuComponent } from './menu/menu.component';
 import { LitInventoryComponent } from './lit-inventory/lit-inventory.component';
 import { FilterComponent } from './filter/filter.component';
 import { SearchBoxAdvancedComponent } from './search-box-advanced/search-box-advanced.component';
+import { ExpansionDirective } from './directives/expansion.directive';
+import { TitlePagePmComponent } from './title-page-pm/title-page-pm.component';
+import { MssListComponent } from './mss-list/mss-list.component';
+import { SearchMemoryComponent } from './search-memory/search-memory.component';
+import { OrderDirective } from './directives/order.directive';
+import { NetworkComponent } from './network/network.component';
+import { SearchListComponent } from './search-list/search-list.component';
+import { MapGroupComponent } from './map-group/map-group.component';
 
 
 @NgModule({
@@ -56,7 +64,15 @@ import { SearchBoxAdvancedComponent } from './search-box-advanced/search-box-adv
     MenuComponent,
     LitInventoryComponent,
     FilterComponent,
-    SearchBoxAdvancedComponent
+    SearchBoxAdvancedComponent,
+    ExpansionDirective,
+    TitlePagePmComponent,
+    MssListComponent,
+    SearchMemoryComponent,
+    OrderDirective,
+    NetworkComponent,
+    SearchListComponent,
+    MapGroupComponent
   ],
   imports: [
     BrowserModule,

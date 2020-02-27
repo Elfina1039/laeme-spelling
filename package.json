@@ -22,11 +22,15 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "@types/ol": "^6.1.0",
+    "@types/vis": "^4.21.19",
     "bootstrap": "^4.4.1",
     "core-js": "^2.5.4",
     "ol": "^6.1.1",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
+    "vis-data": "^6.4.1",
+    "vis-network": "^7.3.6",
+    "vis-util": "^3.0.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

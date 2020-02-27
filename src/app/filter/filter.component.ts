@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FilterDataService } from '../services/filter-data.service';
-import {  Filter, OptionSet } from '../classes/general';
+import {  Filter, OptionSet, Option } from '../classes/general';
 
 @Component({
   selector: 'app-filter',
@@ -17,10 +17,12 @@ export class FilterComponent implements OnInit {
       let setsIds = this.filter.optionSets;
       this.optionSets = this.data.getOptionSets(setsIds);
       
+      console.log(this.optionSets);
+      
   }
     
     updateFilter(os){
-    this.filter.values = os.options.filter((o)=>o[1]==true).map((ch)=>ch[0]);;
+    this.filter.values = os.options.filter((o)=>o.checked==true).map((ch)=>ch.tag);;
     }
 
  

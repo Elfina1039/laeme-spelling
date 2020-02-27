@@ -11,6 +11,10 @@ export interface MsMeta {
     description? : string;
     laemeLink? : string;
     links? : any[];
+    texts? : string[]
+  
+    
+    
 }
 
 export interface MsSize {
@@ -39,7 +43,7 @@ export class Manuscript {
         let lines = []
         lines[0] = <MsLine>{tokens:[]};
         
-        tokens.forEach((t)=>{if(t.nl.join(";").search("\{\\\}")!=-1){lines[lineCount].tokens.push(t);lineCount++; lines[lineCount] = <MsLine>{tokens:[]};}
+        tokens.forEach((t)=>{if(t.nl.join(";").search("\{\.\}")!=-1){lines[lineCount].tokens.push(t);lineCount++; lines[lineCount] = <MsLine>{tokens:[]};}
                                else 
 
                                {

@@ -1,6 +1,21 @@
 
 <header>
-<app-search-box-advanced [functions]="searchFncs"
+    
+      
+   <button  *ngIf="searchMode=='simple'"
+                (click)="searchMode='advanced'">Advanced search</button>
+        
+          <button  *ngIf="searchMode=='advanced'"
+                (click)="searchMode='simple'">Simple search</button>  
+    
+         <app-search-box *ngIf="searchMode=='simple'"
+                          (requestSearch)="setSearch($event)"
+                        [functions]="[searchFncs[1]]">
+        </app-search-box>
+    
+    
+<app-search-box-advanced *ngIf="searchMode=='advanced'"
+                         [functions]="[searchFncs[0]]"
                 (requestSearch)="setSearch($event)"></app-search-box-advanced>
 </header>
 

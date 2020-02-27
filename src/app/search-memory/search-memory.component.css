@@ -1,0 +1,45 @@
+header{
+    width:100%;
+    background:#2e200d;
+    height:7%;
+    display: flex;
+    flex-flow: row nowrap;
+    color:#df8f17;
+    font-size:16pt;
+    padding-left:8em;
+    border-bottom: 2px solid #df8f17;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+content{
+    display:flex;
+    flex-flow: column nowrap;
+    
+}
+
+table{
+    margin:0.5em;
+    border: 2px solid white;
+    border-collapse: collapse;
+}
+
+
+
+
+td,th{
+    border: 1px solid white;
+    color: white;
+    background: #4f391b;
+}
+
+th{
+    background:#c17a10;
+}
+
+th:hover{
+    box-shadow: 0 0 0.5em white inset;
+    cursor: pointer;
+}
+

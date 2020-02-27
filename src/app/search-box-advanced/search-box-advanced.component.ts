@@ -49,7 +49,7 @@ export class SearchBoxAdvancedComponent extends SearchBoxComponent implements On
             let textId = this.search.text;
             result.push({level:"m",
                         field:"text_id",
-                        operator:"=",
+                        operator:"equals",
                         values:textId});
         }
         
@@ -57,7 +57,7 @@ export class SearchBoxAdvancedComponent extends SearchBoxComponent implements On
             let pre = this.search.pre;
             result.push({level:"l",
                         field:"pre",
-                        operator:"=",
+                        operator:"equals",
                         values:pre});
         }
         
@@ -65,7 +65,7 @@ export class SearchBoxAdvancedComponent extends SearchBoxComponent implements On
             let post = this.search.post;
             result.push({level:"l",
                         field:"post",
-                        operator:"=",
+                        operator:"equals",
                         values:post});
         }
         

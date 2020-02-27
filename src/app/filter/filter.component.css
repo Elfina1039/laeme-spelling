@@ -1,11 +1,37 @@
 #wrapper{
     background-color: #4f391b;
-    border:2px solid #df8f17;
+    border:1px solid #df8f17;
 }
 
-h4{
+
+
+h5{
     background-color:#df8f17;
     color:black;
+    margin:0;
+    padding:0;
+    height:1em;
+}
+
+.optionSet{
+   display:flex;
+    flex-flow:column nowrap;
+    align-content: flex-start;
+    margin:0.1em;
+}
+
+.optionList{
+       height:0em;
+    overflow: hidden;
+      transition: height 0.5s ease-out;
+}
+
+
+ul{
+
+    padding:0.1em;
+    margin:0.1em;
+     
 }
 
 .optionList li {

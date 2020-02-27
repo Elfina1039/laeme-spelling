@@ -12,6 +12,7 @@
     <div class=header><h3>Sets</h3></div>
 <app-set-list (requestItem)="searchLexel($event)"
               (requestSelection)="searchMorphids($event)"
+              [searchMode]="none"
               #setListCmp></app-set-list>
     </div>  
  

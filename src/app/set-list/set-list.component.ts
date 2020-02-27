@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Set, Littera, Item } from '../classes/profile';
 import { QueryData, Filter, SearchFnc } from '../classes/general';
 import { SetService } from '../services/set.service';
@@ -12,7 +12,10 @@ export class SetListComponent implements OnInit {
     sets : Set[] = [];
     filtered : Set[] = [];
     queryData : QueryData;
-    searchFncs : SearchFnc[] = [{label:"Advanced search", fnc:"getFilteredSets"}];
+    searchFncs : SearchFnc[] = [{label:"Advanced search", fnc:"getFilteredSets"},
+                               {label:"Search", fnc:"getSetsByLits"}];
+    
+    @Input("searchMode") searchMode : string = "advanced";
     
     @Output() requestItem : EventEmitter<any> = new EventEmitter();
     

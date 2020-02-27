@@ -1,56 +1,44 @@
 <div id=wrapper #wrapper>
 <header>
-    <h1>Poema Morale</h1>
+    <h1>Spelling Database</h1>
     <h2>Linguistic Atlas of Early Middle English</h2>
 </header>
     
     <content>
         
          <p class=big>
-        This webpage presents a digital edition of the early Middle English verse sermon Poema Morale, extant in seven copies. It was built based on data available in the Linguistic Atlas of Early Middle English, which is a corpus of tagged and lemmatized eME texts. The corpus data was further processed to allow a more detailed and effective analysis of spelling. 
+        This webpage provides access to a databse of Early Middle English spelling based on the Linguistic Atlas of Early Middle English (LAEME). 
         </p>
        
         
          <div class=column>
-     <h3>About the Poema Morale</h3>
+     <h3>About the Database</h3>
         
         <p>
-       Poema Morale is a verse sermon written in the first person and the author is an unknown preacher. The preaching poet regrets that he has wasted his life in idleness and has not followed the path leading to heaven. He describes specific human sins and failures and contrasts them to the right behaviour which pleases God. He also tells the audience about God, His generosity and appreciation of good intentions and the effort to fulfil God’s will. Finally, the preaching poet speaks about Doomsday and the Last Judgement as well as the suffering in Hell, providing advice on how to lead a good Christian life and escape damnation.
+       The construction of the database consisted in processing the data from LAEME using the method of grapho-phonological parsing. This produced an extra layer of data to the original LAEME corpus and opened new search possibilities. 
         </p>
-            
+             
+             
         </div>
         
         
          <div class=columnMain>
      <h3>About this website</h3>
             
-     <p>
-         This website allows you to read and compare selected versions of the Poema Morale.
-     </p>
-             
-        <ul>
-            <li>Search and highlight words.
-            <li>Read about the manuscripts of the different versions.
-            <li>Display an overview of litterae (graphemes) used in the texts and highlight the items in which they are used. 
-        </ul>
-             
-             <a [routerLink]="['/guide']">User guide</a>
-             <a [routerLink]="['/references']">References</a>
-             
-             <div class=pickBox>
-                 <h3>Select versions to be displayed</h3>
-                 <label *ngFor="let v of versions">
-                 <input type=checkbox [(ngModel)]=v[1]>{{v[2]}}
-                 </label>
-           
-             </div>
-             
              <p>
-             The website was produced within a larger project dealing with Middle English spelling and more content and features are going to be added.
-            Please note that the spelling data displayed on the website is currently under revision and will be replaced by an updated version. 
-             </p> 
+             This website serves as an interface designed specifically to access the spelling database. The core feaure of the database is that searches can target graphemes (litterae) rather than morhemes. Basic searches include:
+             </p>     
              
+            <ul>
+                <li>List all the alternatives of a selected littera</li>
+                <li>List all lexels (lemmata) where a given grapheme alternates with others</li>
+                <li>Similarly to LAEME, the interface includes construction of maps. </li>
+             </ul>
              
+            <p>
+             Apart from these simple searches the interface allows you to display "profiles" of individual texts and compare them. 
+             </p>
+            
              <p>
   By using this website, users undertake to  use it only for non-commercial, non-profit educational and research purposes.  Filing or printing any part(s) of the data is only allowed for the purposes of private
 reference, research, study or provision of teaching materials for classes taught within

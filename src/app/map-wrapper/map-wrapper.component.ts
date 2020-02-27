@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LitStats, Set } from '../classes/profile';
 import {  SearchFnc, MapSearch, QueryData, Filter } from '../classes/general';
 import { GraphicService } from '../services/graphic.service';
+import { MemoryService } from '../services/memory.service';
+
 @Component({
   selector: 'app-map-wrapper',
   templateUrl: './map-wrapper.component.html',
@@ -18,24 +20,27 @@ export class MapWrapperComponent implements OnInit {
 //@ViewChild("setList") setList : any;
 
     laemeData : any = [];
-    previousSearches : MapSearch[] = [];
+   // previousSearches : MapSearch[] = [];
     litStats : LitStats[];
     selectedText : any = {id:0};
-    sets : Set[] = [];
+   // sets : Set[] = [];
     params : any = {};
      queryData : QueryData;
     searchLabel : string;
     
-    searchFncs : SearchFnc[] = [
-        {label:"Map set+", fnc : "mapSet"},
-        {label:"Map set", fnc : "mapSetExact"}
+    searchMode : string = "advanced";
+     setSearchMode : string = "none";
+    searchFncs : SearchFnc[][] = [
+       [ {label:"Map set+", fnc : "mapSet"}],
+        [ {label:"Map filtered", fnc : "mapfilteredSet"}]
+
     ]
     
     filters : string[] = [
         
     ]
     
-  constructor(protected route: ActivatedRoute, protected router : Router , private setSvc : SetService,  private graphicSvc: GraphicService) { }
+  constructor(protected route: ActivatedRoute, protected router : Router , private setSvc : SetService,  private graphicSvc: GraphicService,  private memorySvc : MemoryService) { }
 
   ngOnInit() {
       
@@ -47,12 +52,8 @@ export class MapWrapperComponent implements OnInit {
    
     ref.loadMap(fnc,args);
            
-           ref.params={fnc:fnc, args:args};
-           if(!ref.searchLabel){
-                ref.searchLabel = fnc;
-           }
+         
           
-           
            
 
       });  
@@ -69,9 +70,9 @@ mapSelection(e){
 }
     
 mapSearch(e){
-   
-    console.log(e.filters);
-    this.changeMap({fnc:e.fnc, args:[e.search.main].concat(e.filters)});
+   let args : string[] = [e.search.main, e.filters];
+    console.log(args);
+    this.changeMap({fnc:e.fnc, args:args});
 }
     
 changeMap(e){
@@ -83,13 +84,18 @@ changeMap(e){
     
 loadMap(fnc,args){
     let ref = this;
-    this.graphicSvc.addFilter(ref.wrapper.nativeElement);
-    this.graphicSvc.addFilter(ref.setList.nativeElement);
-   
+    //this.graphicSvc.addFilter(ref.wrapper.nativeElement);
+   // this.graphicSvc.addFilter(ref.setList.nativeElement);
+      ref.params={fnc:fnc, args:args};
+           if(!ref.searchLabel){
+                ref.searchLabel = fnc;
+           }
+    
     
       this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
           console.log(data);
           ref.laemeData=data.rows;
+          ref.queryData=data.queryData;
         this.setSvc.fetchUniversal(fnc+"Stats",args).subscribe((data:any)=>{
           console.log(data);
           ref.litStats=data.rows;
@@ -97,9 +103,10 @@ loadMap(fnc,args){
         ref.map.makeColorKey(ref.litStats);
        let newLayer = ref.map.addLaemeData(ref.laemeData);
             
-        ref.previousSearches.unshift({label:ref.searchLabel, fnc:fnc, args:args, layer:newLayer});
+        ref.memorySvc.mapSearches.unshift({label:ref.searchLabel, fnc:fnc, args:args, layer:newLayer});
+        
             
-        ref.loadSets("getSetsByLits",args);
+        ref.setList.loadSets(ref.queryData.fnc,args);
       })
       })
     
@@ -111,22 +118,7 @@ loadMap(fnc,args){
     }
     
 
-    loadSets(fnc, args){
-     let ref = this;
-      this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
-          ref.sets=[];
-          data.rows.forEach((s)=>{
-            
-                           ref.sets.push(new Set(s));
-                           
-                           });
-        ref.queryData = data.queryData;
-        ref.graphicSvc.removeFilter(ref.setList.nativeElement);
-        ref.graphicSvc.removeFilter(ref.wrapper.nativeElement);
-        
-      })
 
-}
     
     
 
@@ -138,7 +130,8 @@ displayMs(e){
    // let lits = e.litterae.map((ls)=>ls.str).join(",");
     let args = this.params.args[0];
     let fnc = this.params.fnc+"ForText";
-    this.itemList.loadItems(fnc, [e.id,args]);
+    let filters = JSON.stringify(this.queryData.filters);
+    this.itemList.loadItems(fnc, [e.id,args,filters]);
    // this.itemList.queryData.filters.push({type:"ms", values:[e.id]});
 } 
     

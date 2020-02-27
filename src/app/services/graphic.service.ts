@@ -189,7 +189,7 @@ this.dataSample=[{"id" : 129, "litterae" : [{"str" : "f", "tokens" : 2}], "token
          let ref = this;
         let colorKey=[];
           litStats.forEach((ls,lsi)=>{
-        colorKey[ls.str]=ref.colors[lsi]});  
+        colorKey[ls.str]={color:ref.colors[lsi], tokens:ls.tokens}});  
     
       return colorKey;
     } 
@@ -208,7 +208,7 @@ this.dataSample=[{"id" : 129, "litterae" : [{"str" : "f", "tokens" : 2}], "token
             let end = start + (2*Math.PI*(l.tokens/total));
             ctx.strokeStyle="black";
             ctx.beginPath();
-            ctx.fillStyle=colorKey[l.str];
+            ctx.fillStyle=colorKey[l.str].color;
             ctx.arc(r,r,r,start,end);
             ctx.lineTo(r,r);
             ctx.closePath();

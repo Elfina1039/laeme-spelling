@@ -18,7 +18,7 @@ export class MsInfoComponent implements OnInit {
     
 loadMeta(ids){
     let ref=this;
-      this.setSvc.fetchUniversal("getMsMeta",ids).subscribe((data:any)=>{
+     this.mss=[]; this.setSvc.fetchUniversal("getMsMeta",ids).subscribe((data:any)=>{
           console.log(data);
           data.rows.forEach((i)=>{
                            ref.mss.push(<MsMeta>i);

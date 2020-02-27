@@ -31,6 +31,15 @@ export class Littera{
         let result : number = Math.round(this.tokens*1000);
        return result;
     }
+    
+    toNode(textId, group){
+        let result = {id : this.str +"/"+textId, 
+                      label : this.str,
+                     // value : this.tokens,
+                      group : group
+                     };
+        return result;
+    }
  
 }
 
@@ -48,6 +57,27 @@ export class LitteraExtended extends Littera{
         this.basicFreqs.push(globalCmp);
     }
 }
+
+
+export class LitCorresp{
+    a : string;
+    b : string;
+    tokens : number;
+    
+    constructor(source){
+        this.a = source.a;
+        this.b=source.b;
+        this.tokens = source.tokens;
+    }
+    
+    toEdge(aId, bId){
+        let result = {from : this.a+"/"+aId,
+                     to : this.b+"/"+bId,
+                     value : this.tokens};
+        return result;
+    }
+}
+
 
 export class Slot{
     morphid : number;

@@ -67,9 +67,18 @@ loadMs(id){
         this.search.fields.pop();
     }
     
+    
+    reRunSearches(searches){
+        let ref = this;
+        searches.forEach((s)=>ref.searchMss(s));
+    }
+    
     searchMss(search){
       //  let search = this.search;
-        search.color = this.search.color;
+        if(!search.color){
+            search.color = this.search.color;
+        }
+        
         this.memorySvc.msSearches.push(search);
         console.log(this.msComponents);
         this.msComponents._results.forEach((ms)=>ms.highlightToken(search));

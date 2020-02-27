@@ -1,0 +1,27 @@
+<header>Browse Manuscripts</header>
+
+<content>
+<table *appOrder=mss>
+<tr> 
+    <th >id</th>
+    <th (click)=showData()>manuscript</th>
+    <th> localisation</th>
+    <th>date</th>
+    <th>script</th>
+    <th>texts</th>
+    <th>Profile</th>
+</tr>
+    
+<tr *ngFor="let ms of mss"> 
+    <th>{{ms.id}}</th>
+    <td>{{ms.manuscript}}</td>
+    <td>{{ms.localisation}}</td>
+    <td>{{ms.date}}</td>
+     <td>{{ms.script}}</td>
+     <td>{{ms.texts}}</td>
+    <th><a [routerLink]="['/profile',ms.id]"target="_blank">Profile</a></th>
+</tr>
+    
+    
+</table>
+</content>

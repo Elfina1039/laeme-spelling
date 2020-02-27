@@ -3,15 +3,28 @@
         <h3>Maps</h3>
         <input type=text placeholder="search label" [(ngModel)]="searchLabel">
         <select  id ="previousSearch" title="previous searches" 
-                (change)="switchLayer(previousSearches[$event.target.value])" >
-            <option *ngFor="let ps of previousSearches | keyvalue" [value]="ps.key">{{ps.value.label}}: {{ps.value.args}}</option>
+                (change)="switchLayer(memorySvc.mapSearches[$event.target.value])" >
+            <option *ngFor="let ps of memorySvc.mapSearches | keyvalue" [value]="ps.key">{{ps.value.label}}: {{ps.value.args}}</option>
         </select>
         
-    
-        <app-search-box (requestSearch)="mapSearch($event)"
-                        [functions]=searchFncs
-                        [filters]=filters>
+   <button  *ngIf="searchMode=='simple'"
+                (click)="searchMode='advanced'">Advanced search</button>
+        
+          <button  *ngIf="searchMode=='advanced'"
+                (click)="searchMode='simple'">Simple search</button>
+        
+          <app-search-box *ngIf="searchMode=='simple'"
+                          (requestSearch)="mapSearch($event)"
+                        [functions]=searchFncs[0]>
         </app-search-box>
+        
+       
+        <app-search-box-advanced *ngIf="searchMode=='advanced'" (requestSearch)="mapSearch($event)"
+                        [functions]=searchFncs[1]
+                        [filters]=filters>
+        </app-search-box-advanced>
+        
+        
         
     </header>
     
@@ -19,16 +32,19 @@
 <app-map (msClicked)=displayMs($event) #map></app-map>
 
 <!--<app-set-list (mapSet)=changeMap($event) #setList></app-set-list>-->
-    <div id=setList #setList>
+    <div id=setList >
         <div class=header><h3>Sets</h3></div>
- <app-set *ngFor="let s of sets" 
+        
+        <app-set-list [searchMode]="setSearchMode" #setList></app-set-list>
+        
+ <!--<app-set *ngFor="let s of sets" 
           [set]=s 
           [queryData]=queryData
           [colorKey] = "map.colorKey"
           (mapSet)=changeMap($event) 
  (requestItem)= mapItem($event)
  (requestSelection)=mapSelection($event)
-          #set></app-set>
+          #set></app-set>-->
     </div>
     <div id=selected #selected>
         <div class=header> <h3>Selected text:{{selectedText.id}} </h3></div>

@@ -37,10 +37,17 @@ export class FilterClass{
     }
 }
 
+export interface Option{
+    tag : string;
+    label: string;
+    checked : boolean;
+    count? : number;
+}
+
 export interface OptionSet{
     id : string;
     label : string;
-    options : [string, boolean][];
+    options : Option[];
 }
 
 export interface SearchFnc{

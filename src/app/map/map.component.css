@@ -27,13 +27,16 @@ header{
 }
 
 #legend{background-color: #2e200d;
-width:5em;
-height:100%}
+width:7em;
+height:100%;
+display:flex;
+    flex-flow: column nowrap;
+}
 
 #legend span{
     font-weight:bold;
-    font-size: 20px;
-
+    font-size: 15px;
+width:100%;
 }
 
 input, button{

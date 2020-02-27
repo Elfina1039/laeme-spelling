@@ -1,0 +1,120 @@
+<div id=wrapper #wrapper>
+<header>
+    <h1>Poema Morale</h1>
+    <h2>Linguistic Atlas of Early Middle English</h2>
+</header>
+    
+    <content>
+        
+         <p class=big>
+        This webpage presents a digital edition of the early Middle English verse sermon Poema Morale, extant in seven copies. It was built based on data available in the Linguistic Atlas of Early Middle English, which is a corpus of tagged and lemmatized eME texts. The corpus data was further processed to allow a more detailed and effective analysis of spelling. 
+        </p>
+       
+        
+         <div class=column>
+     <h3>About the Poema Morale</h3>
+        
+        <p>
+       Poema Morale is a verse sermon written in the first person and the author is an unknown preacher. The preaching poet regrets that he has wasted his life in idleness and has not followed the path leading to heaven. He describes specific human sins and failures and contrasts them to the right behaviour which pleases God. He also tells the audience about God, His generosity and appreciation of good intentions and the effort to fulfil God’s will. Finally, the preaching poet speaks about Doomsday and the Last Judgement as well as the suffering in Hell, providing advice on how to lead a good Christian life and escape damnation.
+        </p>
+            
+        </div>
+        
+        
+         <div class=columnMain>
+     <h3>About this website</h3>
+            
+     <p>
+         This website allows you to read and compare selected versions of the Poema Morale.
+     </p>
+             
+        <ul>
+            <li>Search and highlight words.
+            <li>Read about the manuscripts of the different versions.
+            <li>Display an overview of litterae (graphemes) used in the texts and highlight the items in which they are used. 
+        </ul>
+             
+             <a [routerLink]="['/guide']">User guide</a>
+             <a [routerLink]="['/references']">References</a>
+             
+             <div class=pickBox>
+                 <h3>Select versions to be displayed</h3>
+                 <label *ngFor="let v of versions">
+                 <input type=checkbox [(ngModel)]=v[1]>{{v[2]}}
+                 </label>
+           
+             </div>
+             
+             <p>
+             The website was produced within a larger project dealing with Middle English spelling and more content and features are going to be added.
+            Please note that the spelling data displayed on the website is currently under revision and will be replaced by an updated version. 
+             </p> 
+             
+             
+             <p>
+  By using this website, users undertake to  use it only for non-commercial, non-profit educational and research purposes.  Filing or printing any part(s) of the data is only allowed for the purposes of private
+reference, research, study or provision of teaching materials for classes taught within
+a recognized educational institution.
+             </p>
+             
+            
+        </div>
+        
+        
+          <div class=column>
+     <h3>About LAEME</h3>
+            
+          <p>
+      LAEME was designed as a research tool enabling access to information on Early Middle English texts and dialects. It was published in electronic form and is accessible online. Its basis is a corpus of Early Middle English texts. The size of the corpus is 650,000 words and it has detailed lexico-grammatical tagging as well as information about the original manuscripts. A searchable index of sources and information about the individual manuscripts are also available.
+        </p>
+              
+              <p>
+              The permission to display data from LAEME is granted under the condition that the use of this
+website as well as its associated database and documentation is subject to the
+same terms and conditions as LAEME, for which see the link below.
+              </p>
+              
+            <p>
+               
+                <a href="http://www.lel.ed.ac.uk/ihd/laeme2/front_page/laeme_copyright.html" target="_blank">LAEME copyright statement</a><br>
+                 <a href="http://www.lel.ed.ac.uk/ihd/laeme2/laeme2.html" target="_blank">Go to LAEME</a>
+                
+              </p>  
+            
+        </div>
+        
+       
+        
+  
+        
+         
+        
+    
+    </content>    
+    
+    
+    <a class=enterButton (click)="redirect()">Enter</a>
+    
+    
+    <footer>
+       <div>  <a href="http://ff.cuni.cz/" target="_blank">
+    <img src="assets/images/logo_ffuk.JPG">
+        </a> 
+          <p>
+        The production of this website was made possible by the kind consent of Angus McIntosh Cnter for Historical Linguistics and the University of Edinburgh responsible for the production of LAEME. <br>
+        Site created by <a href="mailto:vankova.maru@gmail.com">Marie Vaňková</a> (Faculty of Arts, Charles University).<br>
+        Generously supported by the Progres grant scheme of Charles University.<br> 
+              </p> 
+        </div>
+        
+        
+        <div>
+           
+        <a href="http://www.amc.lel.ed.ac.uk/" target="_blank">
+    <img src="assets/images/amc_banner.jpg">
+        </a>
+        </div>
+    
+    </footer>
+
+</div>

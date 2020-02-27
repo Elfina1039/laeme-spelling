@@ -12,7 +12,9 @@
             <button (click)=removeField() title="remove search criterion" class=icon *ngIf="search.fields.length>1">-</button> 
             <button (click)=addField() title="add search criterion" class=icon>+</button>
             <button (click)=searchMss(search) title="search and highlight in texts">Search</button>    
-            <button (click)=clearMss() title="remove all highlights">Clear all</button>  
+            <button (click)=clearMss() title="remove all highlights">Clear all</button> 
+            
+            <button *ngIf="memorySvc.msSearches.length>0" (click)=reRunSearches(memorySvc.msSearches) title="remove all highlights">Rerun searches</button>
             
         </form>
     </header>    
