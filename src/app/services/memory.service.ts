@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Search, MapSearch } from '../classes/general';
+import { MsSearch, MapSearch, SetSearch } from '../classes/general';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MemoryService {
- msSearches : Search[] = [];
+ msSearches : MsSearch[] = [];
  mapSearches : MapSearch[] = [];
   constructor() { }
 }

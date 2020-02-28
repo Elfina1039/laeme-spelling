@@ -1,5 +1,8 @@
-
+<div id=wrapper #wrapper>
 <header>
+       <div id=filters>
+        <span *ngFor="let f of queryData.filters" [appFilterTag]="f">{{f.values}}</span>
+    </div>
     
       
    <button  *ngIf="searchMode=='simple'"
@@ -25,3 +28,4 @@
          (requestItem)="submitItem($event)"
         (requestSelection)="submitSelection($event)"#set></app-set>
 </content>
+</div>

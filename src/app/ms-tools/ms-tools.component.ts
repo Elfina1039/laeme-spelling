@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChildren } from '@angular/core';
 import { ManuscriptService } from '../services/manuscript.service';
 import { MemoryService } from '../services/memory.service';
 import { Manuscript, MsSize } from '../classes/manuscript';
-import { Search } from '../classes/general';
+import { MsSearch } from '../classes/general';
 import { Profile } from '../classes/profile';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -20,7 +20,7 @@ export class MsToolsComponent implements OnInit {
     @ViewChildren("msComponent") msComponents : any;
     preloaded : string[] = [];
     msSize : MsSize = {width:0, height:90, unit: "%"};
-    search : Search = new Search({fields : [["lexel",""]], color:"#80ff00"});
+    search : MsSearch = new MsSearch({fields : [["lexel",""]], color:"#80ff00"});
 
   constructor(private msService : ManuscriptService, 
                private memorySvc : MemoryService,

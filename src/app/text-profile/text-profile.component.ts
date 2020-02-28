@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, ViewChild } from '@angular/core';
 import { ManuscriptService } from '../services/manuscript.service';
 import { SetService } from '../services/set.service';
 import { Manuscript, MsSize } from '../classes/manuscript';
-import { Search, SingleListSearch, ListSearch } from '../classes/general';
+import { MsSearch, SingleListSearch, ListSearch } from '../classes/general';
 import { Profile } from '../classes/profile';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -38,7 +38,7 @@ profile : Profile;
     
 loadProfile(id){
    // this.preloaded.push(id);
- this.setListCmp.loadSets("getSetsByText",[id]);
+this.setListCmp.loadSets("getSetsByText",id);
 this.profileCmp.fetchProfile(id);
 this.profileCmp.toggle();
     
@@ -50,7 +50,7 @@ filterSets(e){
 }
     
 searchLexel(e){
-     let search :SingleListSearch = new SingleListSearch({fields:[["morphids",e.morphid]], color: "yellow"});
+     let search :SingleListSearch = new SingleListSearch({fields:[["morphids",e.morphid]], color: ""});
     
     console.log(search);
     
@@ -59,7 +59,7 @@ searchLexel(e){
     
 searchMorphids(e){
     let selection = e.map((s)=>eval(s.split("-")[0]));
-     let search :ListSearch = new ListSearch({fields:[["morphids",selection]],list:selection, color: "yellow",});
+     let search :ListSearch = new ListSearch({fields:[["morphids",selection]],list:selection, color: "",});
     
     console.log(search);
     

@@ -37,6 +37,9 @@ import { OrderDirective } from './directives/order.directive';
 import { NetworkComponent } from './network/network.component';
 import { SearchListComponent } from './search-list/search-list.component';
 import { MapGroupComponent } from './map-group/map-group.component';
+import { FilterTagDirective } from './directives/filter-tag.directive';
+import { RedirectDirective } from './directives/redirect.directive';
+import { TextComparisonComponent } from './text-comparison/text-comparison.component';
 
 
 @NgModule({
@@ -72,7 +75,10 @@ import { MapGroupComponent } from './map-group/map-group.component';
     OrderDirective,
     NetworkComponent,
     SearchListComponent,
-    MapGroupComponent
+    MapGroupComponent,
+    FilterTagDirective,
+    RedirectDirective,
+    TextComparisonComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +87,10 @@ import { MapGroupComponent } from './map-group/map-group.component';
       FormsModule
     
   ],
+    entryComponents : [
+        LitInventoryComponent,
+        SetListComponent
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

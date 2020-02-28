@@ -15,6 +15,10 @@ table{
     border: 2px solid white;
     border-collapse: collapse;
 }
+.lit{
+    margin-left:0.1em;
+    margin-right:0.1em;
+}
 
 
 th.link{

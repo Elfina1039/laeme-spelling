@@ -1,7 +1,20 @@
-export interface QueryData{
+export class QueryData{
     fnc : string;
-    args : string[];
-    filters : Filter[]
+    args : string;
+    filters : Filter[];
+    
+    constructor(source){
+        this.fnc=source.fnc;
+         this.args=source.args;
+         this.filters=source.filters;
+        console.log(this);
+    }
+    
+    getJsonFilters(){
+        let filters =this.filters;
+        return JSON.stringify(filters);
+    }
+    
 }
 
 export interface Filter{
@@ -50,6 +63,7 @@ export interface OptionSet{
     options : Option[];
 }
 
+// simple interfaces derived from search class (mainly used to display search buttons)
 export interface SearchFnc{
     label : string;
     fnc : string;
@@ -61,8 +75,86 @@ export interface MapSearch extends SearchFnc{
     filters? : Filter[];
 }
 
+export interface LitGram{
+    pre : string;
+    main : string;
+    post : string;
+    msId : number;
+}
 
-export class Search{
+export class SetSearch{
+    fnc : SearchFnc;
+    litGram : LitGram;
+    
+    mainFilters : Filter[];
+    preFilters : Filter[];
+    postFilters : Filter[];
+    msFilters : Filter[];
+    
+    constructor(source = {fnc : {label:"", fnc : ""},
+                         litGram : {pre:"", main:"", post:"", msId:null},
+                         mainFilters : [],
+                         preFilters : [],
+                         postFilters: [],
+                         msFilters: []}){
+        this.fnc = source.fnc;
+        this.litGram = source.litGram;
+        this.mainFilters = source.mainFilters;
+        this.preFilters = source.preFilters;
+        this.postFilters = source.postFilters;
+        this.msFilters = source.msFilters;
+    }
+    
+   // toMemory(label : string, layer = {}, )
+    
+    toSubmit(fnc){
+        this.fnc = fnc;
+        let activeFilters = this.groupFilters();
+        let filterJson : string = JSON.stringify(activeFilters);
+        console.log(activeFilters);
+        let result = {search : {main:this.litGram.main},
+                     fnc : fnc.fnc,
+                     filters : filterJson};
+        return result;
+    }
+    
+      groupFilters(){
+        let all : Filter[] = [...this.mainFilters, ...this.preFilters, ...this.postFilters, ...this.msFilters];
+            
+        let result : Filter[] = all.filter((a)=>a.values.length>0);
+        
+        if(this.litGram.msId){
+            let textId = this.litGram.msId;
+            result.push({level:"m",
+                        field:"text_id",
+                        operator:"equals",
+                        values:textId});
+        }
+        
+          if(this.litGram.pre){
+            let pre = this.litGram.pre;
+            result.push({level:"l",
+                        field:"pre",
+                        operator:"equals",
+                        values:pre});
+        }
+        
+         if(this.litGram.post){
+            let post = this.litGram.post;
+            result.push({level:"l",
+                        field:"post",
+                        operator:"equals",
+                        values:post});
+        }
+        
+        return result;
+    }
+    
+    
+}
+
+
+export class MsSearch{
     fields : [string, string][];
     color: string;
     rgx : boolean = false;
@@ -90,7 +182,7 @@ export class Search{
     
 }
 
-export class SingleListSearch extends Search{ 
+export class SingleListSearch extends MsSearch{ 
     constructor(data){
         super(data);
        
@@ -115,7 +207,7 @@ export class SingleListSearch extends Search{
 
 
 
-export class ListSearch extends Search{
+export class ListSearch extends MsSearch{
     list : number[];
     littera : string;
     

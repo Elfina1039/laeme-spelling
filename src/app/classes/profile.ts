@@ -73,7 +73,10 @@ export class LitCorresp{
     toEdge(aId, bId){
         let result = {from : this.a+"/"+aId,
                      to : this.b+"/"+bId,
-                     value : this.tokens};
+                     value : this.tokens,
+                     label : this.tokens+"x",
+                     font : {background: "black", color:"white", size:12, bold:false}};
+        console.log(result);
         return result;
     }
 }
@@ -134,6 +137,11 @@ export class Set{
 }
 
 
+export interface Split{
+    formid: number;
+    split : string[];
+    tokens : number;
+}
 
 export class Profile {
     litterae : Littera[];

@@ -13,12 +13,17 @@
     border-bottom:1px dashed silver;
 }
 
-.slot{
+.slot, .freq{
     width:2em;
     text-align:center;
     border-right: 1px dashed white;
     border-left: 1px dashed white;
     background: #df8f17;
     color:black;
+}
+
+.freq{
+    color:white;
+    background-color:navy;
 }
 

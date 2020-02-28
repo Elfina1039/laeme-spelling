@@ -32,7 +32,8 @@ export class SetComponent implements OnInit {
       if(!this.colorKey){
         let litStats = this.set.members;
         this.colorKey = this.graphicSvc.makeColorKey(litStats);
-    console.log(this.colorKey);
+   //set console.log(this.colorKey);
+   //set console.log(this.colorKey);
       }
       
       let chart = this.getChart();
@@ -50,11 +51,11 @@ showItems(){
     let ref = this;
     if(this.itemList.items.length==0){
     let lits : string = this.set.membersStrings.join(",");
-    let args : string[] = this.queryData.args.map((a)=>a);
-        args.push(lits);
-    let filters = this.queryData.filters;
-        args.push(JSON.stringify(filters));
-    this.itemList.loadItems(ref.queryData.fnc,args);
+    //let args : string[] = this.queryData.args.map((a)=>a);
+      //  args.push(lits);
+    let filters = JSON.stringify(this.queryData.filters);
+       // args.push(JSON.stringify(filters));
+    this.itemList.loadItems(ref.queryData.fnc,lits, filters);
     }
     else{
         this.itemList.show();

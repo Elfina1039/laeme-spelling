@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild} from '@angular/core';
 import { Manuscript, MsSize, MsLine } from '../classes/manuscript';
-import { Search, ListSearch } from '../classes/general';
+import { MsSearch, ListSearch } from '../classes/general';
 import { Profile } from '../classes/profile';
 import { ManuscriptService } from '../services/manuscript.service';
 import { SetService } from '../services/set.service';
@@ -15,7 +15,7 @@ export class MsComponent implements OnInit {
     @Input("msSize") msSize : MsSize;
     @Output() requestAlign = new EventEmitter<MsLine>();
     @Output() requestComparison = new EventEmitter<string>();
-    @Output() requestSearch = new EventEmitter<Search>();
+    @Output() requestSearch = new EventEmitter<MsSearch>();
     @Output() requestAlternatives = new EventEmitter<string[]>();
     
     @ViewChild("wrapper") wrapper : any;
@@ -47,7 +47,7 @@ export class MsComponent implements OnInit {
  
     
     
-highlightToken(search:Search){
+highlightToken(search:MsSearch){
     console.log(search);
     let hits = 0;
     this.ms.lines.forEach((l)=>{l.tokens.forEach((t)=>{

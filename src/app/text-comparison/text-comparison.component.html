@@ -1,0 +1,19 @@
+<div id=wrapper>
+    <header>Text Comparison: {{preloaded}} 
+    
+          <a  class=icon [routerLink]="['/network/getCorresp',preloaded.join(',')]" target="_blank">>></a>
+    
+    </header>
+
+<content>
+    <div id=profiles>
+    <div id="container" #container></div>
+    </div>
+    
+    <div id=msTools>
+        <app-ms-tools #msTools></app-ms-tools>
+    </div>
+    
+</content>
+
+</div>

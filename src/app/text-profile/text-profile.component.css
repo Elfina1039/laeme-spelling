@@ -33,14 +33,14 @@ content{
 #side{
     height: 100%;
     width:15%;
-    overflow:scroll;
+  /*  overflow:scroll;*/
     
 }
 
 #sets{
    width:30%;
     height:100%;
-    overflow:scroll;
+  /*  overflow:scroll;*/
 }
 
 #ms{

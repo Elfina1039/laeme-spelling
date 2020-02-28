@@ -5,7 +5,8 @@
     </div>  
     
      <div class=split *ngFor="let split of splits">
-        <span [style.background-color]=highlightPos(s.key) class=slot *ngFor="let s of split | keyvalue">{{s.value}}</span>
+        <span [style.background-color]=highlightPos(s.key) class=slot *ngFor="let s of split.split | keyvalue">{{s.value}}</span>
+         <span class=freq>{{split.tokens}}</span>
     </div> 
 
 

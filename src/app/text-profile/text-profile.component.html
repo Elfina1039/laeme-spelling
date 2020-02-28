@@ -1,8 +1,12 @@
 
 <div id=wrapper>
 
-    <header><h3>Text profile</h3><h3> id: {{textId}}</h3></header>
+    <header><h3>Text profile</h3><h3> id: {{textId}}</h3>
+    
+     <a  class=icon [routerLink]="['/network/getMsCorresp',textId]" target="_blank">>></a>
+    </header>
 <content>
+    
 <div id=side>
     <div class=header><h3>Litterae</h3></div>
 <app-lit-inventory (requestHighlight)=filterSets($event) #profileCmp></app-lit-inventory>
@@ -15,6 +19,7 @@
               [searchMode]="none"
               #setListCmp></app-set-list>
     </div>  
+    
  
 <div id=ms> 
     <app-ms-tools #msTools></app-ms-tools>

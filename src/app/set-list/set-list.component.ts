@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angular/core';
 import { Set, Littera, Item } from '../classes/profile';
 import { QueryData, Filter, SearchFnc } from '../classes/general';
 import { SetService } from '../services/set.service';
@@ -16,6 +16,7 @@ export class SetListComponent implements OnInit {
                                {label:"Search", fnc:"getSetsByLits"}];
     
     @Input("searchMode") searchMode : string = "advanced";
+    @ViewChild("wrapper") wrapper;
     
     @Output() requestItem : EventEmitter<any> = new EventEmitter();
     
@@ -35,23 +36,25 @@ fetchAll(){
           data.rows.forEach((s)=>{
                            ref.sets.push(new Set(s));
                            });
-          ref.queryData = data.queryData;
+          ref.queryData = new QueryData(data.queryData);
+          
           ref.filtered = ref.sets;
       })
 
 }    
     
-loadSets(fnc, args){
+loadSets(fnc, args, filters=""){
      let ref = this;
-        this.filtered = [];
+    this.filtered = [];
     this.sets = [];
-      this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
+    
+      this.setSvc.fetchUniversal(fnc,[args, filters]).subscribe((data:any)=>{
           console.log(data);
           data.rows.forEach((s)=>{
                            ref.sets.push(new Set(s));
                            
                            });
-          ref.queryData = data.queryData;
+           ref.queryData = new QueryData(data.queryData);
            ref.filtered = ref.sets.filter((s)=>s.members.length>1);
       })
 
@@ -72,8 +75,8 @@ submitSelection(e){
     
 setSearch(e){
     console.log(e.filters);
-    let args : string[] = [e.search.main, e.filters];
-    this.loadSets(e.fnc, args);
+   
+    this.loadSets(e.fnc,e.search.main, e.filters);
 }
 
 }

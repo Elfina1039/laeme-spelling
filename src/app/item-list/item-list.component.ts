@@ -11,7 +11,7 @@ import { QueryData, Filter } from '../classes/general';
 export class ItemListComponent implements OnInit {
      items : Item[] = [];
     open : boolean = false;
-    queryData : QueryData;
+    queryData : QueryData = {fnc:"", args:"", filters:[]};
     @Input("enableSelect") enableSelect: boolean = true;
     
     @ViewChild("wrapper") wrapper : any;
@@ -33,19 +33,18 @@ export class ItemListComponent implements OnInit {
 loadSplits(morphid, pos){
     this.splits.pos=pos;
     let fnc = this.queryData.fnc;
-    let args : string[] = this.queryData.args.map((a)=>a);
-        args.push(morphid);
-    let filters = this.queryData.filters;
+    let args : string = this.queryData.args;
+    let filters = JSON.stringify(this.queryData.filters);
        // args.push(JSON.stringify(filters));
-      this.splits.loadSplits(fnc,args);
+      this.splits.loadSplits(fnc,morphid,filters);
 }
     
     
-loadItems(fnc,args){
+loadItems(fnc,args, filters=""){
     this.items = [];
     this.show();
      let ref = this;
-     this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
+     this.setSvc.fetchUniversal(fnc,[args,filters]).subscribe((data:any)=>{
           console.log(data);
           data.rows.forEach((i)=>{
                            ref.items.push(<Item>i);

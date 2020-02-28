@@ -48,13 +48,12 @@ export class MapWrapperComponent implements OnInit {
       
        this.route.paramMap.subscribe(function(p){
         let fnc : string=p.get('fnc');
-        let args : string[]=p.get('args').split(";");
-   
-    ref.loadMap(fnc,args);
+        let args : string=p.get('args');
+        let filters : string=p.get('filters');
            
-         
-          
-           
+           console.log(args);
+    
+    ref.loadMap(fnc,args,filters);
 
       });  
       
@@ -62,51 +61,53 @@ export class MapWrapperComponent implements OnInit {
   }
 
 mapItem(e){
-    this.changeMap({fnc:"mapSlot", args: [e.morphid,e.pos]});
+    this.changeMap({fnc:"mapSlot", args: e.morphid+"-"+e.pos, filters:""});
 }
     
 mapSelection(e){
-    this.changeMap({fnc:"mapSlots", args:[e.join(",") ]});
+    this.changeMap({fnc:"mapSlots", args:[e.join(",")], filters:"" });
 }
     
 mapSearch(e){
-   let args : string[] = [e.search.main, e.filters];
+   let args : string[] = [e.search.main];
     console.log(args);
-    this.changeMap({fnc:e.fnc, args:args});
+    this.changeMap({fnc:e.fnc, args:args, filters:e.filters});
 }
     
 changeMap(e){
     console.log("changing map");
     console.log(e);
-       this.router.navigate(["/map",e.fnc, e.args.join(";")]); 
+       this.router.navigate(["/map",e.fnc, e.args.join(";"), e.filters]); 
  }
     
     
-loadMap(fnc,args){
+loadMap(fnc,args, filters=""){
     let ref = this;
     //this.graphicSvc.addFilter(ref.wrapper.nativeElement);
    // this.graphicSvc.addFilter(ref.setList.nativeElement);
-      ref.params={fnc:fnc, args:args};
+      ref.params={fnc:fnc, args:args, filters:filters};
            if(!ref.searchLabel){
                 ref.searchLabel = fnc;
            }
     
-    
-      this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
+      this.setSvc.fetchUniversal(fnc,[args, filters]).subscribe((data:any)=>{
           console.log(data);
           ref.laemeData=data.rows;
           ref.queryData=data.queryData;
-        this.setSvc.fetchUniversal(fnc+"Stats",args).subscribe((data:any)=>{
+        this.setSvc.fetchUniversal(fnc+"Stats",[args, filters]).subscribe((data:any)=>{
           console.log(data);
           ref.litStats=data.rows;
        
         ref.map.makeColorKey(ref.litStats);
        let newLayer = ref.map.addLaemeData(ref.laemeData);
             
-        ref.memorySvc.mapSearches.unshift({label:ref.searchLabel, fnc:fnc, args:args, layer:newLayer});
-        
             
-        ref.setList.loadSets(ref.queryData.fnc,args);
+            
+        ref.memorySvc.mapSearches.unshift({label:ref.searchLabel, fnc:fnc, args:args, filters:JSON.parse(filters) ,layer:newLayer});
+        
+            console.log(ref.memorySvc.mapSearches);
+            
+        ref.setList.loadSets(ref.queryData.fnc,args,filters);
       })
       })
     

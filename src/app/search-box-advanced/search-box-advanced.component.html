@@ -1,32 +1,33 @@
 <div id=wrapper #wrapper>
     
       <div class=searchPos>
-     <label><input type="text" [(ngModel)]=search.text placeholder="text id"></label>
+     <label><input type="text" [(ngModel)]=search.litGram.msId placeholder="text id"></label>
         <label [style.display]="displayFilters ? 'none':'block'" 
-               *ngFor="let f of textFilters"><app-filter [filter]=f></app-filter></label>
+               *ngFor="let f of search.msFilters"><app-filter [filter]=f></app-filter></label>
   </div>
     
      <div class=searchPos>
-     <label><input type="text" [(ngModel)]=search.pre placeholder="preceding littera"></label>
+     <label><input type="text" [(ngModel)]=search.litGram.pre placeholder="preceding littera"></label>
         <label [style.display]="displayFilters ? 'none':'block'"
-               *ngFor="let f of preFilters"><app-filter [filter]=f></app-filter></label>
+               *ngFor="let f of search.preFilters"><app-filter [filter]=f></app-filter></label>
   </div>
     
     <div class=searchPos>
-     <label><input type="text" [(ngModel)]=search.main placeholder="main littera"></label>
+     <label><input type="text" [(ngModel)]=search.litGram.main placeholder="main littera"></label>
         <label [style.display]="displayFilters ? 'none':'block'"
-               *ngFor="let f of mainFilters"><app-filter [filter]=f></app-filter></label>
+               *ngFor="let f of search.mainFilters"><app-filter [filter]=f></app-filter></label>
   </div>
     
     <div class=searchPos>
-     <label><input type="text" [(ngModel)]=search.post placeholder="following littera"></label>
+     <label><input type="text" [(ngModel)]=search.litGram.post placeholder="following littera"></label>
         <label [style.display]="displayFilters ? 'none':'block'"
-               *ngFor="let f of postFilters"><app-filter [filter]=f></app-filter></label>
+               *ngFor="let f of search.postFilters"><app-filter [filter]=f></app-filter></label>
   </div>
     
     <div class=searchPos>
         <button (click)="displayFilters=!displayFilters">Show filters</button>
-      <button *ngFor="let f of functions" (click)="submitSearch(search, f.fnc)">{{f.label}}</button>
+        
+      <button *ngFor="let f of functions" (click)="submitSearch(search, f)">{{f.label}}</button>
   </div>
     
    

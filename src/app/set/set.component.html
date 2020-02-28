@@ -2,17 +2,18 @@
     <div id=topRow>
         <div #chart> </div>
     <div id=members>
-        <span class=setMember *ngFor="let m of set.members" [style.border-width]="calcBorder(m.tokens)" [style.border-color]="colorKey[m.str]">{{m.str}}</span>
+        <span class=setMember *ngFor="let m of set.members" [style.border-width]="calcBorder(m.tokens)" [style.border-color]="colorKey[m.str].color">{{m.str}}</span>
     </div>
     <div id=freqs>    
         {{set.types}} / {{set.tokens}}
     </div>
         
         <div id=links>
-            <button (click)="requestMap()" class=icon>>></button>
+            <a class=icon [routerLink]="['/map/mapSet',set.membersStrings.join(',')]" target="_blank">>></a>
         </div>
         
 </div>
+ 
     <button *ngIf="!itemList.open" (click)="showItems()">Show items</button>
     <button *ngIf="itemList.open" (click)="hideItems()">Hide items</button>
     <app-item-list enableSelect=true

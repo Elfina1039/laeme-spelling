@@ -107,18 +107,23 @@ loadLitterae(fnc, id, group){
     
 drawNetwork() {
     
- this.nodes = new DataSet(this.nodeSource);
-this.edges = new DataSet(this.edgeSource.filter((ns)=>ns.from.split("/")[0]!=ns.to.split("/")[0]));
+ //this.nodes = new DataSet(this.nodeSource);
+//this.edges = new DataSet(this.edgeSource.filter((ns)=>ns.from.split("/")[0]!=ns.to.split("/")[0]));
 
 // create a network
 
 let data = {
-  nodes: this.nodes,
-  edges: this.edges
+  nodes: this.nodeSource,
+  edges: this.edgeSource.filter((ns)=>ns.from.split("/")[0]!=ns.to.split("/")[0])
 };
     
 
 const network = new Network(this.container, data, this.options);
+    
+network.on("selectEdge", function(params) {
+  console.log("selectEdge Event:", params);
+});    
+    
 }   
 
 }

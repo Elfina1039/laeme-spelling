@@ -22,11 +22,12 @@ export class MenuComponent implements OnInit {
     ];
     
     quickLinks : SearchFnc[] = [
-        {label : "Show profile", fnc : "/profile"},
-        {label : "Get Map", fnc : "/map/mapSet"},
-         {label : "Show Mss", fnc : "/mss"},
-        {label : "Show network", fnc : "/network/getMsCorresp"},
-        {label : "Show double network", fnc : "/network/getCorresp"}
+        {label : "Profile", fnc : "/profile"},
+        {label : "Comparison", fnc : "/comparison"},
+        {label : "Map", fnc : "/map/mapSet"},
+         {label : "MSs", fnc : "/mss"},
+        {label : "Network", fnc : "/network/getMsCorresp"},
+        {label : "Double network", fnc : "/network/getCorresp"}
     ];
     
    

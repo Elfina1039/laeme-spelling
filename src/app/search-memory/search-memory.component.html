@@ -1,4 +1,4 @@
-<header>Browse Manuscripts</header>
+<header>Previous searches</header>
 
 <content>
 <table>
@@ -14,10 +14,33 @@
     <th>{{ms.label}}</th>
     <td>{{ms.fnc}}</td>
     <td>{{ms.args}}</td>
-    <td>{{ms.filters}}</td>
+    <td>
+        <span *ngFor="let f of ms.filters" [appFilterTag]="f">{{f.values}}</span>
+    
+    </td>
     <th><a [routerLink]="['/map',ms.fnc, ms.args+';'+ms.filters]" target="_blank">Map</a></th>
 </tr>
     
     
 </table>
+    
+<table>
+<tr> 
+    <th>Label</th>
+    <th >Fields</th>
+    <th> Color</th>
+    
+
+</tr>
+    
+<tr *ngFor="let ms of memorySvc.msSearches"> 
+    <th>{{ms.label}}</th>
+    <td>{{ms.fields}}</td>
+    <td>{{ms.color}}</td>
+
+</tr>
+    
+    
+</table>    
+    
 </content>
