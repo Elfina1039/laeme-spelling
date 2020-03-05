@@ -11,11 +11,9 @@ import { SetService } from '../services/set.service';
 export class SetListComponent implements OnInit {
     sets : Set[] = [];
     filtered : Set[] = [];
-    queryData : QueryData;
-    searchFncs : SearchFnc[] = [{label:"Advanced search", fnc:"getFilteredSets"},
-                               {label:"Search", fnc:"getSetsByLits"}];
+    queryData : QueryData = {fnc:"", args:"", filters:[], getJsonFilters:function(){return ""}};
     
-    @Input("searchMode") searchMode : string = "advanced";
+    @Input("itemAction") itemAction : string;
     @ViewChild("wrapper") wrapper;
     
     @Output() requestItem : EventEmitter<any> = new EventEmitter();
@@ -25,7 +23,7 @@ export class SetListComponent implements OnInit {
   constructor(private setSvc : SetService) { }
 
   ngOnInit() {
-      
+ 
       
   }
   

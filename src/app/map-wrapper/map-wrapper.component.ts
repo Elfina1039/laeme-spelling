@@ -22,16 +22,18 @@ export class MapWrapperComponent implements OnInit {
     laemeData : any = [];
    // previousSearches : MapSearch[] = [];
     litStats : LitStats[];
+    legendHeader : string;
     selectedText : any = {id:0};
    // sets : Set[] = [];
     params : any = {};
      queryData : QueryData;
     searchLabel : string;
-    
+  
     searchMode : string = "advanced";
      setSearchMode : string = "none";
     searchFncs : SearchFnc[][] = [
-       [ {label:"Map set+", fnc : "mapSet"}],
+       [ {label:"Map set+", fnc : "mapSet"},
+       {label:"Map set exact", fnc : "mapSetExact"}],
         [ {label:"Map filtered", fnc : "mapfilteredSet"}]
 
     ]
@@ -61,15 +63,16 @@ export class MapWrapperComponent implements OnInit {
   }
 
 mapItem(e){
+    console.log(e);
     this.changeMap({fnc:"mapSlot", args: e.morphid+"-"+e.pos, filters:""});
 }
     
 mapSelection(e){
-    this.changeMap({fnc:"mapSlots", args:[e.join(",")], filters:"" });
+    this.changeMap({fnc:"mapSlots", args:e.join(","), filters:"" });
 }
     
 mapSearch(e){
-   let args : string[] = [e.search.main];
+   let args : string = e.search.main;
     console.log(args);
     this.changeMap({fnc:e.fnc, args:args, filters:e.filters});
 }
@@ -77,7 +80,7 @@ mapSearch(e){
 changeMap(e){
     console.log("changing map");
     console.log(e);
-       this.router.navigate(["/map",e.fnc, e.args.join(";"), e.filters]); 
+       this.router.navigate(["/map",e.fnc, e.args, e.filters]); 
  }
     
     
@@ -97,6 +100,8 @@ loadMap(fnc,args, filters=""){
         this.setSvc.fetchUniversal(fnc+"Stats",[args, filters]).subscribe((data:any)=>{
           console.log(data);
           ref.litStats=data.rows;
+         ref.legendHeader = data.queryData.legend;
+            
        
         ref.map.makeColorKey(ref.litStats);
        let newLayer = ref.map.addLaemeData(ref.laemeData);
@@ -127,12 +132,13 @@ displayMs(e){
     console.log("displaying ");
     this.selectedText.id=e.id;
     this.msInfo.loadMeta([e.id]);
-    this.msInfo.toggle();
+    this.msInfo.open();
    // let lits = e.litterae.map((ls)=>ls.str).join(",");
-    let args = this.params.args[0];
-    let fnc = this.params.fnc+"ForText";
+    let args = e.id+";"+this.params.args;
+    let fnc = this.params.fnc + "ForText";
+ 
     let filters = JSON.stringify(this.queryData.filters);
-    this.itemList.loadItems(fnc, [e.id,args,filters]);
+    this.itemList.loadItems(fnc, args,filters);
    // this.itemList.queryData.filters.push({type:"ms", values:[e.id]});
 } 
     

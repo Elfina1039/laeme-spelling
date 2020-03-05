@@ -15,10 +15,10 @@
     <td>{{ms.fnc}}</td>
     <td>{{ms.args}}</td>
     <td>
-        <span *ngFor="let f of ms.filters" [appFilterTag]="f">{{f.values}}</span>
+     <span *ngFor="let f of ms.filters" [appFilterTag]="f">{{f.values}}</span>
     
     </td>
-    <th><a [routerLink]="['/map',ms.fnc, ms.args+';'+ms.filters]" target="_blank">Map</a></th>
+    <th><a [routerLink]="['/map',ms.fnc, ms.args, jsonFilters(ms.filters)]" target="_blank">Map</a></th>
 </tr>
     
     

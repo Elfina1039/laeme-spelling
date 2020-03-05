@@ -13,4 +13,8 @@ export class SearchMemoryComponent implements OnInit {
   ngOnInit() {
   }
 
+    jsonFilters(f){
+        return JSON.stringify(f);
+    }
+    
 }

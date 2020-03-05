@@ -128,7 +128,7 @@ export class SetSearch{
             result.push({level:"m",
                         field:"text_id",
                         operator:"equals",
-                        values:textId});
+                        values:[textId]});
         }
         
           if(this.litGram.pre){
@@ -136,7 +136,7 @@ export class SetSearch{
             result.push({level:"l",
                         field:"pre",
                         operator:"equals",
-                        values:pre});
+                        values:[pre]});
         }
         
          if(this.litGram.post){
@@ -144,7 +144,7 @@ export class SetSearch{
             result.push({level:"l",
                         field:"post",
                         operator:"equals",
-                        values:post});
+                        values:[post]});
         }
         
         return result;

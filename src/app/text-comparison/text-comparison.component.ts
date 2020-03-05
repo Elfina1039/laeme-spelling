@@ -10,7 +10,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileSideComponent } from '../profile-side/profile-side.component';
 import { SetListComponent } from '../set-list/set-list.component';
 import { MsToolsComponent } from '../ms-tools/ms-tools.component';
-import { SetListComponent } from './set-list/set-list.component';
 
 @Component({
   selector: 'app-text-comparison',
@@ -19,10 +18,10 @@ import { SetListComponent } from './set-list/set-list.component';
 })
 export class TextComparisonComponent implements OnInit, AfterContentInit {
     
-    preloaded : number[]= [];
+    preloaded : string[]= [];
     inventories : LitInventoryComponent[]=[];
     setLists : SetListComponent[]=[];
-    setLists : SetListComponent[];
+
     invSize : MsSize = {width:0, height:100, unit: "px"};
     setSize : MsSize = {width:0, height:100, unit: "px"};
     @ViewChild("container", {read: ViewContainerRef}) container;
@@ -53,9 +52,6 @@ ngAfterContentInit(){
     console.log("LOADING COMPONENTS: " + this.preloaded.join("+"));
     this.preloaded.forEach((id)=>ref.addMs(id));
 
-   
-  
-
 }
     
 addMs(id){
@@ -72,13 +68,12 @@ addMs(id){
     console.log(newInventory);
 newInventory.wrapper.nativeElement.style.width = ref.invSize.width+ref.invSize.unit;
     
-newInventory.requestHighlight.subscribe((e)=>{ref.filterSets(e)});
+newInventory.requestHighlight.subscribe((e)=>{ref.filterSets(e);
+                                             ref.searchLittera(e)});
 
 newSetList.requestItem.subscribe((e)=>{ref.searchLexel(e);});
 newSetList.requestSelection.subscribe((e)=>{ref.searchMorphids(e);});
-    
-    
-    newSetList.searchMode="none";
+
    newSetList.loadSets("getSetsByText",id); 
 
     newSetList.wrapper.nativeElement.style.width = ref.setSize.width+ref.setSize.unit;
@@ -109,6 +104,13 @@ searchMorphids(e){
     console.log(e[0]);
     this.setLists.forEach((sl)=>sl.filterSets(e[0].littera));
 }
+    
+     searchLittera(e){
+        console.log(e);
+        this.msTools.searchMss(e[0]);
+        this.inventories.forEach((i)=>i.profile.getAlternatives(e[1]));
+      
+    }
     
     
 

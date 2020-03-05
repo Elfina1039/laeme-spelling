@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { SetService } from '../services/set.service';
 import { Split } from '../classes/profile';
 
@@ -11,6 +11,8 @@ export class SplitsComponent implements OnInit {
     patern : string[];
     splits :  Split[];
     pos : number = -1;
+     @ViewChild("wrapper") wrapper : any;
+    
   constructor(private setSvc : SetService) { }
 
   ngOnInit() {
@@ -21,6 +23,7 @@ loadSplits(fnc, args, filters){
     console.log("NEW POS: "+this.pos);
     this.splits=[];
      let ref = this;
+  
       this.setSvc.fetchUniversal(fnc,[args,filters]).subscribe((data:any)=>{
           console.log(data);
           data.rows.forEach((i)=>{

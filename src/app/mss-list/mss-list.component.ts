@@ -31,6 +31,9 @@ showData(){
     console.log(this.mss);
 }
     
+    redirectToLaeme(link){  window.open("http://archive.lel.ed.ac.uk/ihd/laeme2_scripts/find_msdescriptor.php?idno="+link);
+}
+    
 
 }
 

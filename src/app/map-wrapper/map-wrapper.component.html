@@ -29,13 +29,18 @@
     </header>
     
     <content>
-<app-map (msClicked)=displayMs($event) #map></app-map>
+<app-map (msClicked)=displayMs($event)
+         [legendHeader]="legendHeader"
+         #map></app-map>
 
 <!--<app-set-list (mapSet)=changeMap($event) #setList></app-set-list>-->
     <div id=setList >
         <div class=header><h3>Sets</h3></div>
         
-        <app-set-list [searchMode]="setSearchMode" #setList></app-set-list>
+        <app-set-list itemAction="Map"
+                      (requestItem)=mapItem($event)
+                      (requestSelection)=mapSelection($event)
+                      #setList></app-set-list>
         
  <!--<app-set *ngFor="let s of sets" 
           [set]=s 

@@ -51,13 +51,14 @@ export class FilterDataService {
   optionSets : OptionSet[] = [
       {id : "msDate",
        label :"MS Date",
-      options : [{"tag":"5","label":"C13b2","count":70,"checked":false},
-{"tag":"3","label":"C13a2","count":42,"checked":false},
-{"tag":"6","label":"C14a1","count":42,"checked":false},
-{"tag":"4","label":"C13b1","count":40,"checked":false},
-{"tag":"2","label":"C13a1","count":31,"checked":false},
-{"tag":"7","label":"C14a2","count":13,"checked":false},
-{"tag":"1","label":"C12b2","count":9,"checked":false}]},
+      options : [{"tag":"1","label":"C12b2","count":9,"checked":false},
+                 {"tag":"2","label":"C13a1","count":31,"checked":false},
+                 {"tag":"3","label":"C13a2","count":42,"checked":false},
+                 {"tag":"4","label":"C13b1","count":40,"checked":false},{"tag":"5","label":"C13b2","count":70,"checked":false},
+                 {"tag":"6","label":"C14a1","count":42,"checked":false},
+
+                 {"tag":"7","label":"C14a2","count":13,"checked":false}
+]},
       
         {id : "msLocalisation",
        label :"MS Localisation",
@@ -150,38 +151,7 @@ export class FilterDataService {
   ];
     
     
-tagKey : any = {
-    wI : {label : "word-initial", optionSet : "posTags"},
-    mI : {label : "morpheme-initial", optionSet : "posTags"},
-    wF : {label : "word-final", optionSet : "posTags"},
-    mF : {label : "morpheme-final", optionSet : "posTags"},
-    C : {label : "consonant", optionSet : "soundTags"},
-     V : {label : "vowel", optionSet : "soundTags"},
-     T : {label : "transitional", optionSet : "soundTags"},
-    l : {label : "labial", optionSet : "conPlace"},
-    ld : {label : "labio-dental", optionSet : "conPlace"},
-    d : {label : "dental", optionSet : "conPlace"},
-    a : {label : "alveolar", optionSet : "conPlace"},
-    p : {label : "palatal", optionSet : "conPlace"},
-    v : {label : "velar", optionSet : "conPlace"},
-    g : {label : "glottal", optionSet : "conPlace"},
-    P : {label : "plosive", optionSet : "conMode"},
-    F : {label : "fricative", optionSet : "conMode"},
-    Af : {label : "affricate", optionSet : "conMode"},
-    Xc : {label : "central approximant", optionSet : "conMode"},
-    Xl : {label : "lateral approximant", optionSet : "conMode"},
-    N : {label : "nasal", optionSet : "conMode"},
-    L : {label : "liquid", optionSet : "conMode"},
-    S : {label : "spirant", optionSet : "conMode"},
-    ST : {label : "short", optionSet : "vowelTags"},
-    LN : {label : "long", optionSet : "vowelTags"},
-    DP : {label : "diphthong", optionSet : "vowelTags"},
-    1 : {label : "low", optionSet : "vowHeight"},
-    2 : {label : "low-mid", optionSet : "vowHeight"},
-    3 : {label : "mid", optionSet : "vowHeight"},
-    4 : {label : "high-mid", optionSet : "vowHeight"},
-    5 : {label : "high", optionSet : "vowHeight"}
-}
+
     
   constructor() { 
       

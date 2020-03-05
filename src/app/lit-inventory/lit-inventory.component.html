@@ -2,10 +2,10 @@
     <table id=litterae>
         
         <tr>
-            <th>Lit.</th>
-            <th>T/T</th>
-            <th>C</th>
-            <th>Rare slots</th>
+            <th (click)="profile.sortBy('str')" class=header>Lit.</th>
+            <th (click)="profile.sortBy('tokens')" class=header>T/T</th>
+            <th class=header>C</th>
+            <th (click)="profile.sortBy('rareSlots')" class=header>Rare slots</th>
         </tr>
         
         <tr class=littera *ngFor="let lit of profile.litterae" >
@@ -20,7 +20,11 @@
     </table>
     
     
-    <app-item-list #itemList></app-item-list>
+    
+    <app-item-list
+            itemAction="search"
+            (requestItem)="submitItem($event)"
+                   #itemList></app-item-list>
 
 
 </div>

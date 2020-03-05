@@ -30,18 +30,18 @@ tr.littera{
     cursor:pointer;
 }
 
-tr.littera th:hover, tr.littera td:hover{
+tr.littera th:hover, tr.littera td:hover, th.header:hover{
         box-shadow: 0 0 0.5em white inset;
     cursor: pointer;
 }
 
-th.highlight{
-    color:blue;
-    background:white;
+th.highlight, th.sort{
+    color:white;
+    background:#b30e11;
 }
 
 th{
     background:#c17a10;
     border: 1px solid white;
-    color:white;
+    color:black;
 }

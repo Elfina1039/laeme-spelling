@@ -1,0 +1,30 @@
+
+
+<header>
+     
+   <button class=icon *ngIf="searchMode=='simple'"
+                (click)="searchMode='advanced'">Advanced search</button>
+        
+          <button  class=icon *ngIf="searchMode=='advanced'"
+                (click)="searchMode='simple'">Simple search</button>  
+    
+         <app-search-box *ngIf="searchMode=='simple'"
+                          (requestSearch)="fireSearch($event)"
+                        [functions]="searchFncs[1]">
+        </app-search-box>
+    
+    
+<app-search-box-advanced *ngIf="searchMode=='advanced'"
+                         [functions]="searchFncs[0]"
+                (requestSearch)="fireSearch($event)"></app-search-box-advanced>
+    
+    <button class=icon (click)=clearAll()>Clear all</button>
+    
+</header>
+    
+<content>
+   <div id="container" #container></div>
+   
+</content>
+    
+    

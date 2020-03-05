@@ -3,13 +3,19 @@
 <content>
 <table *appOrder=mss>
 <tr> 
-    <th >id</th>
-    <th (click)=showData()>manuscript</th>
-    <th> localisation</th>
-    <th>date</th>
-    <th>script</th>
-    <th>texts</th>
-    <th>Profile</th>
+    <th (click)="mss=setSvc.orderBy(mss,'id')"
+        class="sort">id</th>
+    <th (click)="mss=setSvc.orderBy(mss,'manuscript')"
+        class="sort">manuscript</th>
+    <th (click)="mss=setSvc.orderBy(mss,'localisation')"
+        class="sort"> localisation</th>
+    <th (click)="mss=setSvc.orderBy(mss,'date')"
+        class="sort">date</th>
+    <th (click)="mss=setSvc.orderBy(mss,'script')"
+        class="sort">script</th>
+    <th (click)="mss=setSvc.orderBy(mss,'texts')"
+        class="sort">texts</th>
+    <th>Links</th>
 </tr>
     
 <tr *ngFor="let ms of mss"> 
@@ -19,7 +25,9 @@
     <td>{{ms.date}}</td>
      <td>{{ms.script}}</td>
      <td>{{ms.texts}}</td>
-    <th><a [routerLink]="['/profile',ms.id]" target="_blank">Profile</a></th>
+    <th><a (click)=redirectToLaeme(ms.id) appRedirect="">L</a>
+        
+        <a [routerLink]="['/profile',ms.id]" target="_blank" appRedirect="manuscript.png"></a></th>
 </tr>
     
     

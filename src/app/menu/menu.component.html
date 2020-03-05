@@ -9,6 +9,10 @@
     
     
     <span>MS searches: {{ memorySvc.msSearches.length}}</span>
+     <button (click)=memorySvc.clearMsSearches()>Clear</button>
     <span>Map searches: {{ memorySvc.mapSearches.length}}</span>
+     <button (click)=memorySvc.clearMapSearches()>Clear</button>
+    
+   
     
 </div>

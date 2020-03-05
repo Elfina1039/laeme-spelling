@@ -17,13 +17,14 @@ import { NetworkComponent } from './network/network.component';
 import { SearchMemoryComponent } from './search-memory/search-memory.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { TextComparisonComponent } from './text-comparison/text-comparison.component';
+import { SearchWrapperComponent } from './search-wrapper/search-wrapper.component';
 
 const routes: Routes = [{path:'mss/:id', component: MsToolsComponent},
                         {path:'profile/:id', component: TextProfileComponent},
                         {path:'comparison/:id', component: TextComparisonComponent},
                          {path:'guide', component: UserGuideComponent},
                          {path:'references', component: ReferencesComponent},
-                        {path:'sets', component: SetListComponent},
+                        {path:'sets', component: SearchWrapperComponent},
                          {path:'mss-list', component: MssListComponent},
                         {path:'map/:fnc/:args/:filters', component: MapWrapperComponent},
                         {path:'map/:fnc/:args', component: MapWrapperComponent},

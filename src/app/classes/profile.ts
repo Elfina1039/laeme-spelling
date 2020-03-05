@@ -123,8 +123,8 @@ export class Set{
     }
     
     checkForLittera(l){
-         console.log(this.membersStrings);
-        console.log(this.membersStrings.indexOf(l));
+       //  console.log(this.membersStrings);
+    //    console.log(this.membersStrings.indexOf(l));
         if(this.membersStrings.indexOf(l)==-1){
             return false;
         }
@@ -191,6 +191,12 @@ linkLitterae(members : string[]){
     
     return result;
 }
+    
+sortBy(crit){
+      console.log("sorting profile by " + crit);
+   let sorted = this.litterae.sort((a,b)=>{return a[crit]>b[crit] ? -1:1});
+    this.litterae=sorted;
+}
 
 getSlotList(littera){
     
@@ -223,7 +229,7 @@ getAlternatives(slotList : string[]){
         if(slotRef[sl]){
           slotRef[sl].litterae.forEach((l)=>{
         l.asAlternative++;
-              console.log("a")
+              console.log(l)
         });  
         }
         

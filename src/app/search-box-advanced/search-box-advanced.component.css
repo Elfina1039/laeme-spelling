@@ -35,6 +35,8 @@ button{
     font-weight:bold;
     padding:0.1em;
     margin:0.1em;
+    white-space:nowrap;
+
 }
 
 .icon{

@@ -79,7 +79,7 @@ loadMs(id){
             search.color = this.search.color;
         }
         
-        this.memorySvc.msSearches.push(search);
+        this.memorySvc.addMsSearch(search);
         console.log(this.msComponents);
         this.msComponents._results.forEach((ms)=>ms.highlightToken(search));
         

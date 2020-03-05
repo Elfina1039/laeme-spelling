@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
     links : SearchFnc[] = [
         {label : "Title page", fnc : ""},
           {label : "Browse MSs", fnc : "/mss-list"},
-        {label : "Browse sets", fnc : "/sets"},
+        {label : "Search DB", fnc : "/sets"},
         {label : "Maps", fnc : "/map"},
         {label : "Searches", fnc : "/searches"},
         {label : "Poema Morale", fnc : "/title-page-pm"}

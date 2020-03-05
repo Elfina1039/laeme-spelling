@@ -26,6 +26,7 @@ export class MapComponent implements OnInit {
     lat : number = 0;
     lang : number = 0;
     map : any;
+    @Input("legendHeader") legendHeader : string;
     colorKey : any = {};
     freqRange : [number,number] = [0,0];
     msKey : any = {};

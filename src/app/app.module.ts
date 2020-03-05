@@ -40,6 +40,7 @@ import { MapGroupComponent } from './map-group/map-group.component';
 import { FilterTagDirective } from './directives/filter-tag.directive';
 import { RedirectDirective } from './directives/redirect.directive';
 import { TextComparisonComponent } from './text-comparison/text-comparison.component';
+import { SearchWrapperComponent } from './search-wrapper/search-wrapper.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { TextComparisonComponent } from './text-comparison/text-comparison.compo
     MapGroupComponent,
     FilterTagDirective,
     RedirectDirective,
-    TextComparisonComponent
+    TextComparisonComponent,
+    SearchWrapperComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +91,8 @@ import { TextComparisonComponent } from './text-comparison/text-comparison.compo
   ],
     entryComponents : [
         LitInventoryComponent,
-        SetListComponent
+        SetListComponent,
+        ItemListComponent
     ],
   providers: [],
   bootstrap: [AppComponent]

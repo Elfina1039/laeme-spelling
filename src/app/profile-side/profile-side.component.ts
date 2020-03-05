@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angu
 import { Profile, Littera, Slot } from '../classes/profile';
 import { ListSearch } from '../classes/general';
 import { SetService } from '../services/set.service';
+import { InterfaceService } from '../services/interface.service';
 
 @Component({
   selector: 'app-profile-side',
@@ -15,9 +16,16 @@ export class ProfileSideComponent implements OnInit {
      @ViewChild("wrapper") wrapper : any;
     loaderFnc : string = "getInventory";
     textId : number;
-  constructor(private setSvc : SetService) { }
+    position : [number, number];
+    
+  constructor(protected setSvc : SetService,
+              protected intfSvc : InterfaceService) {
+ 
+  }
 
   ngOnInit() {
+       console.log(this.wrapper.nativeElement);
+      
   }
 
 fetchProfile(id){
@@ -25,7 +33,7 @@ fetchProfile(id){
      let ref = this;
       this.setSvc.fetchUniversal(ref.loaderFnc,[id]).subscribe((litsData:any)=>{ this.setSvc.fetchUniversal("getSlotsByText",[id]).subscribe((slotsData:any)=>{
           let litterae : Littera[] = ref.processLits(litsData.rows);
-           let slots : any = ref.processSlots(slotsData.rows);
+           let slots : any = ref.processSlots(slotsData.rows, litterae);
           
           ref.profile = new Profile(litterae, slots.list, slots.ref); console.log(this.profile);});});
 }  
@@ -40,12 +48,13 @@ processLits(litsData){
     
 }
     
-processSlots(slotsData){
+processSlots(slotsData, litObjects){
     let slots : Slot[] = [];
      let slotRef : any = {};
      slotsData.forEach((s)=>{
              let members = s.litterae.map((l)=>l.str);
-            let nSlot=<Slot>{morphid : eval(s.morphid), pos: s.pos, litterae : s.litterae};
+            let litterae = litObjects.filter((lo)=>members.indexOf(lo.str)!=-1);
+            let nSlot=<Slot>{morphid : eval(s.morphid), pos: s.pos, litterae : litterae};
             slots.push(nSlot); 
              slotRef[s.morphid+"-"+s.pos] = nSlot;
         
@@ -66,7 +75,13 @@ toggle(){
     }
          
 }     
+
+sortBy(crit){
+    console.log("sorting by " + crit);
+   let sorted = this.profile.litterae.sort((a,b)=>{return a[crit]>b[crit] ? -1:1});
+    this.profile.litterae=sorted;
     
+}    
     
 close(){
         this.wrapper.nativeElement.style.display="none"; 
@@ -85,7 +100,7 @@ highlightStrid(littera){
     
     console.log(slotList);
     
-    let search = new ListSearch({littera:littera.str,fields:[["morphids",""]], color:"yellow", list:stridList});
+    let search = new ListSearch({littera:littera.str,fields:[["morphids",""]], color:"", list:stridList});
     
     
     this.requestHighlight.emit([search, slotList]);

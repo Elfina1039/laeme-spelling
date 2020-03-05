@@ -57,6 +57,12 @@ searchLexel(e){
     this.msTools.searchMss(search);
 }
     
+    searchLittera(e){
+        console.log(e);
+        this.msTools.searchMss(e[0]);
+        this.profileCmp.profile.getAlternatives(e[1]);
+    }
+    
 searchMorphids(e){
     let selection = e.map((s)=>eval(s.split("-")[0]));
      let search :ListSearch = new ListSearch({fields:[["morphids",selection]],list:selection, color: "",});

@@ -3,20 +3,22 @@
 
     <header><h3>Text profile</h3><h3> id: {{textId}}</h3>
     
-     <a  class=icon [routerLink]="['/network/getMsCorresp',textId]" target="_blank">>></a>
+     <a appRedirect="network.png" [routerLink]="['/network/getMsCorresp',textId]" target="_blank"></a>
     </header>
 <content>
     
 <div id=side>
     <div class=header><h3>Litterae</h3></div>
-<app-lit-inventory (requestHighlight)=filterSets($event) #profileCmp></app-lit-inventory>
+<app-lit-inventory (requestHighlight)="filterSets($event); searchLittera($event)"
+                   (requestItem)="searchLexel($event)"
+                   #profileCmp></app-lit-inventory>
 </div>
     
 <div id=sets>
     <div class=header><h3>Sets</h3></div>
 <app-set-list (requestItem)="searchLexel($event)"
               (requestSelection)="searchMorphids($event)"
-              [searchMode]="none"
+              [itemAction]="Search"
               #setListCmp></app-set-list>
     </div>  
     

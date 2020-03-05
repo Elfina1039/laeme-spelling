@@ -3,20 +3,33 @@
         <div id=filters>
         <span *ngFor="let f of queryData.filters" [appFilterTag]="f">{{f.values}}</span>
     </div>
+        
+        <button (click)="hide()" class=icon>X</button>
     </div>
     <div id=content>
         
     <table id=list>
-        <tr><th colspan=3 class="link" (click)="submitSelection()">Submit</th></tr>
+        <tr>
+            <th *ngIf="enableSelect" class=sort><input type="checkbox" (change)=selectAll()></th>
+        <th (click)="items=setSvc.orderBy(items,'lexel')"
+            class="sort">Lexel / WC</th>
+        <th (click)="items=setSvc.orderBy(items,'tokens')"
+            class="sort">Litterae</th>
+        
+        </tr>
+        
+        <tr *ngIf="itemAction"><th colspan=3 class="link" (click)="submitSelection()">  {{itemAction}} selected  </th></tr>
         <tr *ngFor="let i of items">
             <th *ngIf="enableSelect"><input type=checkbox [(ngModel)]="i.selected"></th>
             <th (click)="loadSplits(i.morphid, i.pos)">{{i.lexel}}/{{i.wordClass}} ({{i.pos}})</th>
-            <td><span class=lit *ngFor="let l of i.litterae">{{l.str}}({{l.tokens}})</span></td>
-            <th class="link" (click)="submitItem(i)">
-                Submit
-            </th>
+            
             <td>
-             <a  class=icon [routerLink]="['/map/mapSlot',i.morphid+'-'+i.pos]" target="_blank">>></a>
+                <span class=lit *ngFor="let l of i.litterae">{{l.str}}({{l.tokens}})</span>
+            </td>
+            <th class="link" (click)="submitItem(i)" *ngIf="itemAction">
+                {{itemAction}}            </th>
+            <td>
+             <a  appRedirect="map.png" [routerLink]="['/map/mapSlot',i.morphid+'-'+i.pos]" target="_blank"></a>
             </td>
         </tr>
     </table>    

@@ -18,6 +18,7 @@ export class SetComponent implements OnInit {
     items : Item[] = [];
     filters : any = [];
     @Input("colorKey")  colorKey ;
+    @Input("itemAction")   itemAction : string ;
     @Output() mapSet : EventEmitter<any> = new EventEmitter();
   
     @Output() requestItem : EventEmitter<any> = new EventEmitter();

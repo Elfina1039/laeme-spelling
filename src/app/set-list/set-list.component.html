@@ -1,31 +1,17 @@
 <div id=wrapper #wrapper>
-<header>
-       <div id=filters>
-        <span *ngFor="let f of queryData.filters" [appFilterTag]="f">{{f.values}}</span>
-    </div>
-    
-      
-   <button  *ngIf="searchMode=='simple'"
-                (click)="searchMode='advanced'">Advanced search</button>
-        
-          <button  *ngIf="searchMode=='advanced'"
-                (click)="searchMode='simple'">Simple search</button>  
-    
-         <app-search-box *ngIf="searchMode=='simple'"
-                          (requestSearch)="setSearch($event)"
-                        [functions]="[searchFncs[1]]">
-        </app-search-box>
-    
-    
-<app-search-box-advanced *ngIf="searchMode=='advanced'"
-                         [functions]="[searchFncs[0]]"
-                (requestSearch)="setSearch($event)"></app-search-box-advanced>
-</header>
+
 
 <content>
+       <div id=filters>
+        <span *ngFor="let f of queryData.filters" [appFilterTag]="f">
+            {{f.values}}
+            </span>
+    </div>
 
 <app-set *ngFor="let s of filtered" [set]=s [queryData]="queryData"
          (requestItem)="submitItem($event)"
-        (requestSelection)="submitSelection($event)"#set></app-set>
+        (requestSelection)="submitSelection($event)"
+         [itemAction]="itemAction"
+         #set></app-set>
 </content>
 </div>

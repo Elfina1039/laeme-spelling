@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class GraphicService {
     grid;
     dataSample;
-    colors : string[]=["#fc1703","#2003fc","#ede60c","#22f007","#ff9305","#ffffff","#000000","#aef50a","#0be6c8","#ed0edb","#145415"]; 
+    colors : string[]=["#fc1703","#2003fc","#ede60c","#22f007","#ff9305","#ffffff","#aef50a","#0be6c8","#ed0edb","#145415","#91a63f","#c828f0","#9e3737","#5265df","#3d9da2"]; 
     
     
   constructor() {

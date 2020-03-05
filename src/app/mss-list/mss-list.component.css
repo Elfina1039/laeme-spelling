@@ -38,6 +38,11 @@ th{
     background:#c17a10;
 }
 
+th.highlight, th.sort{
+    color:white;
+    background:#b30e11;
+}
+
 th:hover{
     box-shadow: 0 0 0.5em white inset;
     cursor: pointer;

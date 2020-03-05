@@ -2,6 +2,7 @@
     transition: height 1s ease-out;
     height:0;
     overflow:scroll;
+    background: linear-gradient(black, #2e200d);
 }
 
 #content{
@@ -18,6 +19,17 @@ table{
 .lit{
     margin-left:0.1em;
     margin-right:0.1em;
+     border-left : 1px dashed white; 
+}
+
+.lit::first-of-type{
+    border-left: none;
+}
+
+.lit::nth-of-type(even){
+    background-color : #c17a10;
+    color:black;
+    font-weight:bold;
 }
 
 
@@ -34,6 +46,30 @@ td,th{
 th:hover{
     box-shadow: 0 0 0.5em white inset;
     cursor: pointer;
+}
+
+th.highlight, th.sort{
+    color:white;
+    background:#b30e11;
+}
+
+
+button{
+    border:2px outset #df8f17;
+    background: linear-gradient(#c17a10,#df8f17);
+    font-weight:bold;
+    padding:0.1em;
+    margin:0.1em;
+}
+
+.icon{
+    background:transparent;
+    border:2px solid #df8f17;
+    color:#df8f17;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14pt;
+    float:right;
 }
 
 

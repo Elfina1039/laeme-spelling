@@ -9,7 +9,7 @@
     </div>
         
         <div id=links>
-            <a class=icon [routerLink]="['/map/mapSet',set.membersStrings.join(',')]" target="_blank">>></a>
+            <a  appRedirect="map.png" [routerLink]="['/map/mapSetExact',set.membersStrings.join(',')]" target="_blank"></a>
         </div>
         
 </div>
@@ -19,6 +19,7 @@
     <app-item-list enableSelect=true
                    (requestItem)=submitItem($event)
                    (requestSelection)=submitSelection($event)
+                   [itemAction] = itemAction
                    #itemList>
     </app-item-list>
     
