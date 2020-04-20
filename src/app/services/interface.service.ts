@@ -10,11 +10,12 @@ export class InterfaceService {
     
 moveComponent(c, parent){
     this.updatePosition(parent);
- 
+    console.log("moving cmp");
+   c.style.display = "block";
     c.style.position = "absolute";
     c.style.top=parent.position[1]+"px";
     c.style.left=parent.position[0]+"px";
-        c.style.display = "block";
+      
 }
     
 updatePosition(c){

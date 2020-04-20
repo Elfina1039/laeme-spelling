@@ -141,6 +141,7 @@ export interface Split{
     formid: number;
     split : string[];
     tokens : number;
+    form? : string;
 }
 
 export class Profile {

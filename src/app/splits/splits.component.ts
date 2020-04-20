@@ -8,12 +8,13 @@ import { Split } from '../classes/profile';
   styleUrls: ['./splits.component.css']
 })
 export class SplitsComponent implements OnInit {
-    patern : string[];
+    pattern : string[];
     splits :  Split[];
+    args : number;
     pos : number = -1;
      @ViewChild("wrapper") wrapper : any;
     
-  constructor(private setSvc : SetService) { }
+  constructor(protected setSvc : SetService) { }
 
   ngOnInit() {
   }
@@ -21,6 +22,7 @@ export class SplitsComponent implements OnInit {
     
 loadSplits(fnc, args, filters){
     console.log("NEW POS: "+this.pos);
+    this.args = args;
     this.splits=[];
      let ref = this;
   

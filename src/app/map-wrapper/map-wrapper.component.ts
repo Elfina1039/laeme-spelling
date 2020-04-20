@@ -89,9 +89,7 @@ loadMap(fnc,args, filters=""){
     //this.graphicSvc.addFilter(ref.wrapper.nativeElement);
    // this.graphicSvc.addFilter(ref.setList.nativeElement);
       ref.params={fnc:fnc, args:args, filters:filters};
-           if(!ref.searchLabel){
-                ref.searchLabel = fnc;
-           }
+      
     
       this.setSvc.fetchUniversal(fnc,[args, filters]).subscribe((data:any)=>{
           console.log(data);
@@ -106,9 +104,23 @@ loadMap(fnc,args, filters=""){
         ref.map.makeColorKey(ref.litStats);
        let newLayer = ref.map.addLaemeData(ref.laemeData);
             
+        let parsedFilters : Filter[];    
+            try{
+                parsedFilters = JSON.parse(filters);
+            }
+            catch(error){
+                parsedFilters = [];
+            }
             
-            
-        ref.memorySvc.mapSearches.unshift({label:ref.searchLabel, fnc:fnc, args:args, filters:JSON.parse(filters) ,layer:newLayer});
+            let label : string;
+            if(!ref.searchLabel){
+                label = fnc;
+           }else{
+               label = ref.searchLabel;
+               ref.searchLabel="";
+           }
+
+        ref.memorySvc.mapSearches.unshift({label:label, fnc:fnc, args:args, filters:parsedFilters ,layer:newLayer });
         
             console.log(ref.memorySvc.mapSearches);
             

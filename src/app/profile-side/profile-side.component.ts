@@ -38,6 +38,14 @@ fetchProfile(id){
           ref.profile = new Profile(litterae, slots.list, slots.ref); console.log(this.profile);});});
 }  
     
+loadAlternatives(fnc,lit){
+   // this.textId = id;
+     let ref = this;
+      this.setSvc.fetchUniversal(fnc,[lit]).subscribe((litsData:any)=>{   
+          let litterae : Littera[] = ref.processLits(litsData.rows);
+          ref.profile = new Profile(litterae, [], []); console.log(this.profile);});
+}
+    
 
 processLits(litsData){
     let litterae : Littera[] = [];

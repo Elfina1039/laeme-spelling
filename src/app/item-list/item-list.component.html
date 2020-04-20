@@ -21,7 +21,7 @@
         <tr *ngIf="itemAction"><th colspan=3 class="link" (click)="submitSelection()">  {{itemAction}} selected  </th></tr>
         <tr *ngFor="let i of items">
             <th *ngIf="enableSelect"><input type=checkbox [(ngModel)]="i.selected"></th>
-            <th (click)="loadSplits(i.morphid, i.pos)">{{i.lexel}}/{{i.wordClass}} ({{i.pos}})</th>
+            <th (click)="loadSplitsEdit(i.morphid, i.pos)">{{i.lexel}}/{{i.wordClass}} ({{i.pos}})</th>
             
             <td>
                 <span class=lit *ngFor="let l of i.litterae">{{l.str}}({{l.tokens}})</span>
@@ -35,6 +35,6 @@
     </table>    
 
     
-    <app-splits #splits></app-splits>
+    <app-split-editor #splits></app-split-editor>
     </div>
 </div>

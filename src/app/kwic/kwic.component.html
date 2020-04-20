@@ -1,3 +1,10 @@
-<p>
-  kwic works!
+<div id=wrapper>
+
+<p *ngFor="let line of lines">
+    <!--[style.fontWeight]="t.formid==formid ? 'bold':'normal'"-->
+   <span *ngFor="let token of line[1]"
+         [title]="token.lexel+' / '+token.grammel"
+         class=msToken>{{token.form}}&nbsp;</span>   
 </p>
+    
+</div>

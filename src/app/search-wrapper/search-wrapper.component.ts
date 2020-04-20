@@ -2,6 +2,8 @@ import { Component, OnInit, ViewContainerRef, ComponentFactoryResolver, ViewChil
 import { QueryData, Filter, SearchFnc } from '../classes/general';
 import { SetListComponent } from '../set-list/set-list.component';
 import { ItemListComponent } from '../item-list/item-list.component';
+import { ProfileSideComponent } from '../profile-side/profile-side.component';
+import { LitInventoryComponent } from '../lit-inventory/lit-inventory.component';
 
 @Component({
   selector: 'app-search-wrapper',
@@ -10,10 +12,13 @@ import { ItemListComponent } from '../item-list/item-list.component';
 })
 export class SearchWrapperComponent implements OnInit {
       @ViewChild("container", {read: ViewContainerRef}) container;
-    searchFncs : SearchFnc[][] = [[{label:"Search sets", fnc:"getFilteredSets"},
-                                  {label:"Search items", fnc:"getFilteredSlots"}],
+    searchFncs : SearchFnc[][] = [[{label:"Sets", fnc:"getFilteredSets"},
+                                  {label:"Items", fnc:"getFilteredSlots"}
+                                  ],
                                [{label:"Search sets", fnc:"getSetsByLits"},
-                               {label:"Search items", fnc:"getSlotsByLits"}]];
+                               {label:"Search items", fnc:"getSlotsByLits"},
+                               {label:"Lit. alternatives", fnc:"getAlternatives"},
+                               {label:"Digraphs", fnc:"getDigraphInventory"}]];
     
     searchMode : string = "simple";
      setLists : SetListComponent[]=[];
@@ -34,6 +39,9 @@ fireSearch(e){
          case "getSetsByLits" : ref.setSearch(e); break;
         case "getSlotsByLits" : ref.slotSearch(e); break;
         case "getFilteredSlots" : ref.slotSearch(e); break;
+        case "getAlternatives" : ref.litSearch(e); break;
+        case "getAdjacent" : ref.litSearch(e); break;
+        case "getDigraphInventory" : if(e.search.main.indexOf("%")==-1){e.search.main="%"+e.search.main+"%"};ref.litSearch(e); break;
     }
     
    
@@ -58,6 +66,16 @@ fireSearch(e){
          let newItemList = this.container.createComponent(factory)._component;
         newItemList.loadItems(e.fnc,e.search.main, e.filters); 
            this.itemLists.push(newItemList);
+    }
+    
+        litSearch(e){
+        //add new item-list + loadItems
+         
+        let factory = this.resolver.resolveComponentFactory(ProfileSideComponent);
+         let newInventory = this.container.createComponent(factory)._component;
+        newInventory.loadAlternatives(e.fnc,e.search.main); 
+        newInventory.open();
+         //  this.itemLists.push(newItemList);
     }
 
 }

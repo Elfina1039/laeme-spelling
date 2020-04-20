@@ -1,0 +1,18 @@
+#wrapper{
+    padding:1em;
+    margin-top:3em;
+}
+
+p{
+    margin:1px;
+    padding:0.2em;
+    font-size:14pt;
+}
+
+p:nth-of-type(odd){
+    background : #c17a10;
+}
+
+p:nth-of-type(even){
+    background : #df8f17;
+}

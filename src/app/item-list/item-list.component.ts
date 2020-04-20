@@ -50,6 +50,18 @@ loadSplits(morphid, pos){
     this.intfSvc.moveComponent(splitWrapper,ref);
 }
     
+loadSplitsEdit(morphid, pos){
+    this.splits.pos=pos;
+    let fnc = "getSplitsEditByMorphid";
+      this.splits.loadSplits(fnc,morphid,"");
+    
+    
+  let splitWrapper = this.splits.wrapper.nativeElement;
+    let ref = this;
+    this.intfSvc.moveComponent(splitWrapper,ref);
+}
+  
+    
     
 loadItems(fnc,args, filters=""){
     this.items = [];

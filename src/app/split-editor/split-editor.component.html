@@ -6,11 +6,11 @@
     
      <div class=split *ngFor="let split of splits">
         <span [style.background-color]=highlightPos(s.key) class=slot *ngFor="let s of split.split | keyvalue">{{s.value}}</span>
-         <span class=freq>{{split.tokens}}</span>
+         <span class=freq><!--<input type=text [(ngModel)]="split.form" (change)="reAnalyse(split)"/>-->{{split.tokens}}</span>
          <span><a [routerLink]="['/kwic','getKwic',split.formid,7]"
                   target="_blank"
                   appRedirect="kwic.png"></a></span>
     </div> 
 
-
+    <button (click)="saveLitterae()">Save</button>
 </div>

@@ -18,6 +18,7 @@ import { SearchMemoryComponent } from './search-memory/search-memory.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { TextComparisonComponent } from './text-comparison/text-comparison.component';
 import { SearchWrapperComponent } from './search-wrapper/search-wrapper.component';
+import { KwicComponent } from './kwic/kwic.component';
 
 const routes: Routes = [{path:'mss/:id', component: MsToolsComponent},
                         {path:'profile/:id', component: TextProfileComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [{path:'mss/:id', component: MsToolsComponent},
                          {path:'mss-list', component: MssListComponent},
                         {path:'map/:fnc/:args/:filters', component: MapWrapperComponent},
                         {path:'map/:fnc/:args', component: MapWrapperComponent},
+                         {path:'kwic/:fnc/:args/:range', component: KwicComponent},
                         {path:'network/:fnc/:ids', component: NetworkComponent},
                         {path:'map', component: MapWrapperComponent},
                         {path:'searches', component: SearchMemoryComponent},

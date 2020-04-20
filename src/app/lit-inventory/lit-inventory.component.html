@@ -2,15 +2,17 @@
     <table id=litterae>
         
         <tr>
-            <th (click)="profile.sortBy('str')" class=header>Lit.</th>
-            <th (click)="profile.sortBy('tokens')" class=header>T/T</th>
-            <th class=header>C</th>
-            <th (click)="profile.sortBy('rareSlots')" class=header>Rare slots</th>
+            <th (click)="profile.sortBy('str')" class=sort>Lit.</th>
+            <th (click)="profile.sortBy('types')" class=sort>types</th>
+            <th (click)="profile.sortBy('rawTokens')" class=sort>tokens</th>
+            <th class=sort>C</th>
+            <th (click)="profile.sortBy('rareSlots')" class=sort>Rare slots</th>
         </tr>
         
         <tr class=littera *ngFor="let lit of profile.litterae" >
             <th [title]="lit.tokens+' / '+lit.rawTokens+' / '+lit.types" (click)=highlightStrid(lit) [class]="lit.asAlternative>0 ? 'highlight':''" title="compare usage"> {{lit.str}}</th>
-          <td>{{lit.rawTokens}}/{{lit.types}}</td> 
+          <td>{{lit.types}}</td> 
+            <td>{{lit.rawTokens}}</td>
             <td ><span *ngFor="let f of lit.basicFreqs" [style.background-color]=getShade(f)>_</span></td>
             
             <td (click)="loadSlots(lit.str)">{{lit.rareSlots}}</td>

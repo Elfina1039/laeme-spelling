@@ -18,12 +18,12 @@ export class SetService {
         fetchUniversal(fnc, args){
         console.log("fetch" + fnc);
        // return this.http.get("/assets/queryDb.php?fnc="+fnc+"&args="+args.join(";"));
-    return this.http.get("http://178.209.131.86/laeme-scripts/php/queryDb.php?fnc="+fnc+"&args="+args.join(";"));
+    return this.http.get("/assets/queryDb.php?fnc="+fnc+"&args="+args.join(";"));
     }
     
    orderBy(arr, crit){
     console.log("sorting by " + crit);
-   let sorted = arr.sort((a,b)=>{return a[crit]>b[crit] ? -1:1});
+   let sorted = arr.sort((a,b)=>{return a[crit]<b[crit] ? -1:1});
    return sorted;
 }    
     

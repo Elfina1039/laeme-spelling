@@ -41,6 +41,7 @@ import { FilterTagDirective } from './directives/filter-tag.directive';
 import { RedirectDirective } from './directives/redirect.directive';
 import { TextComparisonComponent } from './text-comparison/text-comparison.component';
 import { SearchWrapperComponent } from './search-wrapper/search-wrapper.component';
+import { SplitEditorComponent } from './split-editor/split-editor.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { SearchWrapperComponent } from './search-wrapper/search-wrapper.componen
     FilterTagDirective,
     RedirectDirective,
     TextComparisonComponent,
-    SearchWrapperComponent
+    SearchWrapperComponent,
+    SplitEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -90,6 +92,7 @@ import { SearchWrapperComponent } from './search-wrapper/search-wrapper.componen
     
   ],
     entryComponents : [
+        ProfileSideComponent,
         LitInventoryComponent,
         SetListComponent,
         ItemListComponent
