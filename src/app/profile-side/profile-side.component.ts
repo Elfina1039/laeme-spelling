@@ -3,6 +3,7 @@ import { Profile, Littera, Slot } from '../classes/profile';
 import { ListSearch } from '../classes/general';
 import { SetService } from '../services/set.service';
 import { InterfaceService } from '../services/interface.service';
+import { ManuscriptService } from '../services/manuscript.service';
 
 @Component({
   selector: 'app-profile-side',
@@ -19,7 +20,8 @@ export class ProfileSideComponent implements OnInit {
     position : [number, number];
     
   constructor(protected setSvc : SetService,
-              protected intfSvc : InterfaceService) {
+              protected intfSvc : InterfaceService,
+              protected msSvc : ManuscriptService) {
  
   }
 
@@ -35,7 +37,7 @@ fetchProfile(id){
           let litterae : Littera[] = ref.processLits(litsData.rows);
            let slots : any = ref.processSlots(slotsData.rows, litterae);
           
-          ref.profile = new Profile(litterae, slots.list, slots.ref); console.log(this.profile);});});
+          ref.profile = new Profile(litterae, slots.list, slots.ref, id); console.log(this.profile);});});
 }  
     
 loadAlternatives(fnc,lit){
@@ -43,7 +45,7 @@ loadAlternatives(fnc,lit){
      let ref = this;
       this.setSvc.fetchUniversal(fnc,[lit]).subscribe((litsData:any)=>{   
           let litterae : Littera[] = ref.processLits(litsData.rows);
-          ref.profile = new Profile(litterae, [], []); console.log(this.profile);});
+          ref.profile = new Profile(litterae, [], [], 0); console.log(this.profile);});
 }
     
 

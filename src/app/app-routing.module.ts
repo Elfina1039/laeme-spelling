@@ -19,20 +19,27 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { TextComparisonComponent } from './text-comparison/text-comparison.component';
 import { SearchWrapperComponent } from './search-wrapper/search-wrapper.component';
 import { KwicComponent } from './kwic/kwic.component';
+import { LoginComponent } from './login/login.component';
 
-const routes: Routes = [{path:'mss/:id', component: MsToolsComponent},
-                        {path:'profile/:id', component: TextProfileComponent},
-                        {path:'comparison/:id', component: TextComparisonComponent},
+import { SplitEditorComponent } from './split-editor/split-editor.component';
+
+import { AuthGuard } from './guards/auth.guard';
+
+const routes: Routes = [{path:'login', component: LoginComponent},
+    {path:'mss/:id', component: MsToolsComponent},
+                        {path:'profile/:id', component: TextProfileComponent, canActivate:[AuthGuard]},
+                        {path:'comparison/:id', component: TextComparisonComponent, canActivate:[AuthGuard]},
                          {path:'guide', component: UserGuideComponent},
                          {path:'references', component: ReferencesComponent},
-                        {path:'sets', component: SearchWrapperComponent},
-                         {path:'mss-list', component: MssListComponent},
-                        {path:'map/:fnc/:args/:filters', component: MapWrapperComponent},
-                        {path:'map/:fnc/:args', component: MapWrapperComponent},
-                         {path:'kwic/:fnc/:args/:range', component: KwicComponent},
-                        {path:'network/:fnc/:ids', component: NetworkComponent},
-                        {path:'map', component: MapWrapperComponent},
-                        {path:'searches', component: SearchMemoryComponent},
+                        {path:'sets', component: SearchWrapperComponent, canActivate:[AuthGuard]},
+                         {path:'mss-list', component: MssListComponent, canActivate:[AuthGuard]},
+                        {path:'map/:fnc/:args/:filters', component: MapWrapperComponent, canActivate:[AuthGuard]},
+                        {path:'map/:fnc/:args', component: MapWrapperComponent, canActivate:[AuthGuard]},
+                         {path:'kwic/:fnc/:args/:range', component: KwicComponent, canActivate:[AuthGuard]},
+                        {path:'network/:fnc/:ids', component: NetworkComponent, canActivate:[AuthGuard]},
+                        {path:'edit/:morphid', component: SplitEditorComponent, canActivate:[AuthGuard]},
+                        {path:'map', component: MapWrapperComponent, canActivate:[AuthGuard]},
+                        {path:'searches', component: SearchMemoryComponent, canActivate:[AuthGuard]},
                          {path:'pm', component: TitlePagePmComponent},
                        {path:'', component: TitlePageComponent}];
 

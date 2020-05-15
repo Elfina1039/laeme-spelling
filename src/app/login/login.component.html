@@ -1,0 +1,11 @@
+
+
+<form id=loginForm #loginForm [style.margin]=margin>
+
+    <label>Login: <input type=text [(ngModel)]="user.login" name=login></label><br/>
+    <label>Password: <input type=password [(ngModel)]="user.password" name=password></label><br/>
+    <label><button (click)="logIn()">Log In</button></label>
+    
+    <p>{{message}}</p>
+
+</form>

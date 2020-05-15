@@ -42,6 +42,7 @@ import { RedirectDirective } from './directives/redirect.directive';
 import { TextComparisonComponent } from './text-comparison/text-comparison.component';
 import { SearchWrapperComponent } from './search-wrapper/search-wrapper.component';
 import { SplitEditorComponent } from './split-editor/split-editor.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { SplitEditorComponent } from './split-editor/split-editor.component';
     RedirectDirective,
     TextComparisonComponent,
     SearchWrapperComponent,
-    SplitEditorComponent
+    SplitEditorComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

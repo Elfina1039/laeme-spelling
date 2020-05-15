@@ -10,7 +10,7 @@ export class Littera{
     tokens : number;
     types : number;
     rawTokens : number;
-    basicFreqs : number[];
+    basicFreqs : [string,number][];
     asAlternative : number = 0;
     
     constructor(source){
@@ -50,11 +50,17 @@ export class LitteraExtended extends Littera{
     
     constructor(source){
         super(source);
+       // console.log(source.litAvg);
         this.mssRatio = source.mssRatio;
         this.rareSlots = source.rareSlots;
-      
-        let globalCmp = this.compareFreq(source.litAvg);
-        this.basicFreqs.push(globalCmp);
+      if(source.litAvg){
+          source.litAvg.forEach((la)=>{
+        let cmp = this.compareFreq(la.normTokens);
+        this.basicFreqs.push([la.label,cmp]);  
+        }); 
+      }
+       
+       
     }
 }
 
@@ -92,7 +98,7 @@ export class Item extends Slot{
     lexel : string;
     wordClass : string;
     selected : boolean = false;
-    
+    comparable : number[] = [];
 }
 
 
@@ -142,15 +148,18 @@ export interface Split{
     split : string[];
     tokens : number;
     form? : string;
+    changed? : string;
+    post? : string[];
 }
 
 export class Profile {
+    id : number;
     litterae : Littera[];
     slots : Slot[];
     slotRef : any;
                       
-    constructor(litterae, slots, slotRef){
-      
+    constructor(litterae, slots, slotRef, id){
+      this.id = id;
    
     let ref = this;
     this.litterae = litterae;
@@ -167,10 +176,10 @@ compare(reference : Littera[]){
         if(refLit){
            
             let ratio = l.compareFreq(refLit.tokens);
-            l.basicFreqs.push(ratio);
+            l.basicFreqs.push(["_",ratio]);
            
         }else{
-            l.basicFreqs.push(2);
+            l.basicFreqs.push(["_",2]);
         }
         
        //  l.basicFreqs=l.basicFreqs.sort((a,b)=>{(Math.abs(1-b)-Math.abs(1-a))});

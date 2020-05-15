@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterContentInit, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { LitInventoryComponent } from '../lit-inventory/lit-inventory.component';
-import { ManuscriptService } from '../services/manuscript.service';
+
 import { SetService } from '../services/set.service';
 import { Manuscript, MsSize } from '../classes/manuscript';
 import { MsSearch, SingleListSearch, ListSearch } from '../classes/general';
@@ -62,8 +62,9 @@ addMs(id){
     
     let newInventory = this.container.createComponent(invFactory)._component;
     let newSetList = this.container.createComponent(setFactory)._component;
-    
-  newInventory.fetchProfile(id);
+      
+
+  newInventory.fetchCompared(id, this.preloaded);
   newInventory.toggle(); 
     console.log(newInventory);
 newInventory.wrapper.nativeElement.style.width = ref.invSize.width+ref.invSize.unit;

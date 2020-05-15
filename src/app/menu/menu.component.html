@@ -7,12 +7,15 @@
     
     <app-search-box (requestSearch)=submitQuickLink($event) [functions]="quickLinks"></app-search-box>
     
+    <div *ngIf="loginSvc.verifyToken()">
+    <span>MS searches: {{ memorySvc.msSearches.length}}</span><br/>
+     <button (click)=memorySvc.clearMsSearches()>Clear</button><br/>
+    <span>Map searches: {{ memorySvc.mapSearches.length}}</span><br/>
+     <button (click)=memorySvc.clearMapSearches()>Clear</button><br/>
+        <button (click)="loginSvc.logOut()">Log Out</button>
+    </div>
     
-    <span>MS searches: {{ memorySvc.msSearches.length}}</span>
-     <button (click)=memorySvc.clearMsSearches()>Clear</button>
-    <span>Map searches: {{ memorySvc.mapSearches.length}}</span>
-     <button (click)=memorySvc.clearMapSearches()>Clear</button>
-    
+    <app-login *ngIf="!loginSvc.verifyToken()" margin="5px"></app-login>
    
     
 </div>

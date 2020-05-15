@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { SetService } from '../services/set.service';
 import { Split } from '../classes/profile';
 
@@ -14,7 +15,8 @@ export class SplitsComponent implements OnInit {
     pos : number = -1;
      @ViewChild("wrapper") wrapper : any;
     
-  constructor(protected setSvc : SetService) { }
+  constructor(protected setSvc : SetService,
+              protected route : ActivatedRoute) { }
 
   ngOnInit() {
   }

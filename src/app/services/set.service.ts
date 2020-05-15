@@ -16,9 +16,9 @@ export class SetService {
   }
     
         fetchUniversal(fnc, args){
-        console.log("fetch" + fnc);
-       // return this.http.get("/assets/queryDb.php?fnc="+fnc+"&args="+args.join(";"));
-    return this.http.get("/assets/queryDb.php?fnc="+fnc+"&args="+args.join(";"));
+        console.log("fetch" + args.join("-"));
+      //  return this.http.get("/assets/queryDb.php?fnc="+fnc+"&args="+args.join(";"));
+    return this.http.get("http://localhost/laeme-scripts/php/queryDb.php?fnc="+fnc+"&args="+args.join(";"));
     }
     
    orderBy(arr, crit){

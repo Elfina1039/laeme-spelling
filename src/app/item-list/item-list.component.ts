@@ -4,6 +4,8 @@ import { SetService } from '../services/set.service';
 import { QueryData, Filter } from '../classes/general';
 import { InterfaceService } from '../services/interface.service';
 
+import { ManuscriptService } from '../services/manuscript.service';
+
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
@@ -27,7 +29,8 @@ export class ItemListComponent implements OnInit {
     
   constructor(private setSvc : SetService,
                private intfSvc : InterfaceService,
-              private renderer: Renderer2) { }
+              private renderer: Renderer2,
+              private msSvc : ManuscriptService) { }
 
   ngOnInit() {
 
@@ -73,6 +76,19 @@ loadItems(fnc,args, filters=""){
                            ref.items.push(<Item>i);
                            });
          ref.queryData = new QueryData(data.queryData);
+         if(ref.msSvc.msProfiles){
+             console.log("Profiles available: " + ref.msSvc.msProfiles.length);
+             
+             ref.items.forEach((i)=>{
+                 i.comparable=[];
+                 ref.msSvc.msProfiles.forEach((p)=>{
+                     if(p.slotRef[i.morphid+"-"+i.pos]){
+                         console.log(i.morphid+"-"+i.pos);
+                         i.comparable.push(p.id);
+                     }
+                 });
+             });
+         }
       })
     
 } 

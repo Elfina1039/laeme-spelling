@@ -13,7 +13,7 @@
             <th [title]="lit.tokens+' / '+lit.rawTokens+' / '+lit.types" (click)=highlightStrid(lit) [class]="lit.asAlternative>0 ? 'highlight':''" title="compare usage"> {{lit.str}}</th>
           <td>{{lit.types}}</td> 
             <td>{{lit.rawTokens}}</td>
-            <td ><span *ngFor="let f of lit.basicFreqs" [style.background-color]=getShade(f)>_</span></td>
+            <td ><span *ngFor="let f of lit.basicFreqs" [style.background-color]=getShade(f[1])>{{f[0]}}</span></td>
             
             <td (click)="loadSlots(lit.str)">{{lit.rareSlots}}</td>
             

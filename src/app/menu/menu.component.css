@@ -13,6 +13,29 @@
 }
 
 
+input, button{
+    border-radius:0.2em;
+    margin:0.2em;
+    width:6em;
+}
+
+input[type=text], select{
+    background : white;
+     box-shadow: 0 0 0.5em #c17a10 inset;
+    padding:0.2em;
+    border: 1px inset #c17a10;
+    color:black;
+}
+
+button{
+    border:2px outset #df8f17;
+    background: linear-gradient(#c17a10,#df8f17);
+    font-weight:bold;
+    padding:0.1em;
+    margin:0.1em;
+    white-space:nowrap;
+
+}
 
 #button{
     font-size: 16pt;
@@ -42,4 +65,7 @@
     border:none;
     border-bottom: 1px solid white;
     padding: 0.2em;
+    width:100%;
+    border-radius:0;
 }
+

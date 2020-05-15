@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer2, ViewChild, Input} from '@angular/core';
 import {  Router } from '@angular/router';
 import {  SearchFnc } from '../classes/general';
 import { MemoryService } from '../services/memory.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-menu',
@@ -16,8 +17,8 @@ export class MenuComponent implements OnInit {
           {label : "Browse MSs", fnc : "/mss-list"},
         {label : "Search DB", fnc : "/sets"},
         {label : "Maps", fnc : "/map"},
-        {label : "Searches", fnc : "/searches"},
-        {label : "Poema Morale", fnc : "/title-page-pm"}
+        {label : "Searches", fnc : "/searches"}
+       // {label : "Poema Morale", fnc : "/title-page-pm"}
       
     ];
     
@@ -37,7 +38,8 @@ export class MenuComponent implements OnInit {
 
   constructor(private router : Router,
               private renderer : Renderer2,
-              private memorySvc : MemoryService) { }
+              private memorySvc : MemoryService,
+              private loginSvc : LoginService) { }
 
   ngOnInit() {
   }

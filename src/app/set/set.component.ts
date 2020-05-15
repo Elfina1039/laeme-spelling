@@ -5,6 +5,7 @@ import { SetService } from '../services/set.service';
 import { GraphicService } from '../services/graphic.service';
 
 
+
 @Component({
   selector: 'app-set',
   templateUrl: './set.component.html',
