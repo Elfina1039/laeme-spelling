@@ -4,7 +4,14 @@
         <app-menu #menu></app-menu> 
     
 
+
     
-<router-outlet> </router-outlet>
+   
+<router-outlet (activate)="catchComponent($event)"> </router-outlet>
     
+    
+     <div  *ngIf="showLoadingIndicator" class="lds-ellipsis">
+         
+          Loading...
+         <div></div><div></div><div></div><div></div></div>
 </div>

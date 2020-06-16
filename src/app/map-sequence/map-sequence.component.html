@@ -1,0 +1,17 @@
+<div id=wrapper #wrapper>      
+    <header>Map sequence</header>
+      <div id=legend>
+        
+    <span *ngFor="let ck of colorKey | keyvalue" [style.color]=ck.value.color>
+   <input type=color (change)="colorChange(ck)" [(ngModel)]="ck.value.color"/> {{ck.key}} ({{ck.value.tokens}})
+    </span>
+    <button (click)=drawMap()>Redraw</button>
+</div>
+    <content>
+  
+    <div id=container #container></div>
+    </content>
+    
+
+    
+</div>

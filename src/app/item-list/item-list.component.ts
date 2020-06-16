@@ -3,6 +3,7 @@ import { Littera, Item, Slot } from '../classes/profile';
 import { SetService } from '../services/set.service';
 import { QueryData, Filter } from '../classes/general';
 import { InterfaceService } from '../services/interface.service';
+import { MemoryService } from '../services/memory.service';
 
 import { ManuscriptService } from '../services/manuscript.service';
 
@@ -25,12 +26,14 @@ export class ItemListComponent implements OnInit {
     
     @Output() requestItem : EventEmitter<any> = new EventEmitter();
     @Output() requestSelection : EventEmitter<any> = new EventEmitter();
+     @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
     
     
   constructor(private setSvc : SetService,
                private intfSvc : InterfaceService,
               private renderer: Renderer2,
-              private msSvc : ManuscriptService) { }
+              private msSvc : ManuscriptService,
+              private memorySvc: MemoryService) { }
 
   ngOnInit() {
 
@@ -89,6 +92,7 @@ loadItems(fnc,args, filters=""){
                  });
              });
          }
+         ref.cmpLoaded.emit();
       })
     
 } 
@@ -102,6 +106,12 @@ submitSelection(){
     let selection = this.items.filter((i)=>i.selected).map((s)=>s.morphid+"-"+s.pos);
     console.log(selection);
      this.requestSelection.emit(selection);
+}
+    
+saveSelection(){
+    let selection = this.items.filter((i)=>i.selected);
+    console.log(selection);
+     this.memorySvc.addItemList(selection);
 }
     
 show(){

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MsMeta } from '../classes/manuscript';
 import { SetService } from '../services/set.service';
 
@@ -9,6 +9,8 @@ import { SetService } from '../services/set.service';
 })
 export class MssListComponent implements OnInit {
  mss : MsMeta[] = [];
+    @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
+
   constructor(private setSvc : SetService) { }
 
   ngOnInit() {
@@ -24,6 +26,7 @@ loadMeta(){
                            ref.mss.push(<MsMeta>i);
                            });
          console.log(ref.mss);
+         ref.cmpLoaded.emit();
       })
 }   
     

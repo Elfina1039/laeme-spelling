@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChildren, Output, EventEmitter } from '@angular/core';
 import { ManuscriptService } from '../services/manuscript.service';
 import { MemoryService } from '../services/memory.service';
 import { Manuscript, MsSize } from '../classes/manuscript';
@@ -22,6 +22,8 @@ export class MsToolsComponent implements OnInit {
     msSize : MsSize = {width:0, height:90, unit: "%"};
     search : MsSearch = new MsSearch({fields : [["lexel",""]], color:"#80ff00"});
 
+     @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
+    
   constructor(private msService : ManuscriptService, 
                private memorySvc : MemoryService,
                protected route: ActivatedRoute) { 
@@ -56,6 +58,7 @@ loadMs(id){
       this.msService.fetchMs(id).subscribe((data:any)=>
                                            ref.mss.push(new Manuscript(data.rows,id)));
       console.log(this.mss);
+    this.cmpLoaded.emit();
     
 }  
     
@@ -83,6 +86,12 @@ loadMs(id){
         console.log(this.msComponents);
         this.msComponents._results.forEach((ms)=>ms.highlightToken(search));
         
+    }
+    
+    searchForStored(e){
+        console.log(e);
+        let s = e.toSearch();
+        this.searchMss(s);
     }
     
       markAlternatives(slotList : string[]){

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SetService } from '../services/set.service';
 import { Token } from '../classes/token';
@@ -10,7 +10,8 @@ import { Token } from '../classes/token';
 })
 export class KwicComponent implements OnInit {
     lines : [number, Token[]][] = [];
-
+@Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
+    
   constructor(protected route: ActivatedRoute, protected router : Router , private setSvc : SetService) { }
     
   ngOnInit() {
@@ -45,6 +46,7 @@ export class KwicComponent implements OnInit {
                            });
            //ref.queryData = new QueryData(data.queryData);
           console.log(ref.lines);
+          ref.cmpLoaded.emit();
       })
 
 }

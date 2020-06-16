@@ -43,6 +43,9 @@ import { TextComparisonComponent } from './text-comparison/text-comparison.compo
 import { SearchWrapperComponent } from './search-wrapper/search-wrapper.component';
 import { SplitEditorComponent } from './split-editor/split-editor.component';
 import { LoginComponent } from './login/login.component';
+import { MapSequenceComponent } from './map-sequence/map-sequence.component';
+import { TextsListComponent } from './texts-list/texts-list.component';
+import { StoredListsComponent } from './stored-lists/stored-lists.component';
 
 
 @NgModule({
@@ -84,7 +87,10 @@ import { LoginComponent } from './login/login.component';
     TextComparisonComponent,
     SearchWrapperComponent,
     SplitEditorComponent,
-    LoginComponent
+    LoginComponent,
+    MapSequenceComponent,
+    TextsListComponent,
+    StoredListsComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +103,8 @@ import { LoginComponent } from './login/login.component';
         ProfileSideComponent,
         LitInventoryComponent,
         SetListComponent,
-        ItemListComponent
+        ItemListComponent,
+        MapComponent
     ],
   providers: [],
   bootstrap: [AppComponent]

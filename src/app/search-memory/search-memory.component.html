@@ -43,4 +43,24 @@
     
 </table>    
     
+    
+<table>
+<tr> 
+    <th>Label</th>
+    <th >Items</th>
+ 
+    
+
+</tr>
+    
+<tr *ngFor="let il of memorySvc.itemLists"> 
+    <th>{{il.label}}</th>
+    <td>{{il.itemList.length}}</td>
+
+
+</tr>
+    
+    
+</table>    
+    
 </content>

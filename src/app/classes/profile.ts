@@ -1,3 +1,5 @@
+import {ListSearch } from "./general";
+
 export interface LitStats{
     str : string;
     tokens : number;
@@ -82,7 +84,7 @@ export class LitCorresp{
                      value : this.tokens,
                      label : this.tokens+"x",
                      font : {background: "black", color:"white", size:12, bold:false}};
-        console.log(result);
+       // console.log(result);
         return result;
     }
 }
@@ -99,6 +101,30 @@ export class Item extends Slot{
     wordClass : string;
     selected : boolean = false;
     comparable : number[] = [];
+}
+
+export class ItemList{
+    label: string;
+    itemList : Item[];
+    
+    
+    constructor(label, itemList){
+        this.label = label;
+        this.itemList = itemList;
+    }
+    
+    toSearch(){
+        let stridList=this.itemList.map((s)=>s.morphid);
+        let search = new ListSearch({littera:this.label,fields:[["morphids",""]], color:"", list:stridList});
+        return search;
+    }
+    
+       toMap(){
+        let stridList=this.itemList.map((s)=>s.morphid+"-"+s.pos);
+ 
+        return stridList;
+    }
+    
 }
 
 

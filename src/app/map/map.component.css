@@ -1,9 +1,6 @@
 #wrapper{
     transition:filter 1s ease-out;
-    width:100%;
-    height:100%;
-    display:flex;
-    flex-flow: row nowrap;
+
 }
 
 header{
@@ -26,18 +23,7 @@ header{
     height:700px;
 }
 
-#legend{background-color: #2e200d;
-width:7em;
-height:100%;
-display:flex;
-    flex-flow: column nowrap;
-}
 
-#legend span{
-    font-weight:bold;
-    font-size: 15px;
-width:100%;
-}
 
 input, button{
     border-radius:0.2em;

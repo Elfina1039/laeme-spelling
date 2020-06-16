@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SetListComponent } from './set-list/set-list.component';
 import { MapWrapperComponent } from './map-wrapper/map-wrapper.component';
+import { MapSequenceComponent } from './map-sequence/map-sequence.component';
 
 import { MsToolsComponent } from './ms-tools/ms-tools.component';
 import { TitlePageComponent } from './title-page/title-page.component';
@@ -34,7 +35,9 @@ const routes: Routes = [{path:'login', component: LoginComponent},
                         {path:'sets', component: SearchWrapperComponent, canActivate:[AuthGuard]},
                          {path:'mss-list', component: MssListComponent, canActivate:[AuthGuard]},
                         {path:'map/:fnc/:args/:filters', component: MapWrapperComponent, canActivate:[AuthGuard]},
+                        {path:'map-seq/:extent/:fnc/:args/:filters', component: MapSequenceComponent, canActivate:[AuthGuard]},
                         {path:'map/:fnc/:args', component: MapWrapperComponent, canActivate:[AuthGuard]},
+                         {path:'map-seq/:extent/:fnc/:args', component: MapSequenceComponent, canActivate:[AuthGuard]},
                          {path:'kwic/:fnc/:args/:range', component: KwicComponent, canActivate:[AuthGuard]},
                         {path:'network/:fnc/:ids', component: NetworkComponent, canActivate:[AuthGuard]},
                         {path:'edit/:morphid', component: SplitEditorComponent, canActivate:[AuthGuard]},

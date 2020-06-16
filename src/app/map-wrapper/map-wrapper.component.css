@@ -71,3 +71,16 @@ content{
     overflow:scroll;
     
 }
+
+#legend{background-color: #2e200d;
+width:7em;
+height:100%;
+display:flex;
+    flex-flow: column nowrap;
+}
+
+#legend span{
+    font-weight:bold;
+    font-size: 15px;
+width:100%;
+}

@@ -26,7 +26,7 @@ export class MapComponent implements OnInit {
     lat : number = 0;
     lang : number = 0;
     map : any;
-    @Input("legendHeader") legendHeader : string;
+    @Input("mapHeader") mapHeader : string;
     colorKey : any = {};
     freqRange : [number,number] = [0,0];
     msKey : any = {};
@@ -37,6 +37,7 @@ export class MapComponent implements OnInit {
     @ViewChild("map") mapContainer : any;
     @ViewChild("wrapper") wrapper : any;
     @Output() msClicked : EventEmitter<number> = new EventEmitter();
+     @Output() mapInitialized : EventEmitter<number> = new EventEmitter();
     
     
   constructor(private graphicSvc : GraphicService) { }
@@ -48,10 +49,7 @@ export class MapComponent implements OnInit {
      
   }
     
-    makeColorKey(litStats){
-        this.colorKey = this.graphicSvc.makeColorKey(litStats);
-      
-    }
+    
     
     initializeMap(){
      let ref = this;
@@ -78,8 +76,9 @@ export class MapComponent implements OnInit {
       ref.displayMs(ref.msKey[e.selected[0]["ol_uid"]]);
     });    
     
+        console.log(this.map);
 //this.addLaemeData(this.graphicSvc.dataSample);
-        
+     this.mapInitialized.emit();   
     }
     
 

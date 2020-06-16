@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MemoryService } from '../services/memory.service';
 
 @Component({
@@ -8,9 +8,12 @@ import { MemoryService } from '../services/memory.service';
 })
 export class SearchMemoryComponent implements OnInit {
 
+      @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
+    
   constructor(private memorySvc : MemoryService) { }
 
   ngOnInit() {
+      this.cmpLoaded.emit();
   }
 
     jsonFilters(f){

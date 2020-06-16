@@ -1,0 +1,39 @@
+content{
+    display:flex;
+    flex-flow: row wrap;
+}
+
+#wrapper{
+    display:flex;
+    flex-flow: column nowrap;
+    height:100%;
+    width:100%
+}
+
+header{
+    width:100%;
+    background:#2e200d;
+    height:7%;
+    display: flex;
+    flex-flow: row nowrap;
+    color:#df8f17;
+    font-size:16pt;
+    padding-left:8em;
+    border-bottom: 2px solid #df8f17;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#legend{background-color: #2e200d;
+width:100%;
+display:flex;
+    flex-flow: row wrap;
+}
+
+#legend span{
+    font-weight:bold;
+    font-size: 15px;
+
+    margin-right:1em;
+}

@@ -1,0 +1,7 @@
+ <select  id ="itemLists" title="stored item lists" 
+                [(ngModel)]="selected" >
+            <option *ngFor="let il of memorySvc.itemLists | keyvalue" [value]="il.key">{{il.value.label}}: </option>
+        </select>
+
+<button (click)=submitList(memorySvc.itemLists[selected])>Submit</button>
+        

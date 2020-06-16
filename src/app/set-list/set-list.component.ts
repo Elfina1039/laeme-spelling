@@ -19,6 +19,7 @@ export class SetListComponent implements OnInit {
     @Output() requestItem : EventEmitter<any> = new EventEmitter();
     
     @Output() requestSelection : EventEmitter<any> = new EventEmitter();
+     @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
     
   constructor(private setSvc : SetService) { }
 
@@ -37,6 +38,7 @@ fetchAll(){
           ref.queryData = new QueryData(data.queryData);
           
           ref.filtered = ref.sets;
+          ref.cmpLoaded.emit();
       })
 
 }    
@@ -54,6 +56,7 @@ loadSets(fnc, args, filters=""){
                            });
            ref.queryData = new QueryData(data.queryData);
            ref.filtered = ref.sets.filter((s)=>s.members.length>1);
+          ref.cmpLoaded.emit();
       })
 
 }

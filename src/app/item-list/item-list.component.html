@@ -15,6 +15,8 @@
             class="sort">Lexel / WC</th>
         <th (click)="items=setSvc.orderBy(items,'tokens')"
             class="sort">Litterae</th>
+            
+            <th><button (click)="saveSelection()">Save</button></th>    
         
         </tr>
         
@@ -36,6 +38,6 @@
     </table>    
 
     
-    <app-split-editor #splits></app-split-editor>
+    <app-splits #splits></app-splits>
     </div>
 </div>

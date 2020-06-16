@@ -14,7 +14,9 @@
             <button (click)=searchMss(search) title="search and highlight in texts">Search</button>    
             <button (click)=clearMss() title="remove all highlights">Clear all</button> 
             
-            <button *ngIf="memorySvc.msSearches.length>0" (click)=reRunSearches(memorySvc.msSearches) title="remove all highlights">Rerun searches</button>
+           <!-- <button *ngIf="memorySvc.msSearches.length>0" (click)=reRunSearches(memorySvc.msSearches) title="remove all highlights">Rerun searches</button> -->
+            
+            <app-stored-lists (requestList)="searchForStored($event)"></app-stored-lists>
             
         </form>
     </header>    

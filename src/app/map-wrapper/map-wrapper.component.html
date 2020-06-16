@@ -1,6 +1,8 @@
 <div id=wrapper #wrapper>
     <header>
         <h3>Maps</h3>
+        <app-stored-lists (requestList)="mapSelection($event.toMap())"></app-stored-lists>
+          <button (click)="makeSequence()">Sequence</button>   
         <input type=text placeholder="search label" [(ngModel)]="searchLabel">
         <select  id ="previousSearch" title="previous searches" 
                 (change)="switchLayer(memorySvc.mapSearches[$event.target.value])" >
@@ -24,13 +26,20 @@
                         [filters]=filters>
         </app-search-box-advanced>
         
-        
+      
         
     </header>
     
     <content>
+            <div id=legend>
+        
+    <span *ngFor="let ck of colorKey | keyvalue" [style.color]=ck.value.color>
+   <input type=color (change)="colorChange(ck)" [(ngModel)]="ck.value.color"/> {{ck.key}} ({{ck.value.tokens}})
+    </span>
+    <button (click)=drawMap()>Redraw</button>
+</div>
 <app-map (msClicked)=displayMs($event)
-         [legendHeader]="legendHeader"
+         [mapHeader]="legendHeader"
          #map></app-map>
 
 <!--<app-set-list (mapSet)=changeMap($event) #setList></app-set-list>-->

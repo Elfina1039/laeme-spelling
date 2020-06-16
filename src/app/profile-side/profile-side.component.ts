@@ -14,6 +14,7 @@ export class ProfileSideComponent implements OnInit {
    profile : Profile;
     //profile : Profile;
   @Output("requestHighlight") requestHighlight = new EventEmitter<[ListSearch, string[]]>();
+     @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
      @ViewChild("wrapper") wrapper : any;
     loaderFnc : string = "getInventory";
     textId : number;
@@ -37,7 +38,9 @@ fetchProfile(id){
           let litterae : Littera[] = ref.processLits(litsData.rows);
            let slots : any = ref.processSlots(slotsData.rows, litterae);
           
-          ref.profile = new Profile(litterae, slots.list, slots.ref, id); console.log(this.profile);});});
+          ref.profile = new Profile(litterae, slots.list, slots.ref, id); console.log(this.profile);
+     
+      });});
 }  
     
 loadAlternatives(fnc,lit){
@@ -45,7 +48,9 @@ loadAlternatives(fnc,lit){
      let ref = this;
       this.setSvc.fetchUniversal(fnc,[lit]).subscribe((litsData:any)=>{   
           let litterae : Littera[] = ref.processLits(litsData.rows);
-          ref.profile = new Profile(litterae, [], [], 0); console.log(this.profile);});
+          ref.profile = new Profile(litterae, [], [], 0); console.log(this.profile);
+    ref.cmpLoaded.emit();
+      });
 }
     
 
@@ -69,6 +74,7 @@ processSlots(slotsData, litObjects){
              slotRef[s.morphid+"-"+s.pos] = nSlot;
         
         });
+    this.cmpLoaded.emit();
     return {list: slots, ref: slotRef};
 }
      

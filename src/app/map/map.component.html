@@ -1,13 +1,6 @@
 <div id=wrapper  #wrapper>
     
-    <div id=legend>
-        <header>{{legendHeader}}</header>    
-        
-    <span *ngFor="let ck of colorKey | keyvalue" [style.color]=ck.value.color>
-   <input type=color (change)="colorChange(ck)" [(ngModel)]="ck.value.color"/> {{ck.key}} ({{ck.value.tokens}})
-    </span>
-    <button (click)=drawMap()>Redraw</button>
-</div>
+    <header>Map: {{mapHeader}}</header>
     
 
 <div id=map  #map></div>

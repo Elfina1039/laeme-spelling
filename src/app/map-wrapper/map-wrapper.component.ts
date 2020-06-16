@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,ViewChildren, Input} from '@angular/core';
+import { Component, OnInit, ViewChild,ViewChildren, Input, Output, EventEmitter} from '@angular/core';
 import { SetService } from '../services/set.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LitStats, Set } from '../classes/profile';
@@ -18,11 +18,13 @@ export class MapWrapperComponent implements OnInit {
 @ViewChild("wrapper") wrapper : any;
 @ViewChild("msInfo") msInfo : any;
 //@ViewChild("setList") setList : any;
+    @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
 
     laemeData : any = [];
    // previousSearches : MapSearch[] = [];
     litStats : LitStats[];
     legendHeader : string;
+    colorKey : any = {};
     selectedText : any = {id:0};
    // sets : Set[] = [];
     params : any = {};
@@ -42,7 +44,7 @@ export class MapWrapperComponent implements OnInit {
         
     ]
     
-  constructor(protected route: ActivatedRoute, protected router : Router , private setSvc : SetService,  private graphicSvc: GraphicService,  private memorySvc : MemoryService) { }
+  constructor(protected route: ActivatedRoute, protected router : Router , protected setSvc : SetService,  protected graphicSvc: GraphicService,  protected memorySvc : MemoryService) { }
 
   ngOnInit() {
       
@@ -62,6 +64,10 @@ export class MapWrapperComponent implements OnInit {
       
   }
 
+makeColorKey(litStats){
+        this.colorKey = this.graphicSvc.makeColorKey(litStats);
+    }    
+    
 mapItem(e){
     console.log(e);
     this.changeMap({fnc:"mapSlot", args: e.morphid+"-"+e.pos, filters:""});
@@ -101,8 +107,10 @@ loadMap(fnc,args, filters=""){
          ref.legendHeader = data.queryData.legend;
             
        
-        ref.map.makeColorKey(ref.litStats);
+        ref.makeColorKey(ref.litStats);
+            ref.map.colorKey = ref.colorKey;
        let newLayer = ref.map.addLaemeData(ref.laemeData);
+            ref.cmpLoaded.emit();
             
         let parsedFilters : Filter[];    
             try{
@@ -125,6 +133,7 @@ loadMap(fnc,args, filters=""){
             console.log(ref.memorySvc.mapSearches);
             
         ref.setList.loadSets(ref.queryData.fnc,args,filters);
+            
       })
       })
     
@@ -136,9 +145,6 @@ loadMap(fnc,args, filters=""){
     }
     
 
-
-    
-    
 
 displayMs(e){
     console.log("displaying ");
@@ -153,6 +159,12 @@ displayMs(e){
     this.itemList.loadItems(fnc, args,filters);
    // this.itemList.queryData.filters.push({type:"ms", values:[e.id]});
 } 
+    
+
+    makeSequence(){
+        let ps = this.params;
+        this.router.navigate(["/map-seq/2",ps.fnc,ps.args]);
+    }
     
     
     
