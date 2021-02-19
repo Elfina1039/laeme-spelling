@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Title, TitleMs } from '../classes/manuscript';
+import { SetService } from '../services/set.service';
 
 @Component({
   selector: 'app-texts-list',
@@ -6,10 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./texts-list.component.css']
 })
 export class TextsListComponent implements OnInit {
-
-  constructor() { }
+ titles : Title[] = [];
+    @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
+  constructor(private setSvc : SetService) { }
 
   ngOnInit() {
+      this.loadTitles();
   }
+    
+    loadTitles(){
+    let ref=this;
+     this.titles=[]; this.setSvc.fetchUniversal("getTitles",[]).subscribe((data:any)=>{
+          console.log(data);
+          data.rows.forEach((i)=>{
+                           ref.titles.push(<Title>i);
+                           });
+
+         ref.cmpLoaded.emit();
+      })
+}   
 
 }

@@ -1,0 +1,193 @@
+
+/*page header*/
+header{
+    width:100%;
+    /*background:#2e200d;*/
+    background:black;
+    height:10%;
+    display: flex;
+    flex-flow: row nowrap;
+    color:var(--paper);
+    font-size:var(--bigText);
+    padding-left:8em;
+    padding-right:1em;
+    border-bottom: 4px ridge var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url(/assets/images/backgrounds/bestiary2.png);
+    background-position: top right;
+    background-repeat: no-repeat;
+}
+
+/*section header 1*/
+
+/*section-header 2*/
+header{
+    flex-flow: row nowrap;
+    color: var(--lightest);
+    padding-left: 1em;
+    background: var(--title2);
+   box-shadow: 0 -0.2em 0.5em var(--darkest) inset;
+    border-radius: 0.4em 0.4em 0 0em;
+    display: flex;
+  justify-content: center;
+}
+
+.listTitle{
+    flex-flow: row nowrap;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+}
+
+
+/*FORMS*/
+input, button{
+    border-radius:0.2em;
+    margin:0.2em;
+}
+
+button{
+    border:2px outset var(--paper);
+    background: linear-gradient(var(--dPaper),var(--paper));
+    font-weight:bold;
+    padding:0.2em;
+    font-size:var(--bigText);
+}
+
+button:hover{
+    box-shadow:0 0 0.2em white;
+    background: linear-gradient(var(--paper),var(--dPaper));
+}
+
+.icon{
+    background:transparent;
+    border:2px solid var(--paper);
+    color:var(--paper);
+    cursor:pointer;
+    
+}
+
+.icon:hover{
+    background: transparent;
+}
+
+/*TABLES*/
+
+table{
+    margin:1em;
+    border: none;
+     border-collapse: separate;
+  border-spacing: 3px;
+    width:100%;
+    table-layout: fixed;
+    width:100%;
+}
+
+th.minColumn{
+    width:2.5em;
+}
+
+th.bigColumn{
+    width:35%;
+}
+
+
+td,th{
+    border: none;
+    color: white;
+
+}
+
+th{
+    background:var(--paper);
+    color:black;
+}
+
+
+td{
+background-color:var(--darkest);
+    word-wrap: break-word;
+}
+
+th.highlight, th.sort{
+    color:var(--lightest);
+    background:var(--beacon);
+}
+
+/*COLOURS*/
+
+/*ORIGINAL*/
+   --paper:#df8f17;
+    --dPaper:#c17a10;
+    --thinPaper : rgba(223,143,23,0.5);
+    
+    --darkest:black;
+    --lightest:white;
+    
+    --icon:navy;
+    --thinIcon : rgba(0, 0, 128,0.6);
+    --beacon:#b30e11;
+    
+    --title1 : #4f391b;
+    --title2 : #1a486d;
+    
+    --shadow: rgba(0,0,0,0.7);
+    
+    --banner: 30pt;
+    --bigHeading: 24pt;
+    --smallHeading: 20pt;
+    --bigText: 16pt;
+    --normalText:12pt;
+    
+    --bGradient: linear-gradient(var(--darkest), var(--title1));
+    --lightGradient: linear-gradient(var(--paper), var(--thinPaper));
+     --lightGradientRv: linear-gradient(var(--thinPaper), var(--paper));
+
+
+/*lighter paper + dark background*/
+    --paper: #fdaf3a;
+    --dPaper: #dc9b3b;
+    --thinPaper: rgba(223,143,23,0.5);
+    --darkest: #191000;
+    --lightest: #f1f1f1;
+    --icon: navy;
+    --thinIcon: rgba(0, 0, 128,0.6);
+    --beacon: #b30e11;
+    --title1: #654212;
+    --title2: #1a486d;
+    --shadow: rgba(0,0,0,0.7);
+    --banner: 30pt;
+    --bigHeading: 24pt;
+    --smallHeading: 20pt;
+    --bigText: 16pt;
+    --normalText: 12pt;
+    --bGradient: linear-gradient(var(--darkest), var(--darkest));
+    --lightGradient: linear-gradient(var(--paper), var(--thinPaper));
+    --lightGradientRv: linear-gradient(var(--thinPaper), var(--paper));
+
+/*blue*/
+
+
+/*gray banners*/
+    --paper: #ef930a;
+    --dPaper: #c17a10;
+    --thinPaper: rgba(223,143,23,0.5);
+    --darkest: #1d1100;
+    --lightest: white;
+    --icon: navy;
+    --thinIcon: rgba(0, 0, 128,0.6);
+    --beacon: #b30e11;
+    --title1: #3a352f;
+    --title2: #292b2d;
+    --shadow: rgba(0,0,0,0.7);
+    --banner: 30pt;
+    --bigHeading: 24pt;
+    --smallHeading: 20pt;
+    --bigText: 16pt;
+    --normalText: 12pt;
+    --bGradient: linear-gradient(var(--darkest), var(--title1));
+    --lightGradient: linear-gradient(var(--paper), var(--thinPaper));
+    --lightGradientRv: linear-gradient(var(--thinPaper), var(--paper));

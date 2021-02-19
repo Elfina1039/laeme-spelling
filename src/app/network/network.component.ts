@@ -22,11 +22,12 @@ export class NetworkComponent implements OnInit {
     edgeSource : any;
     edges : any;
     mss : number[] = [];
+    lits : string[] = [];
     options : any = {
          interaction:{hover:true} ,
           groups: {
-    0: {color:{background:'navy', border:"white"}, font:{color:"white", size:16, bold:true}, borderWidth:1},
-    1: {color:{background:'#b30e11', border:"white"}, font:{color:"white", size:16, bold:true}, borderWidth:1}
+    0: {color:{background:'navy', border:"white", highlight:{background:"blue", border:"black"},hover:{background:"blue", border:"black"}}, font:{color:"white", size:16, bold:true}, borderWidth:1},
+    1: {shape:"box",color:{background:'#b30e11', border:"white", highlight:{background:"red", border:"black"} ,hover:{background:"red", border:"black"}}, font:{color:"white", size:16, bold:true}, borderWidth:1}
   }
     };
     itemLists : ItemListComponent[] = [];
@@ -48,23 +49,33 @@ export class NetworkComponent implements OnInit {
        this.route.paramMap.subscribe(function(p){
         let fnc : string=p.get('fnc');
         let ids : string[]=p.get('ids').split(",");
-   this.mss=ids;
-           console.log(this.mss);
-    ref.loadComplete(fnc,ids);
+        let litSource : string=p.get('lits');
+        
+           if(litSource){
+               ref.lits= litSource.split(",")
+           }
+        ref.mss=ids.map((i)=>parseInt(i));
+    
+           console.log(ref.mss);
+    ref.loadComplete(fnc);
            
          //  ref.params={fnc:fnc, args:args};
          
       });  
   }
     
-loadComplete(fnc,ids){
+loadComplete(fnc){
     let ref = this;
-    if(fnc!="getAllCorresp"){
-        ids.forEach((id, idi)=> ref.loadLitterae("getInventory",id,idi));
-    }else{
-        ref.loadLitterae("getAllLitterae",0,0)
+    let args : any[] = [];
+    console.log(ref.lits);
+     switch(fnc){
+        case "getCorresp" :  ref.mss.forEach((id, idi)=> ref.loadLitterae("getInventory",[id],idi)); args=ref.mss; break;
+        case "getMsCorresp" :  ref.mss.forEach((id, idi)=> ref.loadLitterae("getInventory",[id],idi)); args=ref.mss; break;
+      case "getAllCorresp" :  ref.loadLitterae("getAllLitterae",[0],0); args=[]; break;
+        case "getLitCorresp" :  ref.loadLitterae("getAlternatives",ref.lits,0);args=ref.lits; break;
     }
-    this.loadCorresp(fnc,ids);
+    
+    this.loadCorresp(fnc,args);
 }
     
 
@@ -75,9 +86,10 @@ loadCorresp(fnc, args){
         case "getCorresp" :  a = args[0]; b=args[1]; break;
         case "getMsCorresp" :  a = args[0]; b=args[0]; break;
       case "getAllCorresp" :  a = 0; b=0; break;
+        case "getLitCorresp" :  a = args[0]; b=args[0]; break;
     }
     
-    this.mss = [a,b];
+  //  this.mss = [a,b];
     this.edges = [];
     this.edgeSource = [];
       this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
@@ -92,21 +104,16 @@ loadCorresp(fnc, args){
     
 }
     
-loadLitterae(fnc, id, group){
+loadLitterae(fnc, args, group){
+    console.log(fnc +" : " + args.join(","));
          let ref = this;
     this.nodes = [];
     this.nodeSource = [];
-    let args : number[]=[];
-    if(id==0){
-        args = [];
-    }else{
-        args = [id];
-    }
-    
+  
       this.setSvc.fetchUniversal(fnc,args).subscribe((data:any)=>{
         //  console.log(data);
           data.rows.forEach((ns, nsi)=>{
-                           ref.nodeSource.push(new Littera(ns).toNode(id,group));
+                           ref.nodeSource.push(new Littera(ns).toNode(args[0],group));
                            });
            //console.log(ref.nodeSource);
          
@@ -133,15 +140,32 @@ network.on("afterDrawing", function(params) {
    ref.cmpLoaded.emit();
 });      
     
+network.on("selectNode", function(params) {
+  console.log("selectNode Event:", params);
+    let args = ref.getArgsFromNode(params);
+    ref.displayItems(args);
+    
+}); 
+    
 network.on("selectEdge", function(params) {
   console.log("selectEdge Event:", params);
-    ref.displayItems(params);
+    
+   // ref.displayItems(params);
+    if(params.nodes.length==0){
+        let args = ref.getArgsFromEdge(params, network);
+    ref.displayItems(args);
+    }
     
 });    
     
+    
     network.on("hoverNode", function(params) {
   console.log("hoverNode Event:", params);
-
+    let alternatives = network.getConnectedNodes(params.node);
+        console.log(alternatives);
+        let other = ref.getOtherNode(params.node);
+       
+      //  network.selectNodes(alternatives);
     
 });  
     
@@ -149,27 +173,12 @@ network.on("selectEdge", function(params) {
     
 } 
     
-displayItems(node){
+displayItems(args){
       console.log("adding new item list");
-    
+    console.log(args);
     this.cmpLoading.emit();
     let ref = this;
-    let a, b :string;
-    
-    let nodeData : string[] = node.nodes[0].split("/");
-    
-    console.log(nodeData);
-      console.log(ref.mss);
-    
-    if(parseInt(nodeData[1])==ref.mss[0]){
-        a=nodeData[0];
-        b="%";
-    }else{
-        b=nodeData[0];
-        a="%";
-    }
-  
-    let args : string = [ref.mss[0], ref.mss[1], a, b].join(";");
+   
   
     let itemListFactory = ref.resolver.resolveComponentFactory(ItemListComponent);
 
@@ -185,7 +194,65 @@ displayItems(node){
 
 this.itemLists.push(newItemList);
     
-}    
+}
+    
+getArgsFromNode(node){
+     let a, b :string;
+    let ref=this;
+    
+    let nodeData : string[] = node.nodes[0].split("/");
+    
+    console.log(nodeData);
+      console.log(ref.mss);
+    
+    if(parseInt(nodeData[1])==ref.mss[0]){
+        a=nodeData[0];
+        b="%";
+    }else{
+        b=nodeData[0];
+        a="%";
+    }
+  
+    let args : string = [ref.mss[0], ref.mss[1], a, b].join(";");
+    return args;
+}  
+    
+getArgsFromEdge(params, network){
+     let la, lb :string;
+    let aid, bid : number;
+    let nodes = network.getConnectedNodes(params.edges[0]);
+    console.log(nodes);
+    let a = nodes[0].split("/");
+    la = a[0];
+    aid = a[1];
+    
+      let b = nodes[1].split("/");
+    lb = b[0];
+    bid = b[1];
+    
+    let args : string = [aid, bid, la, lb].join(";");
+    return args;
+
+    
+}
+    
+       getOtherNode(node){
+         let nodeData : string[] = node.split("/");
+        let otherMs = this.getOtherMs(node);
+           let rsl : string = [nodeData[0], otherMs].join("/");;
+           return rsl;
+    }
+    
+    getOtherMs(node){
+        let ref = this;
+         let nodeData : string[] = node.split("/");
+        if(parseInt(nodeData[1])==ref.mss[0]){
+            return ref.mss[1];
+        }else{
+            return ref.mss[0];
+        }
+    }
+    
     
 
 }

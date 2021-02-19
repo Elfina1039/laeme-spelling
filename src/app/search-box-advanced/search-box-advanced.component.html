@@ -7,25 +7,31 @@
   </div>
     
      <div class=searchPos>
-     <label><input type="text" [(ngModel)]=search.litGram.pre placeholder="preceding littera"></label>
+     <label><input type="text" [(ngModel)]=search.litGram.pre placeholder="preceding littera" (focus)="active='pre'"></label>
         <label [style.display]="displayFilters ? 'none':'block'"
-               *ngFor="let f of search.preFilters"><app-filter [filter]=f></app-filter></label>
+               *ngFor="let f of search.preFilters">
+            <app-filter [filter]=f filterGroup="pre"></app-filter>
+         </label>
   </div>
     
     <div class=searchPos>
-     <label><input type="text" [(ngModel)]=search.litGram.main placeholder="main littera"></label>
+     <label><input type="text" [(ngModel)]=search.litGram.main placeholder="main littera"  (focus)="active='main'"></label>
         <label [style.display]="displayFilters ? 'none':'block'"
-               *ngFor="let f of search.mainFilters"><app-filter [filter]=f></app-filter></label>
+               *ngFor="let f of search.mainFilters"><app-filter [filter]=f filterGroup="main"></app-filter></label>
   </div>
     
     <div class=searchPos>
-     <label><input type="text" [(ngModel)]=search.litGram.post placeholder="following littera"></label>
+     <label><input type="text" [(ngModel)]=search.litGram.post placeholder="following littera" (focus)="active='post'"></label>
         <label [style.display]="displayFilters ? 'none':'block'"
-               *ngFor="let f of search.postFilters"><app-filter [filter]=f></app-filter></label>
+               *ngFor="let f of search.postFilters"><app-filter [filter]=f filterGroup="post"></app-filter></label>
   </div>
     
+     <app-runes [target]=search.litGram [field]="active"></app-runes>
+    
+    <button (click)="displayFilters=!displayFilters" class="icon">Filters</button>
+    
     <div class=searchPos>
-        <button (click)="displayFilters=!displayFilters">Show filters</button>
+        
         
       <button *ngFor="let f of functions" (click)="submitSearch(search, f)">{{f.label}}</button>
   </div>

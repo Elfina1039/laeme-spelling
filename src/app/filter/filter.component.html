@@ -1,16 +1,33 @@
 <div id=wrapper  #wrapper>
   
-    <div *ngFor="let os of optionSets" class=optionSet  >
+    <div *ngFor="let os of optionSets" class=optionSet>
       
-        <h5 appExpansion="1em">{{os.label}}</h5>
-        <div class="optionList">
+        <header>
+        <div class="listTitle">
+        <h5> {{os.label}}
+            
+          
+            </h5>
+            <span [appExpansion]="getElement(filterGroup+os.label)" expanded="false" [id]="filterGroup+os.label+'_B'"></span>
+              
+    </div>
+           
+        
+    </header>
+        <content  [id]="filterGroup+os.label">
     <ul >
-        <li *ngFor="let o of os.options">
+      <!--  <li *ngFor="let o of os.options">
             <input  type=checkbox
                    [(ngModel)]=o.checked
-                   (change)="updateFilter(os)"/> {{o.label}}</li>
+                   (change)="updateFilter(os)"/> {{o.label}}</li>-->
+        
+          <li *ngFor="let o of os.options" 
+                   [class]="o.checked ? 'selected' : 'normal'"
+                   (click)="o.checked=!o.checked; updateFilter(os)">{{o.label}}</li>
     </ul>
-        </div>
+        
+            
+        </content>
 </div>
 
 </div>

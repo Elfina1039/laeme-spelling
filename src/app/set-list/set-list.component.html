@@ -1,17 +1,35 @@
-<div id=wrapper #wrapper>
-
-
-<content>
-       <div id=filters>
+<div id=wrapper @appear [@fullScreen]="viewMode"  #wrapper>
+<header  (dblclick)="toggleFullScreen()" >
+        <div class="listTitle">
+        <h2> Sets: {{queryData.args[0]}}</h2>
+        
+        <div id=filters>
         <span *ngFor="let f of queryData.filters" [appFilterTag]="f">
             {{f.values}}
             </span>
     </div>
+           
+            <span>
+            <button [appExpansion]="content"></button>
+            
+           
+            </span>
+    </div>
+        
+        
+    </header>
 
-<app-set *ngFor="let s of filtered" [set]=s [queryData]="queryData"
+<content [@addItems]="filtered.length"  #content>
+      
+    
+  <div *ngFor="let s of filtered"> 
+
+<app-set  [set]=s [queryData]="queryData"
          (requestItem)="submitItem($event)"
         (requestSelection)="submitSelection($event)"
          [itemAction]="itemAction"
          #set></app-set>
+    </div>
+    
 </content>
 </div>

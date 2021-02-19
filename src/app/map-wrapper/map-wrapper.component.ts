@@ -17,6 +17,7 @@ export class MapWrapperComponent implements OnInit {
 @ViewChild("setList") setList : any;
 @ViewChild("wrapper") wrapper : any;
 @ViewChild("msInfo") msInfo : any;
+@ViewChild("selectedContent") selectedContent : any;
 //@ViewChild("setList") setList : any;
     @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
 
@@ -25,7 +26,7 @@ export class MapWrapperComponent implements OnInit {
     litStats : LitStats[];
     legendHeader : string;
     colorKey : any = {};
-    selectedText : any = {id:0};
+    selectedText : any = {id:0, litterae:""};
    // sets : Set[] = [];
     params : any = {};
      queryData : QueryData;
@@ -34,9 +35,9 @@ export class MapWrapperComponent implements OnInit {
     searchMode : string = "advanced";
      setSearchMode : string = "none";
     searchFncs : SearchFnc[][] = [
-       [ {label:"Map set+", fnc : "mapSet"},
-       {label:"Map set exact", fnc : "mapSetExact"}],
-        [ {label:"Map filtered", fnc : "mapfilteredSet"}]
+       [ {label:"Set", fnc : "mapSet"},
+       {label:"Strict set", fnc : "mapSetExact"}],
+        [ {label:"Map", fnc : "mapfilteredSet"}]
 
     ]
     
@@ -44,23 +45,34 @@ export class MapWrapperComponent implements OnInit {
         
     ]
     
-  constructor(protected route: ActivatedRoute, protected router : Router , protected setSvc : SetService,  protected graphicSvc: GraphicService,  protected memorySvc : MemoryService) { }
+  constructor(protected route: ActivatedRoute,
+               protected router : Router , 
+               protected setSvc : SetService, 
+               protected graphicSvc: GraphicService,  
+               protected memorySvc : MemoryService) { }
 
   ngOnInit() {
-      
+   
      let ref = this;
+     
+      this.msInfo.showInfo=true;
       
        this.route.paramMap.subscribe(function(p){
         let fnc : string=p.get('fnc');
         let args : string=p.get('args');
         let filters : string=p.get('filters');
-           
-           console.log(args);
-    
-    ref.loadMap(fnc,args,filters);
+
+          ref.loadMap(fnc,args,filters);
+
 
       });  
       
+       this.map.mapInitialized.subscribe((e)=>{
+           if(ref.params=={}){
+               ref.cmpLoaded.emit();
+           }
+           
+       });
       
   }
 
@@ -149,6 +161,7 @@ loadMap(fnc,args, filters=""){
 displayMs(e){
     console.log("displaying ");
     this.selectedText.id=e.id;
+    this.selectedText.litterae =  e.litterae.map((l)=>l.str+'/'+l.tokens).join(", ");
     this.msInfo.loadMeta([e.id]);
     this.msInfo.open();
    // let lits = e.litterae.map((ls)=>ls.str).join(",");

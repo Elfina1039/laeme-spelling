@@ -1,4 +1,7 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter, Renderer2 } 
+from '@angular/core';
+import {appear, fullScreen} from "./../animations";
+
 import { Littera, Item, Slot } from '../classes/profile';
 import { SetService } from '../services/set.service';
 import { QueryData, Filter } from '../classes/general';
@@ -10,18 +13,25 @@ import { ManuscriptService } from '../services/manuscript.service';
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.css']
+  styleUrls: ['./item-list.component.css'],
+       animations:[
+        appear,
+           fullScreen
+    ]
 })
 export class ItemListComponent implements OnInit {
      items : Item[] = [];
     open : boolean = false;
+    viewMode : string= "default";
     selected : boolean = false;
     queryData : QueryData = {fnc:"", args:"", filters:[], getJsonFilters:function(){return ""}};
+    currentSplits : [number, number] = [0,0];
     
     @Input("enableSelect") enableSelect: boolean = true;
     @Input("itemAction")  itemAction : string ;
     
     @ViewChild("wrapper") wrapper : any;
+    @ViewChild("content") content : any;
     @ViewChild("splits") splits : any;
     
     @Output() requestItem : EventEmitter<any> = new EventEmitter();
@@ -31,7 +41,7 @@ export class ItemListComponent implements OnInit {
     
   constructor(private setSvc : SetService,
                private intfSvc : InterfaceService,
-              private renderer: Renderer2,
+              private renderer: Renderer2, // remove after moving the functionality to the appExpansion directive
               private msSvc : ManuscriptService,
               private memorySvc: MemoryService) { }
 
@@ -39,6 +49,16 @@ export class ItemListComponent implements OnInit {
 
       
   }
+    
+toggleFullScreen(){
+    if(this.viewMode=="default"){
+         this.viewMode = "full";
+    }else{
+         this.viewMode = "default";
+    }
+   
+    console.log(this.viewMode);
+} 
     
     
 loadSplits(morphid, pos){
@@ -50,21 +70,19 @@ loadSplits(morphid, pos){
        // args.push(JSON.stringify(filters));
       this.splits.loadSplits(fnc,morphid,strFilters);
     
-    
-  let splitWrapper = this.splits.wrapper.nativeElement;
-    let ref = this;
-    this.intfSvc.moveComponent(splitWrapper,ref);
+    this.currentSplits = [morphid,pos];
+
 }
     
 loadSplitsEdit(morphid, pos){
     this.splits.pos=pos;
-    let fnc = "getSplitsEditByMorphid";
+    let fnc = "getSplitsByMorphid";
       this.splits.loadSplits(fnc,morphid,"");
     
     
   let splitWrapper = this.splits.wrapper.nativeElement;
     let ref = this;
-    this.intfSvc.moveComponent(splitWrapper,ref);
+    this.intfSvc.moveComponent(splitWrapper,ref.wrapper);
 }
   
     
@@ -97,6 +115,15 @@ loadItems(fnc,args, filters=""){
     
 } 
     
+moveSplits(){
+    
+    let cellId = this.currentSplits[0]+"-"+this.currentSplits[1];
+    let splitWrapper = this.splits.wrapper.nativeElement;
+    let cell = document.getElementById(cellId);
+    this.intfSvc.moveComponent(splitWrapper,cell);
+   // this.intfSvc.adjustHeightToScreen(splitWrapper,cell.getBoundingClientRect().top);
+}
+    
 submitItem(item){
     console.log("requesting map for " + item.morphid);
     this.requestItem.emit({morphid:item.morphid, pos:item.pos});
@@ -115,17 +142,21 @@ saveSelection(){
 }
     
 show(){
-    this.wrapper.nativeElement.style.height="20em";
+      let toRender=this.wrapper.nativeElement;
+    this.renderer.setStyle(toRender, "height", "100%");
+    this.renderer.setStyle(toRender, "display", "flex");
     this.open = true;
 }
     
 hide(){
    this.splits.wrapper.nativeElement.style.display = "none";
    // this.wrapper.nativeElement.style.height="0px";
-    let toRender=this.wrapper.nativeElement;
-    this.renderer.setStyle(toRender, "height", "0px");
+     let toRender=this.wrapper.nativeElement;
+    this.renderer.setStyle(toRender, "display", "none");
     this.open=false;
 }
+    
+
     
     selectAll(){
         let value = !this.selected

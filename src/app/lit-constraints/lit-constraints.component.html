@@ -1,0 +1,13 @@
+<div id=wrapper>
+    
+    <table *ngFor="let c of constraints">    
+        <tr><th colspan=3>{{c.cat}}</th>
+        <tr *ngFor="let v of c.vals">
+            <th>{{v.val}}</th>
+            <td>{{v.tokens}}</td>
+            <td class=bar [style.background]=calcGradient(v.ratio)>{{v.ratio}}</td>
+        </tr>
+    
+    </table>    
+    
+</div>

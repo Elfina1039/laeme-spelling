@@ -1,9 +1,5 @@
-
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-  //other SURROUNDING TEXTS: 138,11,64 , 67
+
  header("Content-Type: text/html; charset=UTF-8");
  
  

@@ -1,3 +1,5 @@
+*{box-sizing: border-box}
+
 input, button{
     border-radius:0.2em;
     margin:0.2em;
@@ -5,8 +7,8 @@ input, button{
 
 input[type=text], select{
     background : white;
-     box-shadow: 0 0 0.5em #c17a10 inset;
+     box-shadow: 0 0 0.5em var(--dPaper) inset;
     padding:0.2em;
-    border: 1px inset #c17a10;
+    border: 1px inset var(--dPaper) ;
     color:black;
 }

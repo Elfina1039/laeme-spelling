@@ -40,7 +40,7 @@ saveLitterae(){
     let ref = this;
     
     this.splits.filter((sp)=>sp.changed)
-        .forEach((s)=>ref.setSvc.fetchUniversal("saveLitterae",[s.split,ref.args,ref.patternString]).subscribe((data:any)=>{
+        .forEach((s)=>ref.setSvc.fetchUniversal("saveLitterae",[s.split,ref.morphid,ref.patternString]).subscribe((data:any)=>{
           console.log(data);
        
       }));

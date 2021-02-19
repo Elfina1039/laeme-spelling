@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SetService } from '../services/set.service';
 import { Split } from '../classes/profile';
@@ -11,9 +11,10 @@ import { Split } from '../classes/profile';
 export class SplitsComponent implements OnInit {
     pattern : string[];
     splits :  Split[];
-    args : number;
+    morphid : number;
     pos : number = -1;
      @ViewChild("wrapper") wrapper : any;
+       @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
     
   constructor(protected setSvc : SetService,
               protected route : ActivatedRoute) { }
@@ -22,20 +23,32 @@ export class SplitsComponent implements OnInit {
   }
 
     
-loadSplits(fnc, args, filters){
+loadSplits(fnc : string, args : string, filters : string="", reset: boolean = true){
     console.log("NEW POS: "+this.pos);
-    this.args = args;
-    this.splits=[];
+    this.morphid = parseInt(args);
+    
+    if(reset==true){
+        this.splits=[];
+    }
+    
      let ref = this;
   
       this.setSvc.fetchUniversal(fnc,[args,filters]).subscribe((data:any)=>{
-          console.log(data);
+         // console.log(data);
           data.rows.forEach((i)=>{
                            ref.splits.push(<Split>i);
+             // console.log(i);
                            });
+        //  console.log(ref.splits);
+          this.cmpLoaded.emit();
       })
     
-} 
+}
+    
+loadSourceForms(langs){
+    let args = [this.morphid.toString(), langs.join(",")].join(";");
+    this.loadSplits("getSourceSplits", args,"" ,false);
+}
     
 highlightPos(i:number){
 

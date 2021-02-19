@@ -15,6 +15,7 @@ export class SearchBoxAdvancedComponent extends SearchBoxComponent implements On
     
    search : SetSearch = new SetSearch();
     displayFilters : boolean = true;
+    active : string = "main";
     
   constructor(filterData : FilterDataService) {
   super(filterData);

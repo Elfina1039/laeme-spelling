@@ -9,6 +9,7 @@ import {  SearchFnc, MapSearch, QueryData, Filter } from '../classes/general';
 import { GraphicService } from '../services/graphic.service';
 import { MemoryService } from '../services/memory.service';
 
+
 @Component({
   selector: 'app-map-sequence',
   templateUrl: './map-sequence.component.html',
@@ -97,13 +98,14 @@ loadMap(fnc,args,extent,filters=""){
 sequenceData(extents){
 let ref = this;
 let i = 0; 
-let result = [];    
+let result : [string[], any][] = [];    
 let tags = [1,2,3,4,5,6,7,8];    
 while(i+extents<8){
     let extent = tags.slice(i, i+extents);
     
    let selection = this.laemeData.filter((t)=>ref.graphicSvc.dates[t.id].filter(dt => extent.includes(dt)).length>0);
-    result.push(selection);
+    let header = extent.map((e)=>ref.graphicSvc.datesKey[e].label);
+    result.push([header, selection]);
     i = i+extents;
      console.log(selection);
 } 
@@ -125,10 +127,10 @@ addMap(data){
 
     let newMap = this.container.createComponent(mapFactory)._component;
    
-    newMap.mapInitialized.subscribe((e)=>{newMap.addLaemeData(data);});
+    newMap.mapInitialized.subscribe((e)=>{newMap.addLaemeData(data[1]);});
 
     newMap.colorKey=ref.colorKey;
-    newMap.mapHeader = "header";
+    newMap.mapHeader = data[0].join(", ");
     //let newLayer = newMap.addLaemeData(data);   
 
  

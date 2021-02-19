@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  Output, EventEmitter  } from '@angular/core';
 
 @Component({
   selector: 'app-references',
@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./references.component.css']
 })
 export class ReferencesComponent implements OnInit {
-
+@Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+      this.cmpLoaded.emit();
   }
 
 }

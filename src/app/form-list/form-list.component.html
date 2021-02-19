@@ -1,3 +1,16 @@
-<p>
-  form-list works!
-</p>
+
+<header class=listTitle>  <h4>Unprocessed forms  <button (click)="loadAll()">Load all</button></h4>
+
+ <button [appExpansion]="content"></button>
+</header>
+
+
+ <ul #content>
+     <li *ngFor="let f of forms">{{f.form}} ({{f.tokens}})
+         - <dfn>{{f.lexel}}/{{f.wordClass}}</dfn> </li>
+</ul>
+
+
+    
+    
+

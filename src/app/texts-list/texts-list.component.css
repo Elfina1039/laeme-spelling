@@ -1,0 +1,102 @@
+*{box-sizing: border-box}
+
+header{
+    width:100%;
+    /*background:#2e200d;*/
+    background:black;
+    height:10%;
+    display: flex;
+    flex-flow: row nowrap;
+    color:var(--paper);
+    font-size:var(--bigText);
+    padding-left:8em;
+    padding-right:1em;
+    border-bottom: 4px ridge var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url(/assets/images/backgrounds/bestiary2.png);
+    background-position: top right;
+    background-repeat: no-repeat;
+}
+
+content{
+    display:flex;
+    flex-flow: column nowrap;
+    padding:1em;
+    background:var(--bGradient);
+}
+
+/*TABLES*/
+
+table{
+  
+    border: none;
+     border-collapse: separate;
+  border-spacing: 3px;
+    width:100%;
+   
+    width:100%;
+}
+
+th.minColumn{
+    width:2.5em;
+}
+
+th.bigColumn{
+    width:35%;
+}
+
+
+td,th{
+    border: none;
+    color: white;
+
+}
+
+th{
+    background:var(--paper);
+    color:black;
+}
+
+
+td{
+background-color:var(--darkest);
+    word-wrap: break-word;
+}
+
+th.highlight, th.sort{
+    color:var(--lightest);
+    background:var(--beacon);
+}
+span.anchor{
+    border-radius:0.2em;
+    border: 1px dashed var(--lightest);
+    background : var(--icon);
+    padding: 0.2em;
+}
+
+
+li{
+        display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
+}

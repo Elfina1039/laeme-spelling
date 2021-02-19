@@ -1,0 +1,190 @@
+
+    <header>
+        <h1>Spelling database</h1>
+        <h3>Linguistic Atlas of Early Middle English</h3>
+    </header>
+
+    <content>
+
+        <h2>About the tool</h2>
+        
+        <div class=chapter @appear>
+            <h3>The basics</h3>
+            <p>
+               The goal of the project is to construct a tool for analyses of early Middle English texts, focusing primarily on spelling and its variation in space and time. 
+            </p>
+            <p>
+                The tool is currently at the testing stage of development. It comprises a database created from the data available in the <a href="http://www.amc.lel.ed.ac.uk/?page_id=492">Linguistic Atlas of Early Middle English (LAEME)</a> and an interface developed specifically to access the data from the database. The database is structurally similar to the project <a href="http://www.amc.lel.ed.ac.uk/?page_id=498">From Inglis to Scots (FITS)</a> in that its basic unit is a segment (usually a single letter of digraph), which opens new querying possibilities. Unlike FITS, the project does not involve interpretation of sound values. 
+            </p>
+           
+            <p>
+The intreface also includes experimental network visualisations of letter alternations in a single spelling system or accross two spelling systems and a mapping tool. This page briefly explains the core of the data structure and outlines the individual functions of the tool. 
+            </p>
+            
+            <p>
+                The texts on this page includes a few terms, which probably will not be familiar to researchers who have not worked with LAEME. A short glossary explaining the terms is available <a [routerLink]="['/glossary']">here</a>. 
+            </p>
+
+        </div>
+        
+       
+        
+        <div class=chapter>
+            <h3>Data structure</h3>
+            <p>
+                The most common searches in LAEME typically involve listing of forms of a specific item, e.g. all the possible spellings of the root morpheme of the verb <dfn>shield</dfn> in the infinitive form, which would return  <i>schild</i>, <i>scild</i>, <i>sild</i>, <i>sculd</i>, <i>shild</i>, <i>ssuld</i>. Naturally, it is also possible to retrieve a list of items which contain a specific sequence of letters, e.g. all the items with <i>sh</i> in the initial position. The results can be sorted by various criteria like county, manuscript etc.  
+            </p>
+            
+            <p>
+                All of these queries are made possible by the fact that LAEME data code correspondences between items and forms. The aim of the present project is to code also the correspondences between segments of different spelling variants in order that queries of the following sort can also be processed:
+            <ul>
+<li> List all the alternatives of  <i>sh</i>  in the database.
+<li> List all words in which <i>v</i> ever alternates with <i>f</i>  in the initial position.
+<li> List all the alternatives of h (in text #246). 
+            </ul>
+            
+   
+        <p>
+            The picture bellow illustrates what the database adds to LAEME data on the example of selected forms of <dfn>shield/vi</dfn> and <dfn>bliss/n</dfn>.  
+        </p> 
+            
+             <img class="guide" src="assets/images/guide_data.png" />
+        
+        <p>
+            Each form in the database is split into a sequence of "slots". Each slot can be referred to by the item + slot number, which corresponds to its position in the sequence. For instance, the slot <dfn>shield/vi (1)</dfn> can contain <i>sc</i> or <i>s</i> (plus other variants not included in the diagram). As a results, the variants in individual slots can be compared. Thus, the tools is "aware" of the fact that the alternation of <i>s</i> and <i>sc</i> is also found in the slot <dfn>bliss/n (4)</dfn> and this connection can be exploited in queries. Any group of letters or letter sequences alternating in a slot or accross slots is called a <i>set</i>.
+        </p>
+        
+
+        </div>
+    
+            <div class=chapter>
+            <h3>Searches for litteare</h3>
+            <p>
+               Searches for litterae are intended to provide basic statistical data about the litterae in the DB, which could serve as a starting point of more complex and in-depth analyses. It is possible to search for alternatives of a given littera or polygraphs containing a given character.
+                </p>
+                <p>
+                    A search for alternatives returns a complete list of litterae which alternate with the input littera at least once in the same slot. For instance, the search for alternatives of <i>f</i> returns <i>v</i>, <i>u</i>, <i>w</i> etc.
+                </p>
+                    <p>
+                        A search for polygraphs returns a list of polygraphs in which the input littera is present. For instance, the search for <i>w</i> returns <i>hw</i>, <i>wh</i>, <i>qw</i> etc. Search results are in both cases displayed as tables and include frequency data for the individual litterae, as illustrated by the picture below. 
+
+            </p>
+            
+
+            
+             <img class="guide" src="assets/images/guide_alternatives.png" />
+        
+     
+        
+
+        </div>
+
+         <div class=chapter>
+            <h3>Searches for sets</h3>
+            <p>
+                A search for sets returns all the sets (groups of litterae) which at least once occur at the same position as the input littera(e). The input for the search can be a single littera or a comma-separated list of litterae. For example, if the user is interested in the sets in which the littera <i>f</i> alternates with <i>u</i>, s/he can run a search for <b>“f, u”</b>.
+                </p>
+             
+              
+             <img class="guide" src="assets/images/guide_sets.png" />
+             
+                <p>
+                   Sets are displayed as boxes. The ratio of the litterae in the set is visualised as a simple pie chart and total number of items / total number of tokens in the set are also displayed. The list of slots (items) in which the given range of litterae appears can be displayed immediately for each set.
+                </p>
+       
+
+        </div>
+        
+              <div class=chapter>
+                  <h3><a name=items>Searches for items</a></h3>
+        
+             
+                <p>
+                    Every set is by definition connected with a list of items (slots) in which the alternation of litterae appears. For example, the set  <i>w</i>, <i>wh</i>  will be connected with <dfn>whence/av (1)</dfn>, <dfn>who/p (1)</dfn> etc. Therefore, search parametres for item lists are analogical to sets. 
+                </p>
+                  
+                  <img class="guide band" src="assets/images/guide_items.png" />
+                  
+                    <p>
+                        Items are displayed in a table in the usual format (i.e. lexel/word class plus  a bracketed number which stands for the position of the littera in the word, e.g. <dfn>white/aj (1)</dfn>). The next column lists the litterae found at the given position along with their token frequency. 
+            </p>
+                  <p>
+                      The first column in the table functions as a link to the complete list of forms and each form on the list is disaplyed with a link to concordances. 
+                      
+                  </p><p>
+                      Advanced search allows to filter the results by LAEME metadata or adjacent segments. For example, it is possible to retrieve a list of items from a specific text or look at e.g. all the alternatives of <i>c</i> before <i>e</i>.
+                  </p>
+            
+
+        </div>
+        
+         <div class=chapter>
+            <h3>Text profile</h3>
+            <p>
+              The purpose of text profile is to offer a good starting point as well as tools for a comprehensive analysis of a text language, but it can also be used as a brief overview of the spelling features of the manuscript.
+                </p>
+             
+                <p>
+                   The screen for text profile combines some of the components introduced above (lists of litterae, sets, item list) and also displays the actual text. The basic version of text profile comprises three components: the inventory of litterae, sets of alternating litterae and the complete text of the MS. The components are linked together so that you can use litterae inventory and items displayed under sets to navigate the text of the manuscript. The following picture shows text profile screen of text #155 (Cambridge, Corpus Christi College 444 containing Exodus and Genesis).
+                </p>
+                  
+                  <img class="guide band" src="assets/images/guide_profile.png" />
+  
+            <p>
+                Multiple text profiles can be displayed side by side and the functionalities are very similar to <i>Text profile</i> of a single text, except any actions (such as searches in the text or filtering of sets) affect all the displayed profiles.
+             </p>
+             
+            
+
+        </div>
+        
+             <div class=chapter>
+            <h3>Maps</h3>
+            <p>
+                The simplest kind of map available in the tool shows the distribution of variants for a single slot (i.e. a position in a specific item), such as the different nuclear vowels in <dfn>cold/aj</dfn>:
+                </p>
+                 
+             <img class="guide" src="assets/images/guide_map.png" />
+                 
+                <p>
+                   Maps in the tool display a pie chart for each text and each colour in the pie chart represents one of the variants. The charts serve as links to the metadata of the corresponding LAEME file. The tool can also combine data for multiple slots in one map.
+                 </p>
+            
+
+        </div>
+        
+             <div class=chapter>
+            <h3>Network visualisations</h3>
+            <p>
+                Network diagrams visualise corresponcences between segments and can be generated for a single text, for all <i>sets</i> in the database or two different texts. The last type displays litterae from the individual texts in different colours. For instance, the correspondences between ƿ in text #300 and <i>qƿ</i>, <i>qu</i>, <i>q</i> in #155 are visualised as folows:
+                </p>
+                 
+             <img class="guide" src="assets/images/guide_double_network.png" />
+                 
+                <p>
+                  Each node in the network represents a single littera and edges connecting the nodes show which litterae alternate with one another. The width of the edges reflects token frequency of the alternation of the two connected litterae and the actual frequency is displayed as a number in a black box.
+                 </p>
+                 <p>
+                 Networks normally do not display correspondences between the same litterae (i.e. “sc corresponds to sc”), because too many edges make the network very difficult to read. Clicking a node or an egde triggers a search for the items in which the alternation occurs. 
+                 </p>
+            
+
+        </div>
+
+
+
+<a [routerLink]="['/references']">References</a>
+
+ <a [routerLink]="['']">Back to Home page</a>
+    </content>
+
+
+
+
+    <footer>
+        <a href="http://www.amc.lel.ed.ac.uk/" target="_blank">
+            <img src="assets/images/amc_banner.jpg">
+        </a>
+
+    </footer>
+

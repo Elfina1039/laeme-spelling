@@ -1,19 +1,52 @@
+*{box-sizing: border-box}
+:host{
+    width:100%;
+    
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+header{
+    width:100%;
+    /*background:#2e200d;*/
+    background:black;
+    height:10%;
+    display: flex;
+    flex-flow: row nowrap;
+    color:var(--paper);
+    font-size:var(--bigText);
+    padding-left:8em;
+    padding-right:1em;
+    border-bottom: 4px ridge var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url(/assets/images/backgrounds/bestiary2.png);
+    background-position: top right;
+    background-repeat: no-repeat;
+}
+
 label,p{
     color:white;
+    margin-top:0.5em;
 }
 
 form{
-    margin: 200px;
+   /* margin: 200px;*/
     display: flex;
     flex-flow: column nowrap;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: space-around;
 }
 
 
 input, button{
     border-radius:0.2em;
-
+    width:8em;
    
 }
 
@@ -26,11 +59,72 @@ input[type=text], input[type=password]{
 }
 
 button{
-    border:2px outset #df8f17;
-    background: linear-gradient(#c17a10,#df8f17);
+    border:2px outset var(--paper);
+    background: linear-gradient(var(--dPaper),var(--paper));
     font-weight:bold;
-    padding:0.1em;
-    margin:0.1em;
-    white-space:nowrap;
+    padding:0.2em;
+    font-size:var(--bigText);
+}
 
+button:hover{
+    box-shadow:0 0 0.2em white;
+    background: linear-gradient(var(--paper),var(--dPaper));
+}
+
+p.alert{
+    border-radius: 0.2em;
+    padding: 0.2em;
+    margin: 0.3em;
+    color: white;
+    border: 1px dashed white;
+    background-color: var(--beacon);
+}
+
+
+p{
+    text-align:justify;
+    font-size: var(--bigText);
+}
+
+h1,  h3, a{
+    color:var(--paper);
+    margin:0.1em;
+}
+
+h1{
+    font-size:var(--banner);
+}
+
+h2{
+    font-size: var(--banner);
+margin: 0.5em;
+    color:white;
+}
+
+h3{
+    font-size:var(--bigHeading);
+}
+
+dfn{
+    font-variant: small-caps;
+    font-style: normal;
+}
+
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
 }

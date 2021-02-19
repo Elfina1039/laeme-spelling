@@ -10,6 +10,7 @@ import { FilterDataService } from '../services/filter-data.service';
 export class SearchBoxComponent implements OnInit {
     search : any = {main:""};
     @Input("functions") functions : SearchFnc[];
+    @Input("layout") layout: string = "horizontal";
     @Input("filters") filters : string[];
     @Output() requestSearch : EventEmitter<any> = new EventEmitter();
     
@@ -21,7 +22,7 @@ export class SearchBoxComponent implements OnInit {
   }
     
     submitSearch(search, fnc){
-       
+       console.log(search);
         this.requestSearch.emit({search:search, fnc:fnc, filters:[]});
     }
 

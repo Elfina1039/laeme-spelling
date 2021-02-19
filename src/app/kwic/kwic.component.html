@@ -1,10 +1,17 @@
 <div id=wrapper>
 
-<p *ngFor="let line of lines">
+<div *ngFor="let line of lines" class=line>
     <!--[style.fontWeight]="t.formid==formid ? 'bold':'normal'"-->
+<p> 
    <span *ngFor="let token of line[1]"
          [title]="token.lexel+' / '+token.grammel"
-         class=msToken>{{token.form}}&nbsp;</span>   
-</p>
+         [class]="token.id==line[3] ? 'kw':'msToken'"
+         >{{token.form}}&nbsp;</span>   
+    </p>
+      <span class=link><a (click)=setSvc.redirectToLaeme(line[2]) appRedirect="">{{line[2]}}</a>
+        
+        <a [routerLink]="['/profile',line[2]]" target="_blank" appRedirect="manuscript.png"></a></span>
+  
+</div>
     
 </div>

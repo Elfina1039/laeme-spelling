@@ -1,18 +1,22 @@
-
+*{box-sizing: border-box}
 #wrapper{
-    position:absolute;
-    top:0;
-    background-color: #2e200d;
+    position:sticky;
+   /* top:0;*/
+    background-color: var(--title1);
     padding: 0.3em;
     display:flex;
     flex-flow: row nowrap;
-    z-index: 2000
+    z-index: 2000;
+        border-radius: 0.2em;
+    box-shadow: 0 0 0.5em var(--darkest) inset;
 }
 
 .searchPos{
-    border:1px dashed #c17a10;
+        border-right: 3px ridge var(--dPaper);
     margin:0.1em;
+     
 }
+
 
 
 input, button{
@@ -23,31 +27,40 @@ input, button{
 
 input[type=text], select{
     background : white;
-     box-shadow: 0 0 0.5em #c17a10 inset;
+     box-shadow: 0 0 0.5em var(--paper) inset;
     padding:0.2em;
-    border: 1px inset #c17a10;
+    border: 1px inset var(--dPaper);
     color:black;
 }
 
-button{
-    border:2px outset #df8f17;
-    background: linear-gradient(#c17a10,#df8f17);
-    font-weight:bold;
-    padding:0.1em;
-    margin:0.1em;
-    white-space:nowrap;
 
+/*FORMS*/
+input, button{
+    border-radius:0.2em;
+    margin:0.2em;
 }
 
-.icon{
-    background:transparent;
-    border:2px solid #4f391b;
-    color:#4f391b;
-    cursor:pointer;
+button{
+    border:2px outset var(--paper);
+    background: linear-gradient(var(--dPaper),var(--paper));
     font-weight:bold;
-    font-size:14pt;
+    padding:0.2em;
+    font-size:var(--normalText);
 }
 
 button:hover{
     box-shadow:0 0 0.2em white;
+    background: linear-gradient(var(--paper),var(--dPaper));
+}
+
+.icon{
+    background:var(--darkest);
+    border:2px solid var(--paper);
+    color:var(--paper);
+    cursor:pointer;
+    
+}
+
+.icon:hover{
+    background: transparent;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, Renderer2 } from '@angular/core';
+import {appear, fullScreen} from "./../animations";
 import { Set, Littera, Item, Slot } from '../classes/profile';
 import { QueryData, Filter } from '../classes/general';
 import { SetService } from '../services/set.service';
@@ -9,13 +10,20 @@ import { GraphicService } from '../services/graphic.service';
 @Component({
   selector: 'app-set',
   templateUrl: './set.component.html',
-  styleUrls: ['./set.component.css']
+  styleUrls: ['./set.component.css'],
+     animations:[
+        appear,
+           fullScreen
+    ]
 })
 export class SetComponent implements OnInit {
     @Input("set") set : Set;
     @Input("queryData") queryData : QueryData;
     @ViewChild("itemList") itemList : any;
     @ViewChild("chart") chart : any;
+    
+    viewMode : string= "default";
+    
     items : Item[] = [];
     filters : any = [];
     @Input("colorKey")  colorKey ;
@@ -41,7 +49,18 @@ export class SetComponent implements OnInit {
       let chart = this.getChart();
       let container = this.chart.nativeElement;
       this.renderer.appendChild(container,chart);
+      this.itemList.hide();
   }
+    
+    toggleFullScreen(target){
+    if(this.viewMode!=target){
+         this.viewMode = target;
+    }else{
+         this.viewMode = "default";
+    }
+   
+    console.log(this.viewMode);
+} 
     
 calcBorder(tokens){
     let border : any = Math.round((tokens/this.set.tokens)* 15);
@@ -51,6 +70,7 @@ calcBorder(tokens){
     
 showItems(){
     let ref = this;
+    this.itemList.show();
     if(this.itemList.items.length==0){
     let lits : string = this.set.membersStrings.join(",");
     //let args : string[] = this.queryData.args.map((a)=>a);

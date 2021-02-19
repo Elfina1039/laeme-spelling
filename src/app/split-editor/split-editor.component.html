@@ -6,11 +6,13 @@
     </div>  
     
      <div class=split *ngFor="let split of splits">
-          <span><a [routerLink]="['/kwic','getKwic',split.formid,7]"
+           <span><a [routerLink]="['/kwic','getKwic',split.formid,7]"
                   target="_blank"
                   appRedirect="kwic.png"></a></span>
+          <span class="slot leader">{{split.pre.join(",")}}</span>
+        
         <span [style.background-color]=highlightPos(s.key) class=slot *ngFor="let s of split.split | keyvalue">{{s.value}}</span>
-         <span class=slot>+{{split.post.join(",")}}</span>
+         <span class="slot trailer">{{split.post.join(",")}}</span>
          <span class=freq><span><input type=text [(ngModel)]="split.form" (change)="reAnalyse(split)"/></span>{{split.tokens}}</span>
         
     </div> 

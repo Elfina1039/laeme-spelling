@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {  Router } from '@angular/router';
 
 @Component({
@@ -9,10 +9,11 @@ import {  Router } from '@angular/router';
 export class TitlePageComponent implements OnInit {
 
     versions: [number, boolean, string][] = [[4, true, "T"],[5, true, "L"],[6, true, "e"],[7, true, "E"],[8, true, "D"],[9, true, "J"],[10, true, "M"]];
-    
+     @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
   constructor(private router : Router) { }
 
   ngOnInit() {
+       this.cmpLoaded.emit();
   }
     
     redirect(){

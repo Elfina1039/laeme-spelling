@@ -5,6 +5,7 @@ import { HttpClient , HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SetService {
+    searchMode : string = "slot";
 
     fncKey : any = {getSetsByLits : "getSlotsByLits", 
                    getSetsByText : "getSlotsByText",
@@ -16,16 +17,26 @@ export class SetService {
   }
     
         fetchUniversal(fnc, args){
+            console.log("fetch: " + args.join("-"));
+         //   args.push(this.searchMode);
         console.log("fetch" + args.join("-"));
+            let mode = this.searchMode;
       //  return this.http.get("/assets/queryDb.php?fnc="+fnc+"&args="+args.join(";"));
-    return this.http.get("http://localhost/laeme-scripts/php/queryDb.php?fnc="+fnc+"&args="+args.join(";"));
+            
+   return this.http.get("http://localhost/laeme-scripts/php/queryDb.php?fnc="+fnc+"&args="+args.join(";")+";"+mode);
     }
     
    orderBy(arr, crit){
     console.log("sorting by " + crit);
    let sorted = arr.sort((a,b)=>{return a[crit]<b[crit] ? -1:1});
    return sorted;
-}    
+}
+    
+    orderByDesc(arr, crit){
+    console.log("sorting by " + crit);
+   let sorted = arr.sort((a,b)=>{return a[crit]<b[crit] ? 1:-1});
+   return sorted;
+} 
     
     
     
@@ -51,6 +62,12 @@ export class SetService {
         return this.http.get("/assets/items_sample.json");
         
     }
+    
+        redirectToLaeme(link){  window.open("http://archive.lel.ed.ac.uk/ihd/laeme2_scripts/find_msdescriptor.php?idno="+link);
+}
+    
+            redirectToCone(link){  window.open("http://archive.ling.ed.ac.uk/ihd/cone_scripts/view_CCchangeC2.php?chabbr=(("+link+"))&prntopt=no");
+}
     
 
 }

@@ -1,4 +1,4 @@
-
+*{box-sizing: border-box}
 
 #wrapper{
     transition:height 1s ease-out;
@@ -21,12 +21,20 @@ h3{
     border-bottom: 1px solid white;
 }
 
+h2, h4, strong{
+    color: #df8f17;
+}
+
 h2{
     font-size: 14pt;
     padding: 0.5em;
+    border-top: 1px ridge #df8f17;
+    border-bottom: 1px ridge #df8f17;
+    background-color:black
+}
+
+hr{
     color: #df8f17;
-    border-top: 1px solid #df8f17;
-    border-bottom: 1px solid #df8f17;
 }
 
 button{
@@ -39,6 +47,11 @@ button{
     width:100%;
 }
 
+.columns{
+    column-count:2;
+    column-rule: 1px ridge #df8f17;
+}
+
 button:hover{
     cursor:pointer;
     box-shadow: 0 0 0.2em white;
@@ -46,4 +59,28 @@ button:hover{
 
 a{
     color:#df8f17;
+}
+
+ span.linkset{
+    display:flex;
+    flex-flow: row wrap;
+}
+
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
 }

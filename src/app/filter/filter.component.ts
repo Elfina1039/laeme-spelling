@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FilterDataService } from '../services/filter-data.service';
 import {  Filter, OptionSet, Option } from '../classes/general';
 
@@ -11,6 +11,8 @@ export class FilterComponent implements OnInit {
 
   constructor(private data : FilterDataService) { }
         @Input("filter") filter : Filter;
+     @Input("filterGroup") filterGroup : string = "";
+    @ViewChild("content") content;
       optionSets : OptionSet[];
     
   ngOnInit() {
@@ -23,6 +25,10 @@ export class FilterComponent implements OnInit {
     
     updateFilter(os){
     this.filter.values = os.options.filter((o)=>o.checked==true).map((ch)=>ch.tag);;
+    }
+    
+    getElement(id){
+        return document.getElementById(id);
     }
 
  

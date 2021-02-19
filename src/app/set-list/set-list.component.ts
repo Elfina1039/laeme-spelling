@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angular/core';
+import {appear, addItems, fullScreen} from "./../animations";
 import { Set, Littera, Item } from '../classes/profile';
 import { QueryData, Filter, SearchFnc } from '../classes/general';
 import { SetService } from '../services/set.service';
@@ -6,15 +7,19 @@ import { SetService } from '../services/set.service';
 @Component({
   selector: 'app-set-list',
   templateUrl: './set-list.component.html',
-  styleUrls: ['./set-list.component.css']
+  styleUrls: ['./set-list.component.css'],
+    animations:[appear, addItems, fullScreen]
 })
 export class SetListComponent implements OnInit {
     sets : Set[] = [];
     filtered : Set[] = [];
     queryData : QueryData = {fnc:"", args:"", filters:[], getJsonFilters:function(){return ""}};
     
+        viewMode : string= "default";
+    
     @Input("itemAction") itemAction : string;
     @ViewChild("wrapper") wrapper;
+    @ViewChild("content") content;
     
     @Output() requestItem : EventEmitter<any> = new EventEmitter();
     
@@ -27,6 +32,16 @@ export class SetListComponent implements OnInit {
  
       
   }
+    
+    toggleFullScreen(){
+    if(this.viewMode=="default"){
+         this.viewMode = "full";
+    }else{
+         this.viewMode = "default";
+    }
+   
+    console.log(this.viewMode);
+} 
   
 fetchAll(){
      let ref = this;

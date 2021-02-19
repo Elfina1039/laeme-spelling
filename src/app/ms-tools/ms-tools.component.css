@@ -1,3 +1,4 @@
+*{box-sizing: border-box}
 #wrapper{width:100%;
 height:100%;
 display:flex;
@@ -13,15 +14,42 @@ flex-flow:column nowrap;
     width:100%;
 }
 
-header{
+#controls{
     width:100%;
-    background:#2e200d;
-    height:7%;
+    background:var(--title1);
+    height:10%;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     color:white;
-    padding-left:7em;
+        padding: 1%;
+    border-bottom: 4px ridge var(--paper);
+    box-shadow: 0 0 1em var(--darkest) inset;
+    margin-bottom: 0.5%;
+}
+
+header{
+    width:100%;
+    /*background:#2e200d;*/
+    background:black;
+    height:10%;
+    display: flex;
+    flex-flow: row nowrap;
+    color:var(--paper);
+    font-size:var(--bigText);
+    padding-left:8em;
+    padding-right:1em;
+    border-bottom: 4px ridge var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url(/assets/images/backgrounds/bestiary2.png);
+    background-position: top right;
+    background-repeat: no-repeat;
+}
+
+h1{
+    font-size:var(--banner);
 }
 
 app-token-search{
@@ -37,22 +65,25 @@ header form{
 }
 
 content{
-    height:90%;
+    height:87%;
     width:100%;
-    background-color:black;
+    background-color:var(--darkest);
     display: flex;
     flex-flow: row wrap;
     overflow:hidden;
-    
+    justify-content: space-around;
 }
 
+.msWrapper{
+    border-radius: 1em 1em 0 0em;
+}
 
 .msWrapper:nth-of-type(odd){
-    background : #c17a10;
+    background : var(--paper);
 }
 
 .msWrapper:nth-of-type(even){
-    background : #df8f17;
+    background : var(--dPaper);
 }
 
 input, button{
@@ -61,24 +92,47 @@ input, button{
 }
 
 button{
-    border:2px outset #df8f17;
-    background: linear-gradient(#c17a10,#df8f17);
+    border:2px outset var(--paper);
+    background: linear-gradient(var(--dPaper),var(--paper));
     font-weight:bold;
-    padding:0.1em;
-    margin:0.1em;
-}
-
-.icon{
-    background:transparent;
-    border:2px solid #df8f17;
-    color:#df8f17;
-    cursor:pointer;
-    font-weight:bold;
-    font-size:14pt;
+    padding:0.2em;
+    font-size:var(--bigText);
 }
 
 button:hover{
     box-shadow:0 0 0.2em white;
+    background: linear-gradient(var(--paper),var(--dPaper));
 }
 
+.icon{
+    background:transparent;
+    border:2px solid var(--paper);
+    color:var(--paper);
+    cursor:pointer;
+    
+}
+
+.icon:hover{
+    background: transparent;
+}
+
+
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
+}
 

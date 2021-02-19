@@ -45,23 +45,37 @@ export class Littera{
  
 }
 
+export class SpecialFeatures{
+    list : LitStats[];
+    
+    constructor(source){
+        this.list=source.filter((sf)=>sf.str);
+    }
+    
+    toPeak(){
+        return this.list.map((sf)=>sf.str+" / "+sf.tokens);
+    }
+}
 
 export class LitteraExtended extends Littera{
     mssRatio : number;
     rareSlots : number;
+    specialFeatures : SpecialFeatures;
     
     constructor(source){
         super(source);
-       // console.log(source.litAvg);
+      
         this.mssRatio = source.mssRatio;
         this.rareSlots = source.rareSlots;
       if(source.litAvg){
           source.litAvg.forEach((la)=>{
         let cmp = this.compareFreq(la.normTokens);
         this.basicFreqs.push([la.label,cmp]);  
+      
+            
         }); 
       }
-       
+        this.specialFeatures = new SpecialFeatures(source.specialFeatures); 
        
     }
 }
@@ -101,6 +115,8 @@ export class Item extends Slot{
     wordClass : string;
     selected : boolean = false;
     comparable : number[] = [];
+    cone? : string[];
+    mss : number[] = [];
 }
 
 export class ItemList{
@@ -136,6 +152,7 @@ export class Set{
     tokens : number;
     loaderFnc : string;
     args : string[];
+    cone? : string[];
     
     constructor(s){
         this.loaderFnc = s.loaderFnc;
@@ -143,6 +160,7 @@ export class Set{
         this.type = s.type;
         this.types = s.types;
         this.tokens = s.tokens;
+        this.cone = s.cone;
         let members : Littera[] = [];
         
          s.members.forEach((li)=>{
@@ -176,6 +194,21 @@ export interface Split{
     form? : string;
     changed? : string;
     post? : string[];
+    pre? : string[];
+    lang? : string;
+}
+
+export interface Form{
+    formid: number;
+    tokens : number;
+    form : string;
+    lexel: string;
+    wordClass : string;
+    morphid : number;
+    status?: string;
+    post? : string[];
+    pre? : string[];
+    lang? : string;
 }
 
 export class Profile {

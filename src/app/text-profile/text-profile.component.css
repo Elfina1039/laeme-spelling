@@ -9,17 +9,26 @@ flex-flow:column nowrap;}
 
 header{
     width:100%;
-    background:#2e200d;
-    height:7%;
+    /*background:#2e200d;*/
+    background:var(--darkest);
+    height:10%;
     display: flex;
     flex-flow: row nowrap;
-    color:#df8f17;
-    font-size:16pt;
+    color:var(--paper);
+    font-size:var(--bigText);
     padding-left:8em;
-    border-bottom: 2px solid #df8f17;
+    padding-right:1em;
+    border-bottom: 4px ridge var(--paper);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-image: url(/assets/images/backgrounds/bestiary2.png);
+    background-position: top right;
+    background-repeat: no-repeat;
+}
+
+h1{
+    font-size:var(--banner);
 }
 
 h3{
@@ -35,35 +44,61 @@ content{
 }
 
 #side{
-    height: 100%;
+    height: 95%;
     width:15%;
   /*  overflow:scroll;*/
     
 }
 
-#sets{
-   width:30%;
-    height:100%;
+#setsForms{
+   width:40%;
+    height:95%;
   /*  overflow:scroll;*/
 }
 
+#forms{
+  
+    max-height:90%;
+    min-height:5%;
+}
+
+#sets{
+    height:90%;
+   max-height:90%;
+    min-height:50%; 
+}
+
 #ms{
-   width:55%;
+   width:45%;
     height:100%;
     overflow:scroll;
 }
 
 .header{
-    flex-flow: column nowrap;
-    color: white;
-    padding: 0.5em;
-    background: #4f391b;
-    height: 5%;
-    transition: height 1s ease-out;
-    border-right: 1px solid white;
-    border-top: 1px solid white;
-    border-left: 1px solid white;
+    flex-flow: row nowrap;
+    color: var(--lightest);
+    padding-left: 1em;
+    background: var(--title1);
+   box-shadow: 0 -0.2em 0.5em var(--darkest) inset;
     border-radius: 0.4em 0.4em 0 0em;
     display: flex;
   justify-content: center;
+}
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
 }

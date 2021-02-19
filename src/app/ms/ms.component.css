@@ -1,22 +1,26 @@
+*{box-sizing: border-box}
+
+
+:host{
+    height:100%;
+    display:block
+}
+
 #wrapper {
-    box-shadow: 0 0 2em black inset;
+    box-shadow: 0 0 2em var(--darkest) inset;
         overflow:scroll;
-height:100%;
+height:96%;
 padding: 1em;
     display: flex;
     flex-flow: column wrap;
 scroll-behavior: smooth}
 
 header{
-    flex-flow: column nowrap;
-    color: white;
-    padding: 0.5em;
-    background: #4f391b;
-    height: 5%;
-    transition: height 1s ease-out;
-    border-right: 1px solid white;
-    border-top: 1px solid white;
-    border-left: 1px solid white;
+    flex-flow: row nowrap;
+    color: var(--lightest);
+    padding-left: 1em;
+    background: var(--title2);
+   box-shadow: 0 -0.2em 0.5em var(--darkest) inset;
     border-radius: 0.4em 0.4em 0 0em;
     display: flex;
   justify-content: center;
@@ -33,7 +37,7 @@ header{
 
 
 .msLine{
-    font-size: 13pt;
+    font-size: var(--bigText);
     margin: 0.2em;
     border-radius : 0.2em;
     display:flex;
@@ -43,14 +47,26 @@ header{
 }
 
 .msToken{
-    padding:0.05em;
+    padding:0.15em;
      border-radius : 0.2em;
+}
+
+
+
+
+
+button{
+    border:2px outset var(--paper);
+    background: linear-gradient(var(--dPaper),var(--paper));
+    font-weight:bold;
+    padding:0.2em;
+    font-size:var(--bigText);
 }
 
 button:hover{
     box-shadow:0 0 0.2em white;
+    background: linear-gradient(var(--paper),var(--dPaper));
 }
-
 
 button.round{
     background: transparent;
@@ -59,8 +75,8 @@ button.round{
     font-size: 9pt;
     text-align: center;
     border: none;
-    border-left: 2px solid darkblue;
-    color: darkblue;
+    border-left: 2px solid var(--icon);
+    color: var(--icon);
 }
 
 button.round:hover{
@@ -69,11 +85,32 @@ button.round:hover{
 
 .icon{
     background:transparent;
-    border:2px solid #df8f17;
-    color:#df8f17;
+    border:2px solid var(--paper);
+    color:var(--paper);
     cursor:pointer;
-    font-weight:bold;
-    font-size:14pt;
-    border-radius:0.2em;
+    margin: 0.5em;
+    
 }
 
+.icon:hover{
+    background: transparent;
+}
+
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
+}

@@ -8,6 +8,15 @@ export class GraphicService {
     dates;
     dataSample;
     colors : string[]=["#fc1703","#2003fc","#ede60c","#22f007","#ff9305","#ffffff","#aef50a","#0be6c8","#ed0edb","#145415","#91a63f","#c828f0","#9e3737","#5265df","#3d9da2"]; 
+
+    datesKey : any = { 1:{label : "C12b2", optionSet : "msDate"},
+     2:{label : "C13a1", optionSet : "msDate"},
+     3:{label : "C13a2", optionSet : "msDate"},
+     4:{label : "C13b1", optionSet : "msDate"},
+     5:{label : "C13b2", optionSet : "msDate"},
+     6:{label : "C14a1", optionSet : "msDate"},
+     7:{label : "C14a2", optionSet : "msDate"},
+     8:{label : "C14b1", optionSet : "msDate"}} ;   
     
     
   constructor() {
@@ -168,7 +177,7 @@ export class GraphicService {
 "12":{"lat":49.7668065515,"long":-7.5572420349},
 "229":{"lat":51.869349843,"long":-2.2337840252},
 "1100":{"lat":52.0936396132,"long":-2.4101156017},
-"9":{"lat":52.0928995346,"long":-2.5852689472},
+"9":{"lat":52.0936396132,"long":-2.4101156017},
 "169":{"lat":53.3913446408,"long":-0.7533925163},
 "227":{"lat":49.7668065515,"long":-7.5572420349},
 "183":{"lat":51.7934671888,"long":1.0728601213},
@@ -360,12 +369,34 @@ this.dataSample=[{"id" : 129, "litterae" : [{"str" : "f", "tokens" : 2}], "token
    makeColorKey(litStats){
          let ref = this;
         let colorKey=[];
+       let colors = this.generateColors(litStats.length);
           litStats.forEach((ls,lsi)=>{
-        colorKey[ls.str]={color:ref.colors[lsi], tokens:ls.tokens}});  
+        colorKey[ls.str]={color:colors[lsi], tokens:ls.tokens}});  
     
       return colorKey;
     } 
+    
+    
+    generateColors(howMany){
+        
+        let colors = [];
+    for(let i = 0; i < 360; i += 360 / howMany) {
 
+    let hue = i;
+    let saturation = 90 + Math.random() * 10;
+    let lightness = 50 + Math.random() * 10;
+        
+        let c = "hsl("+hue+","+saturation+"%,"+lightness+"%)";
+
+    colors.push(c);
+}
+        
+
+        return colors;
+        
+    }
+
+    
     
     
  drawPie(lits:any, total, r, colorKey){

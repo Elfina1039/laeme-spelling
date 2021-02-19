@@ -1,26 +1,34 @@
+*{box-sizing: border-box}
+
+
+:host{
+    display:block;
+    height:100%;
+}
+
 #wrapper{
     transition:filter 1s ease-out;
-
+height:100%;
 }
 
 header{
-    flex-flow: column nowrap;
-    color: white;
-    padding: 0.5em;
-    background: #4f391b;
-    height: 5%;
-    transition: height 1s ease-out;
-    border-right: 1px solid white;
-    border-top: 1px solid white;
-    border-left: 1px solid white;
+    flex-flow: row nowrap;
+    color: var(--lightest);
+    padding-left: 1em;
+    background: var(--title1);
+   box-shadow: 0 -0.2em 0.5em var(--darkest) inset;
     border-radius: 0.4em 0.4em 0 0em;
     display: flex;
   justify-content: center;
+    height:5%;
 }
 
-#map{
-    width:700px;
-    height:700px;
+.listTitle{
+    flex-flow: row nowrap;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width:100%;
 }
 
 
@@ -30,33 +38,50 @@ input, button{
     margin:0.2em;
 }
 
-input[type=color]{
-    background : white;
-     box-shadow: 0 0 0.5em #c17a10 inset;
-    padding:0.2em;
-    border: 1px inset #c17a10;
-    color:black;
-    width:1.5em;
-}
-
 button{
-    border:2px outset #df8f17;
-    background: linear-gradient(#c17a10,#df8f17);
+    border:2px outset var(--paper);
+    background: linear-gradient(var(--dPaper),var(--paper));
     font-weight:bold;
-    padding:0.1em;
-    margin:0.1em;
-    width:100%;
-}
-
-.icon{
-    background:transparent;
-    border:2px solid #4f391b;
-    color:#4f391b;
-    cursor:pointer;
-    font-weight:bold;
-    font-size:14pt;
+    padding:0.2em;
+    font-size:var(--bigText);
 }
 
 button:hover{
     box-shadow:0 0 0.2em white;
+    background: linear-gradient(var(--paper),var(--dPaper));
+}
+
+.icon{
+    background:transparent;
+    border:2px solid var(--paper);
+    color:var(--paper);
+    cursor:pointer;
+    
+}
+
+.icon:hover{
+    background: transparent;
+}
+
+h2{
+    margin:0.1em;
+}
+
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
 }

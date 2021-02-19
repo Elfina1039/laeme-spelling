@@ -1,0 +1,45 @@
+*{box-sizing: border-box}
+
+#wrapper{
+    margin:0.2em;
+}
+
+select{
+    background-color:var(--icon);;
+    border: 1px solid var(--lightest);
+    border-radius: 0.2em 0 0 0.2em;
+    color:white;
+    padding:0.3em;
+}
+
+button{
+     border-radius: 0 0.2em 0.2em 0;
+     border: 1px solid var(--lightest);
+    border-left:none;
+    background-color:var(--icon);
+    color:var(--lightest);
+    padding: 0.3em;
+}
+
+button:hover{
+    box-shadow: 0 0 0.2em var(--lightest);
+}
+
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
+}

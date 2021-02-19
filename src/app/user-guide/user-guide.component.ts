@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  Output, EventEmitter  } from '@angular/core';
 
 @Component({
   selector: 'app-user-guide',
@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-guide.component.css']
 })
 export class UserGuideComponent implements OnInit {
-
+@Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+      this.cmpLoaded.emit();
   }
 
 }

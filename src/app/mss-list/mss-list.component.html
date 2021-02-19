@@ -1,34 +1,69 @@
-<header>Browse Manuscripts</header>
+<header>
+    <h1>Browse Manuscripts</h1>
+        </header>
 
 <content>
-<table *appOrder=mss>
+<table >
 <tr> 
-    <th (click)="mss=setSvc.orderBy(mss,'id')"
-        class="sort">id</th>
-    <th (click)="mss=setSvc.orderBy(mss,'manuscript')"
-        class="sort">manuscript</th>
-    <th (click)="mss=setSvc.orderBy(mss,'localisation')"
-        class="sort"> localisation</th>
-    <th (click)="mss=setSvc.orderBy(mss,'date')"
-        class="sort">date</th>
-    <th (click)="mss=setSvc.orderBy(mss,'script')"
-        class="sort">script</th>
-    <th (click)="mss=setSvc.orderBy(mss,'texts')"
-        class="sort">texts</th>
+    <th class="sort">id
+    <button [appOrder]="mss" orderCrit="id"></button>
+    </th>
+    <th class="sort">manuscript
+    <button [appOrder]="mss" orderCrit="manuscript"></button>
+    </th>
+    <th class="sort"> localisation
+    <button [appOrder]="mss" orderCrit="localisation"></button>
+    </th>
+    <th class="sort">date
+    <button [appOrder]="mss" orderCrit="date"></button>
+    </th>
+    <th class="sort">script
+    <button [appOrder]="mss" orderCrit="script"></button>
+    </th>
+    <th class="sort">texts
+    <button [appOrder]="mss" orderCrit="exts"></button>
+    </th>
+    <th class="sort">Cross-references
+    <button [appOrder]="mss" orderCrit="link"></button>
+    </th>
+    
+     <th class="sort">Slot types
+    <button [appOrder]="mss" orderCrit="slotTypes"></button>
+    </th>
+      <th class="sort">Slot tokens
+    <button [appOrder]="mss" orderCrit="slotTokens"></button>
+    
+    </th>
     <th>Links</th>
 </tr>
     
 <tr *ngFor="let ms of mss"> 
     <th>{{ms.id}}</th>
-    <td>{{ms.manuscript}}</td>
+    <td>{{ms.manuscript}} <span class=anchor *ngIf="ms.anchor">anchor({{ms.anchor}})</span></td>
     <td>{{ms.localisation}}</td>
     <td>{{ms.date}}</td>
      <td>{{ms.script}}</td>
-     <td>{{ms.texts}}</td>
-    <th><a (click)=redirectToLaeme(ms.id) appRedirect="">L</a>
+  
+    
+     <td>  <ul>
+             <li  *ngFor="let t of ms.texts">{{t.title}}</li>
+            </ul>
+    </td>
+    
+    <td><span  *ngFor="let l of ms.links"><a (click)=setSvc.redirectToLaeme(l.textId) appRedirect="" redirectColor="#b30e11">{{l.textId}}</a>&nbsp;({{l.type}})&nbsp;</span></td>
+        
+    
+          <td>{{ms.slotTypes}}</td>
+    
+       <td>{{ms.slotTokens}}</td>
+        
+    <th><a (click)=setSvc.redirectToLaeme(ms.id) appRedirect="" redirectColor="#b30e11">{{ms.id}}</a>
         
         <a [routerLink]="['/profile',ms.id]" target="_blank" appRedirect="manuscript.png"></a></th>
-</tr>
+
+   
+    
+    </tr>
     
     
 </table>

@@ -9,7 +9,7 @@ import { Token } from '../classes/token';
   styleUrls: ['./kwic.component.css']
 })
 export class KwicComponent implements OnInit {
-    lines : [number, Token[]][] = [];
+    lines : [number, Token[], number, number][] = [];
 @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
     
   constructor(protected route: ActivatedRoute, protected router : Router , private setSvc : SetService) { }
@@ -41,7 +41,7 @@ export class KwicComponent implements OnInit {
           console.log(data);
           data.rows.forEach((l)=>{
                             let tokens = l.tokens.sort((a,b)=>{return a.id<b.id ? 1:-1});
-                           ref.lines.push([l.morphid, tokens]);
+                           ref.lines.push([l.morphid, tokens, l.textId, l.tagId]);
                            
                            });
            //ref.queryData = new QueryData(data.queryData);

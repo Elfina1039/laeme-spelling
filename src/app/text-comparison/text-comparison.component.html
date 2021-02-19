@@ -1,17 +1,23 @@
 <div id=wrapper>
-    <header>Text Comparison: {{preloaded}} 
+    <header><h1>Text Comparison: {{preloaded}} </h1>
     
-          <a  class=icon [routerLink]="['/network/getCorresp',preloaded.join(',')]" target="_blank">>></a>
+        <span>
+        <button [appExpansion]="profiles" expandMax="50%"></button>
+          <a appRedirect="network.png" class=icon [routerLink]="['/network/getCorresp',preloaded.join(',')]" target="_blank"></a>
+        </span>
+        
+        
+        
     
     </header>
 
 <content>
-    <div id=profiles>
+    <div id=profiles #profiles>
     <div id="container" #container></div>
     </div>
     
     <div id=msTools>
-        <app-ms-tools #msTools></app-ms-tools>
+        <app-ms-tools mode="nested" #msTools></app-ms-tools>
     </div>
     
 </content>

@@ -1,17 +1,20 @@
-<div id = wrapper>
+<div id = wrapper [@routeAnimation]="currentUrl" >
     
+
     
         <app-menu #menu></app-menu> 
     
-
+ <div id=modeSwitch *ngIf="currentUrl=='/search'"><button (click)="switchSearchMode()">{{setSvc.searchMode}}</button></div> 
 
     
    
-<router-outlet (activate)="catchComponent($event)"> </router-outlet>
+<router-outlet (activate)="catchComponent($event)" #outlet> </router-outlet>
     
     
-     <div  *ngIf="showLoadingIndicator" class="lds-ellipsis">
-         
-          Loading...
+     <div  class="lds-ellipsis" #loadingIndicator>
+        
          <div></div><div></div><div></div><div></div></div>
+    
+    
+    
 </div>

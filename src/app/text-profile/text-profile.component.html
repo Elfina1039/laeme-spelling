@@ -1,30 +1,37 @@
 
 <div id=wrapper>
 
-    <header><h3>Text profile</h3><h3> id: {{textId}}</h3>
+    <header><h1>Text profile</h1><h3> id: {{textId}}</h3>
     
      <a appRedirect="network.png" [routerLink]="['/network/getMsCorresp',textId]" target="_blank"></a>
     </header>
 <content>
     
 <div id=side>
-    <div class=header><h3>Litterae</h3></div>
+   
 <app-lit-inventory (requestHighlight)="filterSets($event); searchLittera($event)"
                    (requestItem)="searchLexel($event)"
                    #profileCmp></app-lit-inventory>
 </div>
     
-<div id=sets>
-    <div class=header><h3>Sets</h3></div>
+<div id=setsForms>
+ 
+<div id=forms #forms>    
+ <app-form-list [textId]="textId" #formListCmp></app-form-list>
+    </div>
+    
+    <div id=sets #sets>
+    
 <app-set-list (requestItem)="searchLexel($event)"
               (requestSelection)="searchMorphids($event)"
               itemAction="Search"
               #setListCmp></app-set-list>
+    </div>
     </div>  
     
  
 <div id=ms> 
-    <app-ms-tools #msTools></app-ms-tools>
+    <app-ms-tools mode="nested" #msTools></app-ms-tools>
     </div>
     
 </content>

@@ -1,17 +1,31 @@
-<div id=wrapper #wrapper>
-    <table id=litterae>
+<div id=wrapper @appear  #wrapper>
+     <header><h3>Litterae</h3></header>
+      <app-lit-constraints #constraints></app-lit-constraints>
+    
+    <table id=litterae  @appear >
         
         <tr>
-            <th (click)="profile.sortBy('str')" class=sort>Lit.</th>
-            <th (click)="profile.sortBy('types')" class=sort>types</th>
-            <th (click)="profile.sortBy('rawTokens')" class=sort>tokens</th>
+            <th class=sort>Lit. 
+                <button [appOrder]="profile.litterae" orderCrit="str"></button>
+            </th>
+            <th class=sort>types
+            <button [appOrder]="profile.litterae" orderCrit="types"></button>
+            </th>
+            <th class=sort>tokens
+            <button [appOrder]="profile.litterae" orderCrit="rawTokens"></button>
+            </th>
             <th class=sort>C</th>
-            <th (click)="profile.sortBy('rareSlots')" class=sort>Rare slots</th>
+            <th  class=sort>Rare slots
+            <button [appOrder]="profile.litterae" orderCrit="rareSlots"></button>
+            </th>
         </tr>
         
         <tr class=littera *ngFor="let lit of profile.litterae" >
-            <th [title]="lit.tokens+' / '+lit.rawTokens+' / '+lit.types" (click)=highlightStrid(lit) [class]="lit.asAlternative>0 ? 'highlight':''" title="compare usage"> {{lit.str}}</th>
-          <td>{{lit.types}}</td> 
+            <th (click)=highlightStrid(lit) [class]="lit.asAlternative>0 ? 'highlight':''" title="compare usage"> {{lit.str}}
+            
+                <span class=sfLink *ngIf="lit.specialFeatures.list.length>0" [title]="lit.specialFeatures.toPeak()">+</span>
+            </th>
+          <td (click)=showConstraints(lit.str)>{{lit.types}}</td> 
             <td>{{lit.rawTokens}}</td>
             <td ><span *ngFor="let f of lit.basicFreqs" [style.background-color]=getShade(f[1])>{{f[0]}}</span></td>
             

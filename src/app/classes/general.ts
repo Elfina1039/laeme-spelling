@@ -1,3 +1,15 @@
+export interface Constraint{
+    cat : string;
+    vals : ConstraintVal[];
+}
+
+export interface ConstraintVal{
+    val : string;
+    tokens : number;
+    ratio : number;
+}
+
+
 export class QueryData{
     fnc : string;
     args : string;

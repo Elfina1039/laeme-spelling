@@ -13,7 +13,7 @@ export class LoginService {
     
         logIn(login, password){
         console.log("fetch" + login);
-       // return this.http.get("/assets/queryDb.php?fnc="+fnc+"&args="+args.join(";"));
+
   //  return this.http.get("/assets/login.php?login="+login+"&password="+password);
              return this.http.get("http://localhost/laeme-scripts/php/login.php?login="+login+"&password="+password);
     }

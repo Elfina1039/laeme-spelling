@@ -1,15 +1,67 @@
+:host{
+
+     display: block;
+      width: 100%;
+}
+
+*{box-sizing: border-box}
+
+
 header{
     width:100%;
-    background:#2e200d;
-    height:7%;
+    /*background:#2e200d;*/
+    background:black;
+    height:10%;
+    display: flex;
     flex-flow: row nowrap;
-    color:#df8f17;
-    font-size:16pt;
+    color:var(--paper);
+    font-size:var(--bigText);
     padding-left:8em;
-    border-bottom: 2px solid #df8f17;
+    padding-right:1em;
+    border-bottom: 4px ridge var(--paper);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-image: url(/assets/images/backgrounds/bestiary2.png);
+    background-position: top right;
+    background-repeat: no-repeat;
+}
+
+content{
+        display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    /* background: linear-gradient(black, #2e200d);*/
+     color: white;
+   height:90%;
+}
+
+#results{
+        width: 100%;
+    height:100%;
+    padding-top:0.5%;
+      padding-left: 2%;
+    padding-right: 2%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+     background-color: transparent;
+    align-content: flex-start;
+}
+
+#results div{
+    width:100%;
+  background-color: transparent;
+}
+
+#container{
+    /*  background-color: rgba(223,143,23,0.1);*/
+    border-top: 4px ridge var(--paper);
+    width:90%;
+    height:0;
+    margin-left:10%;
+    margin-right:10%;
+    
 }
 
 #wrapper{width:100%;
@@ -18,19 +70,101 @@ display:flex;
 flex-flow:column nowrap;
 overflow:scroll}
 
+/*FORMS*/
+input, button{
+    border-radius:0.2em;
+    margin:0.2em;
+}
+
 button{
-    border:2px outset #df8f17;
-    background: linear-gradient(#c17a10,#df8f17);
+    border:2px outset var(--paper);
+    background: linear-gradient(var(--dPaper),var(--paper));
     font-weight:bold;
-    padding:0.1em;
-    margin:0.1em;
+    padding:0.2em;
+    font-size:var(--bigText);
+}
+
+button:hover{
+    box-shadow:0 0 0.2em white;
+    background: linear-gradient(var(--paper),var(--dPaper));
 }
 
 .icon{
     background:transparent;
-    border:2px solid #df8f17;
-    color:#df8f17;
+    border:2px solid var(--paper);
+    color:var(--paper);
     cursor:pointer;
-    font-weight:bold;
-    font-size:14pt;
+    
+}
+
+.icon:hover{
+    background: transparent;
+}
+
+.controls{
+     
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+padding:1em;
+    width:80%;
+}
+
+
+
+button.bigIcon{
+    
+    font-size: 12pt;
+    padding: 0.5em;
+    border-radius:0.2em;
+    background-size:100% 100%;
+    background-position:center center;
+    height:2em;
+    width:2em;
+}
+
+button.passiveIcon{
+    background-color: rgba(223,143,23,0.6);
+    border: 1px solid var(--paper);
+}
+
+button.activeIcon{
+    background-color: var(--thinIcon);
+    border: 1px solid var(--icon);
+}
+
+#columns{
+    background-image:url(/assets/images/icons/columns.png);
+}
+
+#rows{
+    background-image:url(/assets/images/icons/rows.png);
+}
+
+#gridBigger{
+    background-image:url(/assets/images/icons/grid_bigger.png);
+}
+
+#gridSmaller{
+    background-image:url(/assets/images/icons/grid_smaller.png);
+}
+
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
 }

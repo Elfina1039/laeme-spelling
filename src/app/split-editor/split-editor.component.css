@@ -1,3 +1,5 @@
+*{box-sizing: border-box}
+
 #wrapper{
     display:flex;
     flex-flow: column nowrap;
@@ -37,3 +39,13 @@ input{
     font-size:14pt;
 }
 
+
+.leader{
+    margin-right: 0.2em;
+    border-right: none;
+}
+
+.trailer{
+    margin-left: 0.2em;
+    border-left: none;
+}

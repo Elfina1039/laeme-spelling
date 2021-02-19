@@ -1,15 +1,18 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import {expand, appear} from "./../animations";
 import { MsMeta } from '../classes/manuscript';
 import { SetService } from '../services/set.service';
 
 @Component({
   selector: 'app-ms-info',
   templateUrl: './ms-info.component.html',
-  styleUrls: ['./ms-info.component.css']
+  styleUrls: ['./ms-info.component.css'],
+    animations:[expand, appear]
 })
 export class MsInfoComponent implements OnInit {
   mss : MsMeta[] = [];
     @ViewChild("wrapper") wrapper : any;
+    showInfo : boolean = false;
   constructor(private setSvc : SetService) { }
 
   ngOnInit() {
@@ -30,12 +33,12 @@ loadMeta(ids){
     
 toggle(){
     // console.log(this.wrapper);
-    if(this.wrapper.nativeElement.style.display=="block"){
+    if(this.showInfo==true){
         this.close();
-        return false;
+        this.showInfo = false;
     }else{
         this.open();
-        return true;
+       this.showInfo = true;
     }
          
 }     

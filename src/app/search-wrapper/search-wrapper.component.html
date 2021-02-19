@@ -1,12 +1,14 @@
 
 
 <header>
-     
-   <button class=icon *ngIf="searchMode=='simple'"
-                (click)="searchMode='advanced'">Advanced search</button>
-        
-          <button  class=icon *ngIf="searchMode=='advanced'"
-                (click)="searchMode='simple'">Simple search</button>  
+    <h1>Database search</h1>
+
+</header>
+
+<content>
+<div class=controls>
+  
+
     
          <app-search-box *ngIf="searchMode=='simple'"
                           (requestSearch)="fireSearch($event)"
@@ -17,13 +19,36 @@
 <app-search-box-advanced *ngIf="searchMode=='advanced'"
                          [functions]="searchFncs[0]"
                 (requestSearch)="fireSearch($event)"></app-search-box-advanced>
-    
+     
     <!--<button class=icon (click)=clearAll()>Clear all</button>-->
+    <span>
+          <button class=icon *ngIf="searchMode=='simple'"
+                (click)="searchMode='advanced'">Advanced search</button>
+        
+          <button  class=icon *ngIf="searchMode=='advanced'"
+                (click)="searchMode='simple'">Simple search</button>  
+ 
     
-</header>
+    <button class=bigIcon id=gridBigger (click)="setGrid(2,2); view='gridBigger'"
+            [ngClass]="view=='gridBigger' ? 'activeIcon' : 'passiveIcon'">></button>
     
-<content>
+    <button class=bigIcon id=gridSmaller (click)="setGrid(3,3); view='gridSmaller'"
+            [ngClass]="view=='gridSmaller' ? 'activeIcon' : 'passiveIcon'"></button>
+        
+           
+    <button class=bigIcon  id=columns (click)="setGrid(1,3); view='columns'"  [ngClass]="view=='columns' ? 'activeIcon' : 'passiveIcon'">></button>
+    
+    <button class=bigIcon id=rows (click)="setGrid(3,1); view='rows'"
+             [ngClass]="view=='rows' ? 'activeIcon' : 'passiveIcon'">></button>
+    </span>
+         
+       
+</div>
+    
+ <div id=results [@showHide]="view" #results>
    <div id="container" #container></div>
+     
+    </div>
    
 </content>
     

@@ -1,17 +1,42 @@
-<div id=wrapper #wrapper>
+<div id=wrapper [@expand]="showInfo ? 'expanded':'collapsed'"  #wrapper>
   <div *ngFor="let m of mss">  
-    <h2>{{m.manuscript}}</h2>
-    <div>
-        <p class=date>date: {{m.date}}</p>
-        <p class=date>localisation: {{m.localisation}}</p>
-        <p class=date>script: {{m.script}}</p>
+    <h2>{{m.manuscript}} <span class=anchor *ngIf="m.anchor">anchor({{m.anchor}})</span></h2>
+    <div class=columns>
+        <p class=date><strong>date:</strong> {{m.date}}</p>
+        <p class=date><strong>localisation: </strong>{{m.localisation}}</p>
+        <p class=date><strong>script:</strong> {{m.script}}</p>
+        <hr>
+        <p class=date><strong>Slot types:</strong> {{m.slotTypes}}</p>
+        <p class=date><strong>Slot tokens:</strong> {{m.slotTokens}}</p>
+        <hr>
         
-        <p>{{m.description}}</p>
+        <div class=links>
+        <h4>Texts</h4>
+            <ul>
+             <li  *ngFor="let t of m.texts">{{t.title}}</li>
+            </ul>
+      
+            
+        </div>
         
-        <a [routerLink]="['/profile',m.id]" target="_blank" appRedirect="manuscript.png"></a>
+        <div class=links>
+        <h4>Related texts</h4>
+        <span  *ngFor="let l of m.links">{{l.type}}: &nbsp;<a (click)=setSvc.redirectToLaeme(l.textId) appRedirect="" redirectColor="#b30e11">{{l.textId}}</a>&nbsp;</span>
+        </div>
+        
+        <div  class=links>
+            <h4>Links</h4>
+            <span class=linkset>
+             <a [routerLink]="['/profile',m.id]" target="_blank" appRedirect="manuscript.png"></a>
+        <a (click)=setSvc.redirectToLaeme(m.id) appRedirect="" redirectColor="#b30e11">{{m.id}}</a>
+            </span>
+       
+        </div>
+        
+        
     </div>
     
-    <button (click)=redirectToLaeme(m.id) title="see entry in LAEME">LAEME catalogue</button>
+  
     
     </div>
 </div>

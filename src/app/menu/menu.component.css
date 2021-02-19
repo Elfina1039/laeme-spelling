@@ -1,3 +1,5 @@
+*{box-sizing: border-box;}
+
 #wrapper{
     height:100%;
     width:0em;
@@ -5,11 +7,11 @@
     transition: width 1s ease-out;
     display:flex;
     flex-flow:column nowrap;
-    background:  linear-gradient(#2e200d,black);; /*#0c253a*/
-    border-right: 3px outset white;
+    background:  var(--bGradient); /*#0c253a*/
+     border-right: 4px ridge var(--paper);
     font-size: 16pt;
 
-    color:white;
+    color:var(--lightest);
 }
 
 
@@ -21,15 +23,16 @@ input, button{
 
 input[type=text], select{
     background : white;
-     box-shadow: 0 0 0.5em #c17a10 inset;
+     box-shadow: 0 0 0.5em var(--dPaper) inset;
     padding:0.2em;
-    border: 1px inset #c17a10;
+    border: 1px inset var(--dPaper);
     color:black;
 }
 
 button{
-    border:2px outset #df8f17;
-    background: linear-gradient(#c17a10,#df8f17);
+    border:2px outset var(--paper);
+        background-color: var(--thinPaper);
+    color: var(--darkest);    
     font-weight:bold;
     padding:0.1em;
     margin:0.1em;
@@ -38,34 +41,58 @@ button{
 }
 
 #button{
-    font-size: 16pt;
-    border: 1px solid black;
+    font-size: var(--bigText);
     width:7em;
+    height:10%;
     padding: 0.5em;
     color: black;
-    background: #df8f17;
+    background-color: var(--thinPaper);
     margin: 0em;
     transition: background 0.5s ease-out;
     cursor:pointer;
-    border: 3px outset white;
+    border-bottom: 4px ridge var(--paper);
+    border-right: 4px ridge var(--paper);
     font-weight:bold;
-    
+    border-radius:0;
+    background-image: url(/assets/images/icons/menu.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 80%;
 }
 
 #button:hover, .link:hover{
 
-    box-shadow: 0 0 0.5em white inset;
-  
+   background-color: var(--paper);
+   
 }
 
 .link{
-    font-size: 14pt;
-    color: white;
-    background: transparent;
+    font-size: var(--bigText);
+    color: black;
+    background-color: var(--thinPaper);
     border:none;
-    border-bottom: 1px solid white;
-    padding: 0.2em;
+    border-bottom: 1px solid var(--paper);
+    padding:  0.2em 0 0.2em 0;
     width:100%;
     border-radius:0;
+    margin-top:0.4em;
 }
 
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
+}

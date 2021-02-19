@@ -1,13 +1,20 @@
-<button (click)="toggle()" id="button">Menu</button>
+<button (click)="toggle()" id="button"></button>
 <div id=wrapper #wrapper>
     
-    <button class="link" *ngFor="let l of links" (click)="submitLink(l.fnc)">{{l.label}}</button>
+    <button class="link" *ngFor="let l of publicLinks" (click)="submitLink(l.fnc)">{{l.label}}</button>
     
-    Quick search:
-    
-    <app-search-box (requestSearch)=submitQuickLink($event) [functions]="quickLinks"></app-search-box>
+  
+   
     
     <div *ngIf="loginSvc.verifyToken()">
+            <button class="link" *ngFor="let l of privateLinks" (click)="submitLink(l.fnc)">{{l.label}}</button>
+        
+         Quick search:
+    <app-search-box (requestSearch)=submitQuickLink($event) 
+                    [functions]="quickLinks"
+                     layout="vertical"></app-search-box>
+    
+    
     <span>MS searches: {{ memorySvc.msSearches.length}}</span><br/>
      <button (click)=memorySvc.clearMsSearches()>Clear</button><br/>
     <span>Map searches: {{ memorySvc.mapSearches.length}}</span><br/>
@@ -15,7 +22,7 @@
         <button (click)="loginSvc.logOut()">Log Out</button>
     </div>
     
-    <app-login *ngIf="!loginSvc.verifyToken()" margin="5px"></app-login>
+    <app-login *ngIf="!loginSvc.verifyToken()" margin="5px" alrt="F"></app-login>
    
     
 </div>

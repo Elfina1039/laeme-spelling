@@ -1,72 +1,83 @@
-<div id=wrapper #wrapper>
-    <header>
-        <h3>Maps</h3>
-        <app-stored-lists (requestList)="mapSelection($event.toMap())"></app-stored-lists>
-          <button (click)="makeSequence()">Sequence</button>   
-        <input type=text placeholder="search label" [(ngModel)]="searchLabel">
-        <select  id ="previousSearch" title="previous searches" 
-                (change)="switchLayer(memorySvc.mapSearches[$event.target.value])" >
+<header>
+    <h1>Maps</h1>
+    <div>
+        
+        <a (click)="makeSequence()" appRedirect="sequence.png"></a>
+
+
+
+
+
+    </div>
+
+
+</header>
+
+<div class=controls>
+    <input type=text placeholder="search label" [(ngModel)]="searchLabel">
+
+    <app-search-box *ngIf="searchMode=='simple'" (requestSearch)="mapSearch($event)" [functions]=searchFncs[0]>
+    </app-search-box>
+
+
+    <app-search-box-advanced *ngIf="searchMode=='advanced'" (requestSearch)="mapSearch($event)" [functions]=searchFncs[1] [filters]=filters>
+    </app-search-box-advanced>
+
+
+
+    <button class="icon" *ngIf="searchMode=='simple'" (click)="searchMode='advanced'">Advanced search</button>
+
+    <button class=icon *ngIf="searchMode=='advanced'" (click)="searchMode='simple'">Simple search</button>
+    
+    <app-stored-lists (requestList)="mapSelection($event.toMap())"></app-stored-lists>
+
+</div>
+
+<content>
+    <div id=legend>
+        <select id="previousSearch" title="previous searches" (change)="switchLayer(memorySvc.mapSearches[$event.target.value])">
             <option *ngFor="let ps of memorySvc.mapSearches | keyvalue" [value]="ps.key">{{ps.value.label}}: {{ps.value.args}}</option>
         </select>
-        
-   <button  *ngIf="searchMode=='simple'"
-                (click)="searchMode='advanced'">Advanced search</button>
-        
-          <button  *ngIf="searchMode=='advanced'"
-                (click)="searchMode='simple'">Simple search</button>
-        
-          <app-search-box *ngIf="searchMode=='simple'"
-                          (requestSearch)="mapSearch($event)"
-                        [functions]=searchFncs[0]>
-        </app-search-box>
-        
-       
-        <app-search-box-advanced *ngIf="searchMode=='advanced'" (requestSearch)="mapSearch($event)"
-                        [functions]=searchFncs[1]
-                        [filters]=filters>
-        </app-search-box-advanced>
-        
-      
-        
-    </header>
-    
-    <content>
-            <div id=legend>
-        
-    <span *ngFor="let ck of colorKey | keyvalue" [style.color]=ck.value.color>
-   <input type=color (change)="colorChange(ck)" [(ngModel)]="ck.value.color"/> {{ck.key}} ({{ck.value.tokens}})
-    </span>
-    <button (click)=drawMap()>Redraw</button>
-</div>
-<app-map (msClicked)=displayMs($event)
-         [mapHeader]="legendHeader"
-         #map></app-map>
 
-<!--<app-set-list (mapSet)=changeMap($event) #setList></app-set-list>-->
-    <div id=setList >
-        <div class=header><h3>Sets</h3></div>
-        
-        <app-set-list itemAction="Map"
-                      (requestItem)=mapItem($event)
-                      (requestSelection)=mapSelection($event)
-                      #setList></app-set-list>
-        
- <!--<app-set *ngFor="let s of sets" 
-          [set]=s 
-          [queryData]=queryData
-          [colorKey] = "map.colorKey"
-          (mapSet)=changeMap($event) 
- (requestItem)= mapItem($event)
- (requestSelection)=mapSelection($event)
-          #set></app-set>-->
+        <div>
+            <span *ngFor="let ck of colorKey | keyvalue" [style.color]=ck.value.color>
+                <input type=color (change)="map.colorChange(ck)" [style.background-color]="ck.value.color" [(ngModel)]="ck.value.color" /> {{ck.key}} ({{ck.value.tokens}})
+            </span>
+
+        </div>
+
+        <button (click)=map.drawMap()>Redraw</button>
     </div>
-    <div id=selected #selected>
-        <div class=header> <h3>Selected text:{{selectedText.id}} </h3></div>
-        <app-ms-info #msInfo></app-ms-info>        
+    <app-map (msClicked)=displayMs($event) [mapHeader]="legendHeader" #map></app-map>
+
+    <!--<app-set-list (mapSet)=changeMap($event) #setList></app-set-list>-->
+    <div id=board>
+
+        <div id=selected #selected>
+            <div class=header>
+            <div class=listTitle >
+                <h3>Selected text: {{selectedText.id}}: </h3>
+                
+                  <h4>{{selectedText.litterae}} </h4>
+               
+                <span [appExpansion]="selectedContent" expandMax="100%"></span>
+            </div>
+            </div>
+            
+            <div id="selectedContent" #selectedContent>
+               
+            <app-ms-info #msInfo></app-ms-info>
+
+            <app-item-list (requestItem)=mapItem($event) (requestSelection)=mapSelection($event) #itemList></app-item-list>
+        </div>
+
         
-<app-item-list (requestItem)=mapItem($event)
-               (requestSelection)=mapSelection($event)
-               #itemList></app-item-list>
+
+      </div>
+        <div id="sets">
+        <app-set-list itemAction="Map" (requestItem)=mapItem($event) (requestSelection)=mapSelection($event) #setList></app-set-list>
+        </div>
+        
     </div>
-    </content>
-</div>
+
+</content>

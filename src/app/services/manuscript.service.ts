@@ -15,8 +15,8 @@ export class ManuscriptService {
     
     fetchMs(msId){
         console.log("fetch " + msId);
-       // return this.http.get("/assets/queryDb.php?fnc="+fnc+"&args="+args.join(";"));
-    return this.http.get("http://localhost/laeme-scripts/php/queryDb.php?fnc=getMs&args="+msId);
+   //    return this.http.get("/assets/queryDb.php?fnc=getMs&args="+msId);
+   return this.http.get("http://localhost/laeme-scripts/php/queryDb.php?fnc=getMs&args="+msId);
     }
     
       fetchMsSample(msId){

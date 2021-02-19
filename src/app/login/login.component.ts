@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter  } from '@angular/core';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -11,11 +11,15 @@ export class LoginComponent implements OnInit {
     user : any = {login:"", password:""};
     message : string = "";
     
+    
     @Input("margin") margin : string = "200px";
+    @Input("alrt") alrt : string = "T";
+     @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
     
   constructor(private loginSvc : LoginService) { }
 
   ngOnInit() {
+        this.cmpLoaded.emit();
   }
     
 

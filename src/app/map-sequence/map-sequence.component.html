@@ -1,9 +1,9 @@
 <div id=wrapper #wrapper>      
-    <header>Map sequence</header>
+    <header><h1>Map sequence</h1></header>
       <div id=legend>
         
     <span *ngFor="let ck of colorKey | keyvalue" [style.color]=ck.value.color>
-   <input type=color (change)="colorChange(ck)" [(ngModel)]="ck.value.color"/> {{ck.key}} ({{ck.value.tokens}})
+   <input type=color (change)="colorChange(ck)" [style.background-color]="ck.value.color"  [(ngModel)]="ck.value.color"/> {{ck.key}} ({{ck.value.tokens}})
     </span>
     <button (click)=drawMap()>Redraw</button>
 </div>

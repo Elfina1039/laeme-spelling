@@ -1,5 +1,5 @@
-<div id=wrapper #wrapper>
-    <div id=topRow>
+<div id=wrapper [@fullScreen]="viewMode"  (dblclick)="toggleFullScreen('full')"  #wrapper>
+    <div id=topRow (click)="toggleFullScreen('detail')">
         <div #chart> </div>
     <div id=members>
         <span class=setMember *ngFor="let m of set.members" [style.border-width]="calcBorder(m.tokens)" [style.border-color]="colorKey[m.str].color">{{m.str}}</span>
@@ -8,15 +8,26 @@
         {{set.types}} / {{set.tokens}}
     </div>
         
-        <div id=links>
-            <a  appRedirect="map.png" [routerLink]="['/map/mapSetExact',set.membersStrings.join(',')]" target="_blank"></a>
-        </div>
+      
         
 </div>
- 
-    <button *ngIf="!itemList.open" (click)="showItems()">Show items</button>
+    
+      <div  *ngIf="viewMode!='default'" @appear id=links>
+           <span>
+           <a *ngFor="let chl of set.cone" (click)=setSvc.redirectToCone(chl) appRedirect="" redirectColor="#b30e11">{{chl}}</a>
+             <a  appRedirect="map.png" [routerLink]="['/map/mapSetExact',set.membersStrings.join(',')]" target="_blank"></a>
+          </span>
+           
+          <span>
+              <button  *ngIf="!itemList.open" (click)="showItems()">Show items</button>
     <button *ngIf="itemList.open" (click)="hideItems()">Hide items</button>
-    <app-item-list enableSelect=true
+          </span>
+        
+        </div>
+ 
+  
+    <app-item-list
+                   enableSelect=true
                    (requestItem)=submitItem($event)
                    (requestSelection)=submitSelection($event)
                    [itemAction] = itemAction

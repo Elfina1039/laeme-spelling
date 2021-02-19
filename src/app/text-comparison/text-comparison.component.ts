@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterContentInit, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterContentInit, ViewContainerRef, ComponentFactoryResolver, Output, EventEmitter } from '@angular/core';
 import { LitInventoryComponent } from '../lit-inventory/lit-inventory.component';
 
 import { SetService } from '../services/set.service';
@@ -26,7 +26,8 @@ export class TextComparisonComponent implements OnInit, AfterContentInit {
     setSize : MsSize = {width:0, height:100, unit: "px"};
     @ViewChild("container", {read: ViewContainerRef}) container;
     @ViewChild("msTools") msTools : MsToolsComponent; 
-     @ViewChild("profiles") profiles : MsToolsComponent; 
+     @ViewChild("profiles") profiles : any; 
+     @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
     
   constructor(private resolver : ComponentFactoryResolver,
               protected route: ActivatedRoute) { }
@@ -38,7 +39,7 @@ export class TextComparisonComponent implements OnInit, AfterContentInit {
         let texts : string[]=p.get('id').split(",");
         ref.preloaded = texts;
            console.log(screen.width);
-    ref.invSize.width = (screen.width*0.3)/ref.preloaded.length;
+    ref.invSize.width = (screen.width*0.6)/ref.preloaded.length;
     ref.setSize.width = (screen.width*0.7)/ref.preloaded.length;
 
       });
@@ -81,6 +82,8 @@ newSetList.requestSelection.subscribe((e)=>{ref.searchMorphids(e);});
  
     ref.inventories.push(newInventory);
     ref.setLists.push(newSetList);
+    
+    this.cmpLoaded.emit();
 
 }
     

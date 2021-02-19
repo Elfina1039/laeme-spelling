@@ -1,11 +1,31 @@
 
+<header *ngIf="alrt=='T'">
+    <h1> Log in</h1>
+</header>
 
+
+<content>
 <form id=loginForm #loginForm [style.margin]=margin>
-
-    <label>Login: <input type=text [(ngModel)]="user.login" name=login></label><br/>
-    <label>Password: <input type=password [(ngModel)]="user.password" name=password></label><br/>
-    <label><button (click)="logIn()">Log In</button></label>
     
+
+    <p class=alert *ngIf="alrt=='T'">
+        <b>This website is under development and is not yet publicly accessible.
+
+            <ul>
+                <li>You can read more about the Spelling database project <a [routerLink]="['/overview']">here</a>.</li>
+
+                <li>For a smaller-scale project covering the seven texts of <i>The Poema Morale</i> see <a href="http://pm-spelling.delfiin.net/#/">this link</a>.</li>
+            </ul>
+
+        </b>
+    </p>
+
+    <label>Login: <input type=text [(ngModel)]="user.login" name=login></label><br />
+    <label>Password: <input type=password [(ngModel)]="user.password" name=password></label><br />
+    <label><button (click)="logIn()">Log In</button></label>
+
     <p>{{message}}</p>
 
 </form>
+    
+</content>

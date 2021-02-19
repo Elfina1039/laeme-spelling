@@ -1,0 +1,165 @@
+*{box-sizing: border-box}
+
+#wrapper{
+    width:100%;
+    background: linear-gradient(black, #2e200d);
+    color: white;
+    display:flex;
+    flex-flow: column nowrap;
+    align-items:center;
+    padding:2%;
+}
+
+header{
+    width:100%;
+    /*background:#2e200d;*/
+    background:black;
+    height:10%;
+    display: flex;
+    flex-flow: row nowrap;
+    color:#df8f17;
+    font-size:16pt;
+    padding-left:8em;
+    padding-right:1em;
+    border-bottom: 4px ridge #df8f17;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+        background-image: url(/assets/images/backgrounds/bestiary2.png);
+    background-position: top right;
+    background-repeat: no-repeat;
+
+    box-sizing: border-box;
+}
+content{
+        display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+     background: linear-gradient(black, #2e200d);
+     color: white;
+}
+
+footer{
+    display:flex;
+flex-flow:column nowrap;
+    background-color:black;
+    border-top: 4px ridge #df8f17;
+    align-items: center;
+    padding: 0.5em;
+}
+
+div.chapter{
+    width: 70%;
+     border-bottom : 1px solid #df8f17;
+     flex-flow: column nowrap;
+    align-items: center;
+    /* box-shadow: 0 0 0.5em inset black;*/
+}
+
+div.chapter:nth-of-type(odd){
+        background-color: rgba(223,143,23,0.1);
+}
+
+div.chapter:nth-of-type(even){
+        background-color: rgba(223,143,23,0.14);
+}
+
+div.chapter:first-of-type{
+    border-top: 4px ridge #df8f17;
+}
+
+img.guide{
+    max-width:50%;
+    max-height:50%;
+    margin:0.5em;
+    border: 4px solid #df8f17;
+}
+
+img.band{
+    max-width:100%;
+}
+
+
+content div{
+    padding:2%;
+}
+
+p.big{
+    width:100%;
+}
+
+div.column{
+    width:30%;
+}
+
+div.columnMain{
+    width:40%;
+    border-left : 1px solid #df8f17;
+      border-right : 1px solid #df8f17;
+}
+
+.enterButton{
+    border: 1px solid black;
+    font-size: 22pt;
+    padding: 0.5em;
+    color: white;
+    background: linear-gradient(#2e200d,#df8f17);
+    margin: 0.5em;
+    transition: background 0.5s ease-out;
+    cursor:pointer;
+}
+
+.enterButton:hover{
+
+    background: linear-gradient(#df8f17,#2e200d);
+  
+}
+
+
+p, li{
+    text-align:justify;
+    font-size: 16pt;
+}
+
+h1,  h3, a{
+    color:#df8f17;
+    margin:0.1em;
+}
+
+h1{
+    font-size:30pt;
+}
+
+h2{
+    font-size: 28pt;
+margin: 0.5em;
+    color:white;
+}
+
+h3{
+    font-size:24pt;
+}
+
+dfn{
+    font-variant: small-caps;
+    font-style: normal;
+    color:#df8f17;}
+
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
+}

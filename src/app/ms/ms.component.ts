@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild} from '@angular/core';
+import {expand, appear} from "./../animations";
 import { Manuscript, MsSize, MsLine } from '../classes/manuscript';
 import { MsSearch, ListSearch } from '../classes/general';
 import { Profile } from '../classes/profile';
@@ -8,7 +9,8 @@ import { SetService } from '../services/set.service';
 @Component({
   selector: 'app-ms',
   templateUrl: './ms.component.html',
-  styleUrls: ['./ms.component.css']
+  styleUrls: ['./ms.component.css'],
+    animations:[expand, appear]
 })
 export class MsComponent implements OnInit {
     @Input("ms") ms : Manuscript;
@@ -22,7 +24,7 @@ export class MsComponent implements OnInit {
     @ViewChild("msInfo") msInfo : any;
     @ViewChild("profileCmp") profileCmp : any;
     
-    showInfo : boolean = false;
+    
     showProfile : boolean = false;
     profile : Profile ;
     searchResults : [string, number][]=[];
@@ -37,7 +39,7 @@ export class MsComponent implements OnInit {
       //this.loadProfile();
       let id = this.ms.id;
       this.msInfo.loadMeta([id]);
-      this.profileCmp.fetchProfile(id);
+     // this.profileCmp.fetchProfile(id);
       this.lineWidth = this.msSize.width;
       
       
@@ -82,7 +84,7 @@ highlightLine(scoreTreshold: number){
                                    offset = document.getElementById(msId+"/"+li).offsetTop;
                                    }}); 
     console.log("scrolling to " + offset);
-    this.wrapper.nativeElement.scrollTop = offset - 100;
+    this.wrapper.nativeElement.scrollTop = offset -200;
     
 }
     

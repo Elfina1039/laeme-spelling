@@ -1,36 +1,44 @@
+*{box-sizing: border-box}
 
+.horizontal{
+    display:flex;
+    flex-flow:row nowrap;
+    align-items:center;
+}
 
+.horizontal{
+    display:flex;
+    flex-flow:row wrap;
+  
+}
 
+/*FORMS*/
 input, button{
     border-radius:0.2em;
     margin:0.2em;
 }
 
-input[type=text], select{
-    background : white;
-     box-shadow: 0 0 0.5em #c17a10 inset;
-    padding:0.2em;
-    border: 1px inset #c17a10;
-    color:black;
-}
-
 button{
-    border:2px outset #df8f17;
-    background: linear-gradient(#c17a10,#df8f17);
+    border:2px outset var(--paper);
+    background: linear-gradient(var(--dPaper),var(--paper));
     font-weight:bold;
-    padding:0.1em;
-    margin:0.1em;
-}
-
-.icon{
-    background:transparent;
-    border:2px solid #4f391b;
-    color:#4f391b;
-    cursor:pointer;
-    font-weight:bold;
-    font-size:14pt;
+    padding:0.2em;
+    font-size:var(--bigText);
 }
 
 button:hover{
     box-shadow:0 0 0.2em white;
+    background: linear-gradient(var(--paper),var(--dPaper));
+}
+
+.icon{
+    background:transparent;
+    border:2px solid var(--paper);
+    color:var(--paper);
+    cursor:pointer;
+    
+}
+
+.icon:hover{
+    background: transparent;
 }

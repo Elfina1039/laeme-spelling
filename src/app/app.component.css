@@ -1,3 +1,33 @@
+:host{
+    --paper:#df8f17;
+    --dPaper:#a96a0e;
+    --thinPaper : rgba(223,143,23,0.5);
+    
+    --darkest:black;
+    --lightest:white;
+    
+    --icon:navy;
+    --thinIcon : rgba(0, 0, 128,0.6);
+    --beacon:#b30e11;
+    
+    --title1 : #614824;
+    --title2 : #112a3e;
+    
+    --shadow: rgba(0,0,0,0.7);
+    
+    --banner: 30pt;
+    --bigHeading: 24pt;
+    --smallHeading: 20pt;
+    --bigText: 16pt;
+    --normalText:12pt;
+    
+    --bGradient: linear-gradient(var(--darkest), var(--title1));
+    --lightGradient: linear-gradient(var(--paper), var(--thinPaper));
+     --lightGradientRv: linear-gradient(var(--thinPaper), var(--paper));
+    
+}
+
+
 *{
     
 box-sizing: border-box;
@@ -17,12 +47,13 @@ html, app-network{
     flex-flow:row nowrap;
     align-content:stretch;
     align-items:stretch;
-    background: linear-gradient(black, #2e200d);
+    background: var(--bGradient);
 }
 
 input{
     border-radius: 0.2em;
 }
+
 
 app-menu{
     position:absolute;
@@ -49,6 +80,23 @@ router-outliet{
     border:3px solid red;
 }
 
+#modeSwitch{
+    position:absolute;
+    top:1em;
+    right:1em;
+}
+
+#modeSwitch button{
+    background-color: rgba(223,143,23,0.6);
+    border: 1px solid #df8f17;
+    font-size: 18pt;
+}
+
+#modeSwitch button:hover{
+   background-color: rgba(0, 0, 128,0.6);
+    border: 1px solid navy;
+}
+
 .lds-ellipsis {
   display: inline-block;
   position: absolute;
@@ -57,6 +105,9 @@ top:48%;
   width: 80px;
     background-color:rgba(0,0,0,0.5);
   height: 80px;
+    color:white;
+    text-align:center;
+    border-radius:40px;
 }
 .lds-ellipsis div {
   position: absolute;
@@ -106,4 +157,20 @@ top:48%;
   100% {
     transform: translate(24px, 0);
   }
+}
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, #ffffff 14%,#ffffff 64%);
+}
+::-webkit-scrollbar-track{
+ background: #030303;
+ border-radius: 7px;
 }

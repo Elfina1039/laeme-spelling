@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChildren, Output, EventEmitter, AfterViewInit, Input } from '@angular/core';
 import { ManuscriptService } from '../services/manuscript.service';
 import { MemoryService } from '../services/memory.service';
 import { Manuscript, MsSize } from '../classes/manuscript';
@@ -15,12 +15,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 
 
-export class MsToolsComponent implements OnInit {
+export class MsToolsComponent implements OnInit, AfterViewInit {
     mss : Manuscript[] = [];
+    mi : number = 0;
+    @Input("mode") mode : string ="alone";
     @ViewChildren("msComponent") msComponents : any;
     preloaded : string[] = [];
     msSize : MsSize = {width:0, height:90, unit: "%"};
     search : MsSearch = new MsSearch({fields : [["lexel",""]], color:"#80ff00"});
+    
+    currentField : number  = 0;
 
      @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
     
@@ -41,24 +45,30 @@ export class MsToolsComponent implements OnInit {
     ref.msSize.width = 100/ref.preloaded.length;
       ref.msSize.height = 100;
            console.log("LOADING MS");
-      texts.forEach((pl)=>ref.loadMs(pl));
+      texts.forEach((pl)=>{ref.loadMs(pl, ref.mi);
+                           ref.mi++;
+                          });
     
 
       });
-      
-      
      
       
   }
+    
+    ngAfterViewInit(){
+         this.cmpLoaded.emit();
+    }
 
     
-loadMs(id){
+loadMs(id, mi){
    // this.preloaded.push(id);
      let ref = this;
-      this.msService.fetchMs(id).subscribe((data:any)=>
-                                           ref.mss.push(new Manuscript(data.rows,id)));
+      this.msService.fetchMs(id).subscribe((data:any)=>{
+          ref.mss[mi]=new Manuscript(data.rows,id);
+                                          }
+                                           );
       console.log(this.mss);
-    this.cmpLoaded.emit();
+   
     
 }  
     

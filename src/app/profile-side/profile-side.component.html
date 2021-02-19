@@ -1,16 +1,25 @@
 <div id=wrapper #wrapper>
+    
+    <app-lit-constraints #constraints></app-lit-constraints>
+    
     <table id=litterae>
         
         <tr>
-            <th (click)="profile.sortBy('str')" class=sort>Lit.</th>
-            <th (click)="profile.sortBy('types')" class=sort>types</th>
-            <th (click)="profile.sortBy('tokens')" class=sort>tokens</th>
+            <th class=sort>Lit.
+            <button [appOrder]="profile.litterae" orderCrit="str"></button>
+            </th>
+            <th  class=sort>types
+            <button [appOrder]="profile.litterae" orderCrit="types"></button>
+            </th>
+            <th  class=sort>tokens
+            <button [appOrder]="profile.litterae" orderCrit="tokens"></button>
+            </th>
         
         </tr>
         
         <tr class=littera *ngFor="let lit of profile.litterae" >
             <th [title]="lit.tokens+' / '+lit.rawTokens+' / '+lit.types" (click)=highlightStrid(lit) [class]="lit.asAlternative>0 ? 'highlight':''" title="compare usage"> {{lit.str}}</th>
-          <td>{{lit.types}}</td> 
+          <td (click)=showConstraints(lit.str)>{{lit.types}}</td> 
             <td>{{lit.tokens}}</td>
             <td ><span *ngFor="let f of lit.basicFreqs" [style.background-color]=getShade(f)>_</span></td>
             

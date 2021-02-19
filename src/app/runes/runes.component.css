@@ -1,0 +1,19 @@
+:host{
+        display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+
+
+button{
+   background-color: rgba(0, 0, 128,0.6);
+    border: 1px solid navy;
+    color:white;
+    font-size: 14pt;
+    margin:0.05em;}
+
+    
+    button:hover{
+            border: 1px solid white;
+    }

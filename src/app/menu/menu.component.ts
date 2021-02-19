@@ -12,10 +12,19 @@ import { LoginService } from '../services/login.service';
 export class MenuComponent implements OnInit {
     
     @ViewChild("wrapper") wrapper : any;
-    links : SearchFnc[] = [
+    
+    publicLinks : SearchFnc[] = [
         {label : "Title page", fnc : ""},
+        {label : "About the tool", fnc : "/overview"},
+        {label : "References", fnc : "/references"}
+       // {label : "Poema Morale", fnc : "/title-page-pm"}
+      
+    ];
+    
+    privateLinks : SearchFnc[] = [
           {label : "Browse MSs", fnc : "/mss-list"},
-        {label : "Search DB", fnc : "/sets"},
+           {label : "Browse Texts", fnc : "/texts-list"},
+        {label : "Search DB", fnc : "/search"},
         {label : "Maps", fnc : "/map"},
         {label : "Searches", fnc : "/searches"}
        // {label : "Poema Morale", fnc : "/title-page-pm"}
@@ -39,9 +48,10 @@ export class MenuComponent implements OnInit {
   constructor(private router : Router,
               private renderer : Renderer2,
               private memorySvc : MemoryService,
-              private loginSvc : LoginService) { }
+              private loginSvc : LoginService) {}
 
   ngOnInit() {
+    
   }
 
 toggle(){

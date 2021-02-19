@@ -16,6 +16,7 @@ export class ProfileSideComponent implements OnInit {
   @Output("requestHighlight") requestHighlight = new EventEmitter<[ListSearch, string[]]>();
      @Output() cmpLoaded : EventEmitter<any> = new EventEmitter();
      @ViewChild("wrapper") wrapper : any;
+    @ViewChild("constraints") constraints : any;
     loaderFnc : string = "getInventory";
     textId : number;
     position : [number, number];
@@ -27,11 +28,19 @@ export class ProfileSideComponent implements OnInit {
   }
 
   ngOnInit() {
-       console.log(this.wrapper.nativeElement);
+       this.profile = new Profile([],[],[],0);
       
   }
+    
+    
+showConstraints(lit){
+    console.log(lit);
+    let args : string = lit+";"+this.textId.toString();
+    this.constraints.loadConstraints("getConstraintsForText", args);
+}
 
 fetchProfile(id){
+    console.log("FETCH PROFILE SHOULD NOT RUN NOW");
     this.textId = id;
      let ref = this;
       this.setSvc.fetchUniversal(ref.loaderFnc,[id]).subscribe((litsData:any)=>{ this.setSvc.fetchUniversal("getSlotsByText",[id]).subscribe((slotsData:any)=>{

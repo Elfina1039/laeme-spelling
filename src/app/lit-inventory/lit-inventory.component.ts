@@ -1,15 +1,20 @@
 import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import {appear, fullScreen} from "./../animations";
 import { ProfileSideComponent } from '../profile-side/profile-side.component';
 import { SetService } from '../services/set.service';
 import { InterfaceService } from '../services/interface.service';
 
-import { LitteraExtended, Littera, Profile } from '../classes/profile';
+import { LitteraExtended, Littera, Profile, SpecialFeatures } from '../classes/profile';
 import { ManuscriptService } from '../services/manuscript.service';
 
 @Component({
   selector: 'app-lit-inventory',
   templateUrl: './lit-inventory.component.html',
-  styleUrls: ['./lit-inventory.component.css']
+  styleUrls: ['./lit-inventory.component.css'],
+     animations:[
+        appear,
+           fullScreen
+    ]
 })
 export class LitInventoryComponent extends ProfileSideComponent implements OnInit {
 loaderFnc : string = "getInventoryExtended";
@@ -24,7 +29,7 @@ loaderFnc : string = "getInventoryExtended";
   }
 
   ngOnInit() {
-            
+              this.profile = new Profile([],[],[],0);
   }
     
 fetchCompared(id, compared){

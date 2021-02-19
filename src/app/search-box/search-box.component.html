@@ -1,8 +1,8 @@
-<div id=wrapper #wrapper>
+<div id=wrapper [class]="layout" #wrapper>
    
 
      <label><input type="text" [(ngModel)]=search.main></label>
-
+    <app-runes [target]=search field='main'></app-runes>
     
     <button *ngFor="let f of functions" (click)="submitSearch(search, f.fnc)">{{f.label}}</button>
 </div>

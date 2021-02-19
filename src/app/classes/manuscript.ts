@@ -1,6 +1,19 @@
 import { Token } from './token';
 
 
+export interface TitleMs{
+    textId : number;
+    beg : string;
+    note : string;
+}
+
+
+export interface Title{
+    title: string;
+    mss : TitleMs[];
+}
+
+
 export interface MsMeta {
     id : number;
     version? : string;
@@ -10,11 +23,12 @@ export interface MsMeta {
     manuscript : string;
     description? : string;
     laemeLink? : string;
-    links? : any[];
+    links? : MsLink[];
     texts? : string[]
+    anchor : string;
+    slotCount : number;
+    slotTokens : number;
   
-    
-    
 }
 
 export interface MsSize {
@@ -27,6 +41,12 @@ export interface MsLine {
     tokens : Token[];
     matchScore? : number;
     color? : string;
+}
+
+export interface MsLink {
+    type : string;
+    textId : number;
+  
 }
 
 export class Manuscript {
@@ -42,23 +62,28 @@ export class Manuscript {
         let lineCount = 0;
         let lines = []
         lines[0] = <MsLine>{tokens:[]};
-        
-        tokens.forEach((t)=>{if(t.nl.join(";").search("\{\.\}")!=-1){lines[lineCount].tokens.push(t);lineCount++; lines[lineCount] = <MsLine>{tokens:[]};}
-                               else 
-
-                               {
-                                   lines[lineCount].tokens.push(t);
-                               if(t.nl.join(";")[0]=="\\" || t.nl.join(";")[0]==";"){
-                                  lines[lineCount].tokens.push({lexel:"", grammel:"PN", form:t.nl.join(";").match("[A-Z]+"), morphids:[]});; 
-                               }
-                               
-                               }});
+        let ci=1;
+       // if(t.nl.join(";").search("\{\.\}")!=-1)
+        tokens.forEach((t)=>{
+            lines[lineCount].tokens.push(t);
+            
+           t.nl.forEach((c)=>{
+               switch(c.f2){
+                   case "L" : lineCount++; lines[lineCount] = <MsLine>{tokens:[]}; break;
+                   case "T" : lineCount++; lines[lineCount] = <MsLine>{tokens:[]};lines[lineCount].tokens.push({lexel:"", grammel:"", form:c.f1, morphids:[]});break;
+                  case "D" : lines[lineCount].tokens.push({lexel:"", grammel:"", form: c.f1.match(/[\.,;]/g), morphids:[]});break;
+                    case "C" : lines[lineCount].tokens.push({lexel:c.f1, grammel:"", form: "<strong>["+ci+"]</strong>", morphids:[]});ci++;break;
+               }
+               
+           }); 
+           
+                             });
         
         this.lines = lines;
         
         console.log(this);
     }
-    
+ 
     
 compareLines(line){
     let lexels = line.tokens.map((t)=>t.lexel);

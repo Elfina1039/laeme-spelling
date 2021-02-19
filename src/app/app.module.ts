@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -46,6 +47,11 @@ import { LoginComponent } from './login/login.component';
 import { MapSequenceComponent } from './map-sequence/map-sequence.component';
 import { TextsListComponent } from './texts-list/texts-list.component';
 import { StoredListsComponent } from './stored-lists/stored-lists.component';
+import { RunesComponent } from './runes/runes.component';
+import { LitConstraintsComponent } from './lit-constraints/lit-constraints.component';
+import { WikiOverviewComponent } from './wiki-overview/wiki-overview.component';
+import { WikiGlossaryComponent } from './wiki-glossary/wiki-glossary.component';
+import { IconDirective } from './directives/icon.directive';
 
 
 @NgModule({
@@ -90,13 +96,19 @@ import { StoredListsComponent } from './stored-lists/stored-lists.component';
     LoginComponent,
     MapSequenceComponent,
     TextsListComponent,
-    StoredListsComponent
+    StoredListsComponent,
+    RunesComponent,
+    LitConstraintsComponent,
+    WikiOverviewComponent,
+    WikiGlossaryComponent,
+    IconDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
       HttpClientModule,
-      FormsModule
+      FormsModule,
+      BrowserAnimationsModule
     
   ],
     entryComponents : [

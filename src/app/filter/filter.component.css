@@ -1,16 +1,32 @@
+*{box-sizing: border-box}
 #wrapper{
-    background-color: #4f391b;
-    border:1px solid #df8f17;
+    background-color: var(--title1);
+       padding: 0.2em;
 }
 
+header{
+    flex-flow: row nowrap;
+    color: white;
+    padding-left: 1em;
+    background: var(--title2);
+   box-shadow: 0 -0.2em 0.5em var(--darkest) inset;
+    border-radius: 0.4em 0.4em 0 0em;
+    display: flex;
+  justify-content: center;
+}
 
+.listTitle{
+    flex-flow: row nowrap;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+}
 
 h5{
-    background-color:#df8f17;
-    color:black;
+    color:white;
     margin:0;
-    padding:0;
-    height:1em;
+    font-size:var(--bigText)
 }
 
 .optionSet{
@@ -20,10 +36,10 @@ h5{
     margin:0.1em;
 }
 
-.optionList{
-       height:0em;
+content{
+       max-height:0em;
     overflow: hidden;
-      transition: height 0.5s ease-out;
+      transition: max-height 0.5s ease-out;
 }
 
 
@@ -34,6 +50,34 @@ ul{
      
 }
 
-.optionList li {
+content li {
     list-style-type: none;
+    border: 1px dashed var(--paper);
+    background-color: var(--thinPaper);
+    border-radius: 0.4em;
+    color:var(--darkest);
+    padding:0.1em;
+}
+
+content li.selected{
+    background-color:var(--paper);
+}
+
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
 }

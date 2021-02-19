@@ -32,6 +32,7 @@ export class MapComponent implements OnInit {
     msKey : any = {};
     mapData :any = [];
     activeLayer : string = "";
+    filledSpots : any = {};
     @Input("previousSearches") previousSearches : MapSearch[];
    // @Input()litStats : LitStats[];
     @ViewChild("map") mapContainer : any;
@@ -55,6 +56,12 @@ export class MapComponent implements OnInit {
      let ref = this;
         let target = this.mapContainer.nativeElement;
         
+    let mapHeight = this.wrapper.nativeElement.clientHeight*0.95;
+        
+ 
+    this.mapContainer.nativeElement.style.height = mapHeight+"px";
+         this.mapContainer.nativeElement.style.width = mapHeight+"px";
+        
    
     this.map = new Map({
         target:target,
@@ -70,7 +77,8 @@ export class MapComponent implements OnInit {
       });
   
         
-        let select=new Select({condition:click});
+    let select=new Select({condition:click});
+        
     this.map.addInteraction(select);
     select.on('select', function(e) {
       ref.displayMs(ref.msKey[e.selected[0]["ol_uid"]]);
@@ -100,6 +108,7 @@ addLaemeData(mapData){
        
           let ref = this;  
         this.graphicSvc.addFilter(ref.wrapper.nativeElement);
+    this.filledSpots = {};
     let features : Feature[] = [];
     
     this.mapData.forEach((md)=>{
@@ -138,10 +147,19 @@ addLaemeData(mapData){
 
     createFeature(f){
         let ref = this;
+        let shift : number = 0;
+        let spot : string = this.graphicSvc.grid[f.id].long.toString()+this.graphicSvc.grid[f.id].lat.toString();
+        if(this.filledSpots[spot]){
+            shift = 0.01*this.filledSpots[spot];
+           // console.log("SHIFTING "+ spot + " / "+parseFloat(this.graphicSvc.grid[f.id].lat+shift) + "("+this.filledSpots[spot]+")");
+        }else{
+            this.filledSpots[spot]=0;
+        }
         let feature = new Feature({
-            geometry: new Point(fromLonLat([this.graphicSvc.grid[f.id].long, this.graphicSvc.grid[f.id].lat]))
+            geometry: new Point(fromLonLat([parseFloat(this.graphicSvc.grid[f.id].long+shift), parseFloat(this.graphicSvc.grid[f.id].lat+shift)]))
         });
         
+        this.filledSpots[spot]++;
        // console.log(feature);
         
         this.msKey[<any>feature["ol_uid"]]=f;
@@ -169,6 +187,7 @@ addLaemeData(mapData){
     
 displayMs(id){
     console.log(id);
+    
     this.msClicked.emit(id);
 }
     

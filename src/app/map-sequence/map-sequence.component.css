@@ -1,3 +1,4 @@
+*{box-sizing: border-box}
 content{
     display:flex;
     flex-flow: row wrap;
@@ -12,20 +13,25 @@ content{
 
 header{
     width:100%;
-    background:#2e200d;
-    height:7%;
+    /*background:#2e200d;*/
+    background:black;
+    height:10%;
     display: flex;
     flex-flow: row nowrap;
-    color:#df8f17;
-    font-size:16pt;
+    color:var(--paper);
+    font-size:var(--bigText);
     padding-left:8em;
-    border-bottom: 2px solid #df8f17;
+    padding-right:1em;
+    border-bottom: 4px ridge var(--paper);
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+    background-image: url(/assets/images/backgrounds/bestiary2.png);
+    background-position: top right;
+    background-repeat: no-repeat;
 }
 
-#legend{background-color: #2e200d;
+#legend{background-color: var(--title1);
 width:100%;
 display:flex;
     flex-flow: row wrap;
@@ -34,6 +40,32 @@ display:flex;
 #legend span{
     font-weight:bold;
     font-size: 15px;
-
     margin-right:1em;
+}
+
+input[type=color]{
+    width:1.5em;
+}
+
+h1{
+    font-size:var(--banner);
+}
+
+
+::-webkit-scrollbar {
+ width: 16px;
+ height: 16px;
+}
+::-webkit-scrollbar-thumb {
+ background: linear-gradient(0deg, #b30e11 14%,#b30e11 59%);
+ border-radius: 7px;
+    border:1px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: linear-gradient(13deg, navy 14%,navy 64%);
+}
+::-webkit-scrollbar-track{
+ background: white;
+ border-radius: 7px;
+    border:7px  solid black;
 }
